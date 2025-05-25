@@ -1,0 +1,6 @@
+console.log('=== TinaCMS Environment Debug ===')
+console.log('NEXT_PUBLIC_TINA_CLIENT_ID:', process.env.NEXT_PUBLIC_TINA_CLIENT_ID || 'NOT SET')
+console.log('TINA_TOKEN:', process.env.TINA_TOKEN ? 'SET (hidden)' : 'NOT SET')
+console.log('NEXT_PUBLIC_TINA_BRANCH:', process.env.NEXT_PUBLIC_TINA_BRANCH || 'NOT SET')
+console.log('NODE_ENV:', process.env.NODE_ENV)
+console.log('================================')
