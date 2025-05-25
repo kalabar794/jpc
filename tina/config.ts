@@ -24,8 +24,8 @@ export default defineConfig({
     // Use Cloudinary if configured, otherwise fallback to local
     ...(process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME ? {
       loadCustomStore: async () => {
-        const pack = await import('next-cloudinary')
-        return pack.TinaCloudinaryMediaStore
+        const pack = await import('next-tinacms-cloudinary')
+        return pack.TinaCloudCloudinaryMediaStore
       },
     } : {
       tina: {

@@ -15,7 +15,7 @@ export async function getProjects() {
   if (!client) return []
   try {
     const { data } = await client.queries.projectConnection()
-    return data.projectConnection.edges?.map(edge => edge?.node) || []
+    return data.projectConnection.edges?.map((edge: any) => edge?.node) || []
   } catch (error) {
     console.error('Error fetching projects:', error)
     return []
@@ -41,7 +41,7 @@ export async function getFeaturedProjects() {
     const { data } = await client.queries.projectConnection({
       filter: { featured: { eq: true } }
     })
-    return data.projectConnection.edges?.map(edge => edge?.node) || []
+    return data.projectConnection.edges?.map((edge: any) => edge?.node) || []
   } catch (error) {
     console.error('Error fetching featured projects:', error)
     return []
@@ -53,7 +53,7 @@ export async function getPosts() {
   if (!client) return []
   try {
     const { data } = await client.queries.postConnection()
-    return data.postConnection.edges?.map(edge => edge?.node) || []
+    return data.postConnection.edges?.map((edge: any) => edge?.node) || []
   } catch (error) {
     console.error('Error fetching posts:', error)
     return []
@@ -79,7 +79,7 @@ export async function getFeaturedPosts() {
     const { data } = await client.queries.postConnection({
       filter: { featured: { eq: true } }
     })
-    return data.postConnection.edges?.map(edge => edge?.node) || []
+    return data.postConnection.edges?.map((edge: any) => edge?.node) || []
   } catch (error) {
     console.error('Error fetching featured posts:', error)
     return []
@@ -92,7 +92,7 @@ export async function getGalleryImages(category?: string) {
   try {
     const filter = category ? { category: { eq: category } } : undefined
     const { data } = await client.queries.galleryImageConnection({ filter })
-    return data.galleryImageConnection.edges?.map(edge => edge?.node) || []
+    return data.galleryImageConnection.edges?.map((edge: any) => edge?.node) || []
   } catch (error) {
     console.error('Error fetching gallery images:', error)
     return []
