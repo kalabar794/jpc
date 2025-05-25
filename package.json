@@ -14,7 +14,7 @@
     "tina:build": "tinacms build",
     "tina:dev": "tinacms dev",
     "setup:cms": "node scripts/setup-cms.js",
-    "vercel-build": "next build"
+    "vercel-build": "tinacms build && next build"
   },
   "dependencies": {
     "@cloudinary/react": "^1.14.3",
