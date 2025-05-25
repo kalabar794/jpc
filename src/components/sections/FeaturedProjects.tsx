@@ -266,19 +266,23 @@ export default function FeaturedProjects({ projects }: FeaturedProjectsProps) {
 
                     {/* Metrics */}
                     <motion.div
-                      className="grid grid-cols-3 gap-4 mb-6"
+                      className="grid grid-cols-3 gap-2 md:gap-4 mb-6"
                       initial={{ opacity: 0, y: 20 }}
                       whileInView={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.6, delay: index * 0.2 + 0.6 }}
                     >
-                      {Object.entries(project.metrics || {}).filter(([key, value]) => value).slice(0, 3).map(([key, value], metricIndex) => (
+                      {project.metrics && [
+                        { label: project.metrics.roi ? 'ROI' : project.metrics.custom1Label, value: project.metrics.roi || project.metrics.custom1Value },
+                        { label: project.metrics.engagement ? 'Engagement' : project.metrics.custom2Label, value: project.metrics.engagement || project.metrics.custom2Value },
+                        { label: project.metrics.efficiency ? 'Efficiency' : 'Results', value: project.metrics.efficiency || '100%' }
+                      ].filter(m => m.value).slice(0, 3).map((metric, metricIndex) => (
                         <motion.div
-                          key={key}
+                          key={metricIndex}
                           className="text-center"
                           whileHover={{ scale: 1.05 }}
                         >
                           <motion.div
-                            className="text-2xl font-bold"
+                            className="text-lg md:text-2xl font-bold"
                             initial={{ scale: 0 }}
                             whileInView={{ scale: 1 }}
                             transition={{ 
@@ -288,9 +292,9 @@ export default function FeaturedProjects({ projects }: FeaturedProjectsProps) {
                               stiffness: 200
                             }}
                           >
-                            {value}
+                            {metric.value}
                           </motion.div>
-                          <div className="text-xs text-gray-300 capitalize">{key}</div>
+                          <div className="text-xs text-gray-300 truncate px-1">{metric.label}</div>
                         </motion.div>
                       ))}
                     </motion.div>

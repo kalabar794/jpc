@@ -186,7 +186,7 @@ export default function HeroSection() {
 
         {/* Main Title */}
         <motion.h1
-          className="text-6xl md:text-8xl font-bold mb-6 leading-tight"
+          className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold mb-6 leading-tight"
           initial={{ opacity: 0, y: 50, scale: 0.8 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
           transition={{ 
@@ -217,19 +217,19 @@ export default function HeroSection() {
 
         {/* Typewriter Subtitle */}
         <motion.div
-          className="text-2xl md:text-4xl mb-8 h-16 flex items-center justify-center"
+          className="text-xl md:text-2xl lg:text-4xl mb-8 min-h-[4rem] md:h-16 flex flex-col md:flex-row items-center justify-center"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.6 }}
         >
           <span className="text-gray-200">Through </span>
           <motion.span
-            className="ml-2 bg-gradient-to-r from-blue-300 to-purple-300 bg-clip-text text-transparent font-semibold min-w-[400px] text-left"
+            className="ml-0 md:ml-2 bg-gradient-to-r from-blue-300 to-purple-300 bg-clip-text text-transparent font-semibold text-center md:text-left"
             key={currentPhrase}
           >
             {text}
             <motion.span
-              className="inline-block w-1 h-8 bg-white ml-1"
+              className="inline-block w-1 h-6 md:h-8 bg-white ml-1"
               animate={{ opacity: [0, 1, 0] }}
               transition={{ duration: 1, repeat: Infinity }}
             />
@@ -238,7 +238,7 @@ export default function HeroSection() {
 
         {/* Description */}
         <motion.p
-          className="text-xl md:text-2xl mb-12 text-gray-200 max-w-4xl mx-auto leading-relaxed"
+          className="text-lg md:text-xl lg:text-2xl mb-12 text-gray-200 max-w-4xl mx-auto leading-relaxed px-4 md:px-0"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.8 }}
