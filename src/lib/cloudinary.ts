@@ -58,28 +58,9 @@ export async function uploadImage(file: File, folder: string = 'portfolio'): Pro
   width: number
   height: number
 }> {
-  if (!process.env.CLOUDINARY_API_KEY) {
-    throw new Error('Cloudinary not configured')
-  }
-
-  const formData = new FormData()
-  formData.append('file', file)
-  formData.append('folder', folder)
-  formData.append('upload_preset', 'portfolio') // You'll need to create this preset
-
-  const response = await fetch(
-    `https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload`,
-    {
-      method: 'POST',
-      body: formData,
-    }
-  )
-
-  if (!response.ok) {
-    throw new Error('Failed to upload image')
-  }
-
-  return response.json()
+  // This function is deprecated - use TinaCMS media handler instead
+  // The TinaCMS Cloudinary integration handles secure uploads with proper authentication
+  throw new Error('Direct uploads disabled. Please use the TinaCMS media manager.')
 }
 
 // Generate responsive image sizes
