@@ -1,16 +1,13 @@
 import {
-  mediaHandlerConfig,
   createMediaHandler,
 } from 'next-tinacms-cloudinary/dist/handlers'
 import { isAuthorized } from '@tinacms/auth'
-
-export const config = mediaHandlerConfig
 
 const handler = createMediaHandler({
   cloud_name: process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME!,
   api_key: process.env.CLOUDINARY_API_KEY!,
   api_secret: process.env.CLOUDINARY_API_SECRET!,
-  authorized: async (req, _res) => {
+  authorized: async (req, _res): Promise<boolean> => {
     // Allow in local development
     if (process.env.TINA_TOKEN === 'local') {
       return true
@@ -19,7 +16,7 @@ const handler = createMediaHandler({
     try {
       // In production, check TinaCMS authorization
       const user = await isAuthorized(req)
-      return user && user.verified
+      return !!(user && user.verified)
     } catch (e) {
       console.error(e)
       return false
