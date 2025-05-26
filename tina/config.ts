@@ -21,10 +21,10 @@ export default defineConfig({
   }),
   
   media: {
-    // Use Cloudinary when available
-    loadCustomStore: async () => {
-      const pack = await import('next-tinacms-cloudinary')
-      return pack.TinaCloudCloudinaryMediaStore
+    // Use local storage for now since we only have read-only tokens
+    tina: {
+      mediaRoot: 'uploads',
+      publicFolder: 'public',
     },
   },
   
