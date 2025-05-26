@@ -35,7 +35,7 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
       type: 'article',
       publishedTime: post.date,
       authors: [post.author || 'Jonathon'],
-      images: post.image ? [post.image] : undefined,
+      images: post.heroImage ? [post.heroImage] : undefined,
     },
   };
 }
@@ -61,10 +61,10 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         </Link>
 
         <article className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl overflow-hidden">
-          {post.image && (
+          {post.heroImage && (
             <div className="aspect-video relative overflow-hidden">
               <img
-                src={post.image}
+                src={post.heroImage}
                 alt={post.title}
                 className="w-full h-full object-cover"
               />
