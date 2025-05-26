@@ -11,6 +11,7 @@ interface SEOFieldsProps {
     }
     title?: string
     excerpt?: string
+    slug?: string
   }
   onChange: (seo: any) => void
   type: 'post' | 'project'
