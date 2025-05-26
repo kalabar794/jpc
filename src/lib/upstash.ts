@@ -113,4 +113,4 @@ export async function deleteContent(type: 'post' | 'project', slug: string): Pro
     console.error('Error deleting content:', error)
     return false
   }
-}
+}// Force rebuild Mon May 26 16:24:04 PDT 2025
