@@ -8,6 +8,15 @@ const handler = createMediaHandler({
   api_key: process.env.CLOUDINARY_API_KEY!,
   api_secret: process.env.CLOUDINARY_API_SECRET!,
   authorized: async (req, _res): Promise<boolean> => {
+    // Log environment info for debugging
+    console.log('Cloudinary Auth Check:', {
+      hasCloudName: !!process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME,
+      hasApiKey: !!process.env.CLOUDINARY_API_KEY,
+      hasApiSecret: !!process.env.CLOUDINARY_API_SECRET,
+      tinaToken: process.env.TINA_TOKEN,
+      nodeEnv: process.env.NODE_ENV
+    })
+    
     // Allow in local development
     if (process.env.TINA_TOKEN === 'local') {
       return true
@@ -18,7 +27,7 @@ const handler = createMediaHandler({
       const user = await isAuthorized(req)
       return !!(user && user.verified)
     } catch (e) {
-      console.error(e)
+      console.error('TinaCMS Auth Error:', e)
       return false
     }
   },

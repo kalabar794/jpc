@@ -64,12 +64,38 @@ body {
     @apply bg-gradient-to-r from-primary-500 to-secondary-500 bg-clip-text text-transparent;
   }
   
+  .text-gradient {
+    @apply bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent;
+  }
+  
   .shadow-glow {
     box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
   }
   
   .shadow-glow-purple {
     box-shadow: 0 0 20px rgba(168, 85, 247, 0.3);
+  }
+  
+  .animate-gradient {
+    animation: gradient 6s ease infinite;
+    background-size: 300% 300%;
+  }
+  
+  .bg-300\% {
+    background-size: 300% 300%;
+  }
+}
+
+/* Gradient animation */
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
   }
 }
 
