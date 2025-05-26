@@ -60,6 +60,7 @@ export default function OptimizedImage({
           {...imageProps}
           fill={fill}
           sizes={sizes}
+          loading={priority ? 'eager' : 'lazy'}
           className={`transition-opacity duration-300 ${
             imageLoaded ? 'opacity-100' : 'opacity-0'
           }`}
@@ -98,6 +99,7 @@ export default function OptimizedImage({
         fill={fill}
         sizes={sizes}
         priority={priority}
+        loading={priority ? 'eager' : 'lazy'}
         className={`transition-opacity duration-300 ${
           imageLoaded ? 'opacity-100' : 'opacity-0'
         }`}

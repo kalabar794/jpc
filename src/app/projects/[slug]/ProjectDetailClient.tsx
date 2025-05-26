@@ -5,6 +5,7 @@ import { motion, useScroll, useTransform } from 'framer-motion'
 import { Button } from '@/components/ui'
 import { Project } from '@/lib/content'
 import Link from 'next/link'
+import OptimizedImage from '@/components/ui/OptimizedImage'
 
 interface ProjectDetailClientProps {
   project: Project
@@ -31,11 +32,16 @@ export default function ProjectDetailClient({ project }: ProjectDetailClientProp
           className="absolute inset-0"
           style={{ y: heroY }}
         >
-          <img
-            src={project.heroImage || "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=1920&h=1080&fit=crop"}
-            alt={project.title}
-            className="w-full h-full object-cover"
-          />
+          <div className="absolute inset-0">
+            <OptimizedImage
+              src={project.heroImage || "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=1920&h=1080&fit=crop"}
+              alt={project.title}
+              fill
+              priority
+              className="object-cover"
+              sizes="100vw"
+            />
+          </div>
           <div className="absolute inset-0 bg-black/50" />
         </motion.div>
 
