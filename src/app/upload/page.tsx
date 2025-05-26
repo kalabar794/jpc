@@ -20,7 +20,7 @@ export default function UploadPage() {
           transition={{ duration: 0.6 }}
         >
           <h1 className="text-4xl font-bold text-center mb-8 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-            Cloudinary Direct Upload
+            Cloudinary Direct Upload Tool
           </h1>
           
           <div className="bg-white dark:bg-gray-800 rounded-xl shadow-xl p-8 mb-8">
