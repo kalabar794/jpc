@@ -20,11 +20,13 @@ export async function GET() {
     
     // Try to fetch existing resources to verify connection
     let resources = null
+    let errorMessage = null
     try {
       const result = await cloudinary.api.resources({ max_results: 1 })
       resources = result.resources.length
-    } catch (error) {
+    } catch (error: any) {
       console.error('Cloudinary API error:', error)
+      errorMessage = error.message || 'Unknown error'
     }
     
     return NextResponse.json({
@@ -32,6 +34,7 @@ export async function GET() {
       config,
       connected: resources !== null,
       resourceCount: resources,
+      error: errorMessage,
     })
   } catch (error) {
     return NextResponse.json({
