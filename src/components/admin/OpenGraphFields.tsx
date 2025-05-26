@@ -29,13 +29,13 @@ export default function OpenGraphFields({ data, onChange, type }: OpenGraphField
   // Auto-fill from main content if empty
   useEffect(() => {
     if (!ogData.title && data.title) {
-      setOgData(prev => ({ ...prev, title: data.title }))
+      setOgData(prev => ({ ...prev, title: data.title || '' }))
     }
     if (!ogData.description && data.excerpt) {
-      setOgData(prev => ({ ...prev, description: data.excerpt }))
+      setOgData(prev => ({ ...prev, description: data.excerpt || '' }))
     }
     if (!ogData.image && data.heroImage) {
-      setOgData(prev => ({ ...prev, image: data.heroImage }))
+      setOgData(prev => ({ ...prev, image: data.heroImage || '' }))
     }
   }, [data.title, data.excerpt, data.heroImage])
 

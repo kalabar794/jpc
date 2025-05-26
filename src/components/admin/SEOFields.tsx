@@ -34,7 +34,7 @@ export default function SEOFields({ data, onChange, type }: SEOFieldsProps) {
     if (!seoData.description && data.excerpt) {
       setSeoData(prev => ({
         ...prev,
-        description: data.excerpt.slice(0, 160)
+        description: (data.excerpt || '').slice(0, 160)
       }))
     }
   }, [data.title, data.excerpt])
