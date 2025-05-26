@@ -5,8 +5,16 @@ import { useEffect } from 'react'
 // This redirects to the TinaCMS admin interface
 export default function AdminPage() {
   useEffect(() => {
-    // Redirect to the TinaCMS admin interface
-    window.location.href = '/admin/index.html'
+    // Clear all caches before redirecting
+    if ('caches' in window) {
+      caches.keys().then(names => {
+        names.forEach(name => caches.delete(name))
+      })
+    }
+    
+    // Add timestamp to force fresh load
+    const timestamp = new Date().getTime()
+    window.location.href = `/admin/index.html?v=${timestamp}`
   }, [])
 
   return (
