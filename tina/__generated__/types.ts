@@ -480,20 +480,13 @@ export type SiteSettings = Node & Document & {
   _values: Scalars['JSON']['output'];
 };
 
-export type ImageFilter = {
-  startsWith?: InputMaybe<Scalars['String']['input']>;
-  eq?: InputMaybe<Scalars['String']['input']>;
-  exists?: InputMaybe<Scalars['Boolean']['input']>;
-  in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-};
-
 export type SiteSettingsSiteFilter = {
   title?: InputMaybe<StringFilter>;
   description?: InputMaybe<StringFilter>;
   author?: InputMaybe<StringFilter>;
   email?: InputMaybe<StringFilter>;
-  logo?: InputMaybe<ImageFilter>;
-  favicon?: InputMaybe<ImageFilter>;
+  logo?: InputMaybe<StringFilter>;
+  favicon?: InputMaybe<StringFilter>;
 };
 
 export type SiteSettingsSocialFilter = {
@@ -506,7 +499,7 @@ export type SiteSettingsSocialFilter = {
 export type SiteSettingsSeoFilter = {
   defaultTitle?: InputMaybe<StringFilter>;
   defaultDescription?: InputMaybe<StringFilter>;
-  defaultImage?: InputMaybe<ImageFilter>;
+  defaultImage?: InputMaybe<StringFilter>;
 };
 
 export type SiteSettingsFilter = {

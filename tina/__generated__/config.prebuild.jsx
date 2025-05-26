@@ -13,13 +13,8 @@ var config_default = defineConfig({
   ...{
     localContentPath: "./content"
   },
-  media: {
-    // Use local storage for now since we only have read-only tokens
-    tina: {
-      mediaRoot: "uploads",
-      publicFolder: "public"
-    }
-  },
+  // No media configuration needed since we're using string fields for URLs
+  media: void 0,
   schema: {
     collections: [
       // Projects Collection
@@ -462,14 +457,16 @@ var config_default = defineConfig({
                 label: "Contact Email"
               },
               {
-                type: "image",
+                type: "string",
                 name: "logo",
-                label: "Site Logo"
+                label: "Site Logo URL",
+                description: "Upload via /upload page or paste URL"
               },
               {
-                type: "image",
+                type: "string",
                 name: "favicon",
-                label: "Favicon"
+                label: "Favicon URL",
+                description: "Upload via /upload page or paste URL"
               }
             ]
           },
@@ -519,9 +516,10 @@ var config_default = defineConfig({
                 }
               },
               {
-                type: "image",
+                type: "string",
                 name: "defaultImage",
-                label: "Default Social Share Image"
+                label: "Default Social Share Image URL",
+                description: "Upload via /upload page or paste URL"
               }
             ]
           }

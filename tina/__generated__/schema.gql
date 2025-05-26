@@ -341,20 +341,13 @@ type SiteSettings implements Node & Document {
   _values: JSON!
 }
 
-input ImageFilter {
-  startsWith: String
-  eq: String
-  exists: Boolean
-  in: [String]
-}
-
 input SiteSettingsSiteFilter {
   title: StringFilter
   description: StringFilter
   author: StringFilter
   email: StringFilter
-  logo: ImageFilter
-  favicon: ImageFilter
+  logo: StringFilter
+  favicon: StringFilter
 }
 
 input SiteSettingsSocialFilter {
@@ -367,7 +360,7 @@ input SiteSettingsSocialFilter {
 input SiteSettingsSeoFilter {
   defaultTitle: StringFilter
   defaultDescription: StringFilter
-  defaultImage: ImageFilter
+  defaultImage: StringFilter
 }
 
 input SiteSettingsFilter {
