@@ -39,7 +39,7 @@ export async function GET() {
     const uploadUrl = `https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload`
     
     return NextResponse.json({
-      status: 'Cloudinary configuration test',
+      status: 'Cloudinary configuration test v2',
       config,
       connected: resources !== null,
       resourceCount: resources,
