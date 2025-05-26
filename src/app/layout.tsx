@@ -4,6 +4,7 @@ import './globals.css'
 import { ThemeProvider } from '@/components/providers/ThemeProvider'
 import { TinaProvider } from '@/components/providers/TinaProvider'
 import Navigation from '@/components/ui/Navigation'
+import { defaultMetadata } from '@/lib/metadata'
 
 const inter = Inter({ 
   subsets: ['latin'],
@@ -11,32 +12,7 @@ const inter = Inter({
   display: 'swap',
 })
 
-export const metadata: Metadata = {
-  title: {
-    template: '%s | Jonathon - AI & Marketing Expert',
-    default: 'Jonathon - AI & Marketing Expert | Portfolio',
-  },
-  description: 'Professional portfolio showcasing AI-powered marketing solutions, creative projects, and innovative digital strategies.',
-  keywords: ['AI Marketing', 'Digital Strategy', 'Portfolio', 'Creative Solutions', 'Automation'],
-  authors: [{ name: 'Jonathon' }],
-  creator: 'Jonathon',
-  openGraph: {
-    type: 'website',
-    locale: 'en_US',
-    title: 'Jonathon - AI & Marketing Expert',
-    description: 'Professional portfolio showcasing AI-powered marketing solutions and creative projects.',
-    siteName: 'Jonathon Portfolio',
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'Jonathon - AI & Marketing Expert',
-    description: 'Professional portfolio showcasing AI-powered marketing solutions and creative projects.',
-  },
-  robots: {
-    index: true,
-    follow: true,
-  },
-}
+export const metadata: Metadata = defaultMetadata
 
 export default function RootLayout({
   children,

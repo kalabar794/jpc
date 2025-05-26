@@ -1,6 +1,8 @@
 import { notFound } from 'next/navigation'
 import { getProject, getProjects } from '@/lib/content'
 import ProjectDetailClient from './ProjectDetailClient'
+import { generateMetadata as generateMeta } from '@/lib/metadata'
+import { Metadata } from 'next'
 
 // Generate static params for all projects
 export async function generateStaticParams() {
@@ -14,7 +16,7 @@ export async function generateStaticParams() {
 }
 
 // Generate metadata for each project
-export async function generateMetadata({ params }: { params: { slug: string } }) {
+export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
   const project = await getProject(params.slug)
   
   if (!project) {
@@ -23,15 +25,12 @@ export async function generateMetadata({ params }: { params: { slug: string } })
     }
   }
 
-  return {
-    title: `${project.title} | Jonathon's Portfolio`,
-    description: project.excerpt,
-    openGraph: {
-      title: project.title,
-      description: project.excerpt,
-      images: project.heroImage ? [project.heroImage] : [],
-    },
-  }
+  return generateMeta(
+    project.title,
+    project.excerpt || `${project.title} - AI-powered marketing solution with proven ROI improvements.`,
+    `/projects/${params.slug}`,
+    project.heroImage
+  )
 }
 
 export default async function ProjectPage({ params }: { params: { slug: string } }) {
