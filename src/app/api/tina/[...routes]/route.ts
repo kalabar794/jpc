@@ -3,26 +3,16 @@ import { TinaCloudBackendAuthProvider } from '@tinacms/auth'
 
 const isLocal = process.env.TINA_TOKEN === 'local' || !process.env.TINA_TOKEN
 
-async function getHandler() {
-  if (isLocal) {
-    return TinaNodeBackend({
-      authProvider: LocalBackendAuthProvider(),
-      databaseClient: createLocalDatabase(),
-    })
-  }
-  
-  // Dynamically import database client for production
-  const { default: databaseClient } = await import('../../../../../tina/__generated__/databaseClient')
-  
-  return TinaNodeBackend({
-    authProvider: TinaCloudBackendAuthProvider(),
-    databaseClient,
-  })
-}
+// Since we only have read-only tokens, always use local database
+const handler = TinaNodeBackend({
+  authProvider: isLocal
+    ? LocalBackendAuthProvider()
+    : TinaCloudBackendAuthProvider(),
+  databaseClient: createLocalDatabase(),
+})
 
 export async function GET(request: Request, { params }: { params: Promise<{ routes: string[] }> }) {
   const { routes } = await params
-  const handler = await getHandler()
   
   // Convert Next.js Request to req/res format expected by TinaNodeBackend
   const req = {
@@ -58,7 +48,6 @@ export async function GET(request: Request, { params }: { params: Promise<{ rout
 export async function POST(request: Request, { params }: { params: Promise<{ routes: string[] }> }) {
   const { routes } = await params
   const body = await request.text()
-  const handler = await getHandler()
   
   // Convert Next.js Request to req/res format expected by TinaNodeBackend
   const req = {
