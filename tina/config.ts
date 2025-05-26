@@ -75,10 +75,10 @@ export default defineConfig({
             required: true,
           },
           {
-            type: 'image',
+            type: 'string',
             name: 'heroImage',
-            label: 'Hero Image',
-            description: 'Main project image (recommended: 1200x800px)',
+            label: 'Hero Image URL',
+            description: 'Upload via /upload page or paste URL (recommended: 1200x800px)',
           },
           {
             type: 'object',
@@ -87,9 +87,10 @@ export default defineConfig({
             list: true,
             fields: [
               {
-                type: 'image',
+                type: 'string',
                 name: 'image',
-                label: 'Image',
+                label: 'Image URL',
+                description: 'Upload via /upload page or paste URL',
               },
               {
                 type: 'string',
@@ -251,10 +252,10 @@ export default defineConfig({
             description: 'Show this post prominently',
           },
           {
-            type: 'image',
+            type: 'string',
             name: 'heroImage',
-            label: 'Featured Image',
-            description: 'Main post image (recommended: 1200x630px)',
+            label: 'Featured Image URL',
+            description: 'Upload via /upload page or paste URL (recommended: 1200x630px)',
           },
           {
             type: 'string',
@@ -355,9 +356,10 @@ export default defineConfig({
             required: true,
           },
           {
-            type: 'image',
+            type: 'string',
             name: 'image',
-            label: 'Image File',
+            label: 'Image URL',
+            description: 'Upload via /upload page or paste Cloudinary URL',
             required: true,
           },
           {
