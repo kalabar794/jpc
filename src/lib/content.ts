@@ -1,9 +1,9 @@
-// Content layer that reads directly from markdown files
-// This replaces TinaCMS with a simpler, more reliable solution
+// Content layer that reads from both Upstash (for new content) and markdown files (for existing content)
 
 import fs from 'fs'
 import path from 'path'
 import matter from 'gray-matter'
+import { getAllContent as getUpstashContent } from './upstash'
 
 const contentDirectory = path.join(process.cwd(), 'content')
 
@@ -83,27 +83,45 @@ function readMarkdownFile(filePath: string) {
 export async function getProjects(): Promise<Project[]> {
   const projectsDirectory = path.join(contentDirectory, 'projects')
   
-  if (!fs.existsSync(projectsDirectory)) {
-    return []
+  // Get projects from Upstash
+  let upstashProjects: Project[] = []
+  try {
+    const upstashData = await getUpstashContent('project')
+    upstashProjects = upstashData.map(p => ({
+      ...p,
+      content: p.content || p.description || ''
+    })) as Project[]
+  } catch (error) {
+    console.error('Error fetching from Upstash:', error)
   }
   
-  const filenames = fs.readdirSync(projectsDirectory)
+  // Get projects from filesystem
+  let fileProjects: Project[] = []
+  if (fs.existsSync(projectsDirectory)) {
+    const filenames = fs.readdirSync(projectsDirectory)
+    fileProjects = filenames
+      .filter(name => name.endsWith('.md'))
+      .map(name => {
+        const filePath = path.join(projectsDirectory, name)
+        const { frontmatter, content } = readMarkdownFile(filePath)
+        
+        return {
+          ...frontmatter,
+          content,
+          slug: frontmatter.slug || name.replace(/\.md$/, ''),
+        } as Project
+      })
+  }
   
-  const projects = filenames
-    .filter(name => name.endsWith('.md'))
-    .map(name => {
-      const filePath = path.join(projectsDirectory, name)
-      const { frontmatter, content } = readMarkdownFile(filePath)
-      
-      return {
-        ...frontmatter,
-        content,
-        slug: frontmatter.slug || name.replace(/\.md$/, ''),
-      } as Project
-    })
-    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+  // Combine and deduplicate by slug
+  const allProjects = [...upstashProjects]
+  fileProjects.forEach(fp => {
+    if (!allProjects.find(p => p.slug === fp.slug)) {
+      allProjects.push(fp)
+    }
+  })
   
-  return projects
+  return allProjects.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
 }
 
 // Get a single project by slug
@@ -122,27 +140,42 @@ export async function getFeaturedProjects(): Promise<Project[]> {
 export async function getPosts(): Promise<Post[]> {
   const postsDirectory = path.join(contentDirectory, 'posts')
   
-  if (!fs.existsSync(postsDirectory)) {
-    return []
+  // Get posts from Upstash
+  let upstashPosts: Post[] = []
+  try {
+    const upstashData = await getUpstashContent('post')
+    upstashPosts = upstashData as Post[]
+  } catch (error) {
+    console.error('Error fetching from Upstash:', error)
   }
   
-  const filenames = fs.readdirSync(postsDirectory)
+  // Get posts from filesystem
+  let filePosts: Post[] = []
+  if (fs.existsSync(postsDirectory)) {
+    const filenames = fs.readdirSync(postsDirectory)
+    filePosts = filenames
+      .filter(name => name.endsWith('.md'))
+      .map(name => {
+        const filePath = path.join(postsDirectory, name)
+        const { frontmatter, content } = readMarkdownFile(filePath)
+        
+        return {
+          ...frontmatter,
+          content,
+          slug: frontmatter.slug || name.replace(/\.md$/, ''),
+        } as Post
+      })
+  }
   
-  const posts = filenames
-    .filter(name => name.endsWith('.md'))
-    .map(name => {
-      const filePath = path.join(postsDirectory, name)
-      const { frontmatter, content } = readMarkdownFile(filePath)
-      
-      return {
-        ...frontmatter,
-        content,
-        slug: frontmatter.slug || name.replace(/\.md$/, ''),
-      } as Post
-    })
-    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+  // Combine and deduplicate by slug
+  const allPosts = [...upstashPosts]
+  filePosts.forEach(fp => {
+    if (!allPosts.find(p => p.slug === fp.slug)) {
+      allPosts.push(fp)
+    }
+  })
   
-  return posts
+  return allPosts.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
 }
 
 // Get a single post by slug

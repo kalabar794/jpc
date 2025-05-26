@@ -1,7 +1,5 @@
 import { NextResponse } from 'next/server'
-import fs from 'fs/promises'
-import path from 'path'
-import matter from 'gray-matter'
+import { getContent, updateContent } from '@/lib/upstash'
 
 export async function GET(
   request: Request,
@@ -9,16 +7,13 @@ export async function GET(
 ) {
   try {
     const { type, slug } = params
-    const contentDir = path.join(process.cwd(), 'content', type === 'post' ? 'posts' : 'projects')
-    const filePath = path.join(contentDir, `${slug}.md`)
+    const content = await getContent(type as 'post' | 'project', slug)
     
-    const fileContent = await fs.readFile(filePath, 'utf-8')
-    const { data, content } = matter(fileContent)
+    if (!content) {
+      return NextResponse.json({ error: 'Content not found' }, { status: 404 })
+    }
     
-    return NextResponse.json({
-      ...data,
-      content: content.trim()
-    })
+    return NextResponse.json(content)
   } catch (error) {
     console.error('Error reading content:', error)
     return NextResponse.json({ error: 'Content not found' }, { status: 404 })
@@ -33,21 +28,18 @@ export async function PUT(
     const { type, slug } = params
     const body = await request.json()
     
-    // Extract content/description from body
-    const content = body.content || body.description || ''
-    delete body.content
-    delete body.description
+    // Update content in Upstash
+    const success = await updateContent(
+      type as 'post' | 'project',
+      slug,
+      body
+    )
     
-    // Create frontmatter
-    const frontmatter = matter.stringify(content, body)
-    
-    // Write to file
-    const contentDir = path.join(process.cwd(), 'content', type === 'post' ? 'posts' : 'projects')
-    const filePath = path.join(contentDir, `${slug}.md`)
-    
-    await fs.writeFile(filePath, frontmatter)
-    
-    return NextResponse.json({ success: true })
+    if (success) {
+      return NextResponse.json({ success: true })
+    } else {
+      return NextResponse.json({ error: 'Failed to save content' }, { status: 500 })
+    }
   } catch (error) {
     console.error('Error saving content:', error)
     return NextResponse.json({ error: 'Failed to save content' }, { status: 500 })

@@ -1,56 +1,31 @@
 import { NextResponse } from 'next/server'
-import fs from 'fs/promises'
-import path from 'path'
-import matter from 'gray-matter'
+import { getAllContent } from '@/lib/upstash'
 
 export async function GET() {
   try {
-    const contentDir = path.join(process.cwd(), 'content')
-    const content = []
+    // Get all posts and projects from Upstash
+    const [posts, projects] = await Promise.all([
+      getAllContent('post'),
+      getAllContent('project')
+    ])
 
-    // Get all posts
-    const postsDir = path.join(contentDir, 'posts')
-    try {
-      const postFiles = await fs.readdir(postsDir)
-      for (const file of postFiles) {
-        if (file.endsWith('.md')) {
-          const filePath = path.join(postsDir, file)
-          const fileContent = await fs.readFile(filePath, 'utf-8')
-          const { data } = matter(fileContent)
-          content.push({
-            title: data.title || 'Untitled',
-            slug: data.slug || file.replace('.md', ''),
-            type: 'post',
-            status: data.status || 'draft',
-            date: data.date || new Date().toISOString()
-          })
-        }
-      }
-    } catch (error) {
-      console.error('Error reading posts:', error)
-    }
-
-    // Get all projects
-    const projectsDir = path.join(contentDir, 'projects')
-    try {
-      const projectFiles = await fs.readdir(projectsDir)
-      for (const file of projectFiles) {
-        if (file.endsWith('.md')) {
-          const filePath = path.join(projectsDir, file)
-          const fileContent = await fs.readFile(filePath, 'utf-8')
-          const { data } = matter(fileContent)
-          content.push({
-            title: data.title || 'Untitled',
-            slug: data.slug || file.replace('.md', ''),
-            type: 'project',
-            status: data.status || 'draft',
-            date: data.date || new Date().toISOString()
-          })
-        }
-      }
-    } catch (error) {
-      console.error('Error reading projects:', error)
-    }
+    // Combine and format for the admin panel
+    const content = [
+      ...posts.map(post => ({
+        title: post.title || 'Untitled',
+        slug: post.slug,
+        type: 'post' as const,
+        status: post.status || 'draft',
+        date: post.date || new Date().toISOString()
+      })),
+      ...projects.map(project => ({
+        title: project.title || 'Untitled',
+        slug: project.slug,
+        type: 'project' as const,
+        status: project.status || 'draft',
+        date: project.date || new Date().toISOString()
+      }))
+    ]
 
     // Sort by date
     content.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
