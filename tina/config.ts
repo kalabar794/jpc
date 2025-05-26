@@ -10,9 +10,6 @@ export default defineConfig({
   clientId: process.env.NEXT_PUBLIC_TINA_CLIENT_ID || 'local',
   token: process.env.TINA_TOKEN || 'local',
   
-  // Add cache buster to force schema refresh
-  cacheKey: 'v2-string-fields',
-  
   build: {
     outputFolder: 'admin',
     publicFolder: 'public',
