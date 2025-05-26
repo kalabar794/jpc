@@ -1,9 +1,9 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, Suspense } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 
-export default function EditPage() {
+function EditPageContent() {
   const router = useRouter()
   const searchParams = useSearchParams()
   const type = searchParams.get('type')
@@ -197,5 +197,17 @@ export default function EditPage() {
         </div>
       </div>
     </div>
+  )
+}
+
+export default function EditPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-gray-900"></div>
+      </div>
+    }>
+      <EditPageContent />
+    </Suspense>
   )
 }
