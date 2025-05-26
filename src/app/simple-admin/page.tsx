@@ -52,16 +52,10 @@ export default function SimpleAdminPage() {
             <h2 className="text-xl font-semibold">Content</h2>
             <div className="space-x-4">
               <button
-                onClick={() => router.push('/simple-admin/new?type=post')}
+                onClick={() => router.push('/simple-admin/generate')}
                 className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
               >
-                New Blog Post
-              </button>
-              <button
-                onClick={() => router.push('/simple-admin/new?type=project')}
-                className="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700"
-              >
-                New Project
+                Create New Content
               </button>
             </div>
           </div>

@@ -41,6 +41,13 @@ export async function POST(request: Request) {
     return NextResponse.json({ success: true, slug, type })
   } catch (error) {
     console.error('Error creating content:', error)
-    return NextResponse.json({ error: 'Failed to create content' }, { status: 500 })
+    // In production, we can't write to the filesystem
+    if (process.env.NODE_ENV === 'production') {
+      return NextResponse.json({ 
+        error: 'Content creation is not available in production. Please create content locally and push to Git.', 
+        details: 'Vercel serverless functions cannot write to the filesystem.'
+      }, { status: 501 })
+    }
+    return NextResponse.json({ error: 'Failed to create content', details: error instanceof Error ? error.message : 'Unknown error' }, { status: 500 })
   }
 }

@@ -56,7 +56,8 @@ function NewPageContent() {
       if (response.ok) {
         router.push('/simple-admin')
       } else {
-        alert('Failed to create content')
+        const data = await response.json()
+        alert(data.error || 'Failed to create content')
       }
     } catch (error) {
       console.error('Error creating content:', error)
