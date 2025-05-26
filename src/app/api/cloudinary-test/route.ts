@@ -26,8 +26,17 @@ export async function GET() {
       resources = result.resources.length
     } catch (error: any) {
       console.error('Cloudinary API error:', error)
-      errorMessage = error.message || 'Unknown error'
+      errorMessage = error.error?.message || error.message || JSON.stringify(error)
+      
+      // Check if it's an authentication error
+      if (error.http_code === 401) {
+        errorMessage = 'Authentication failed - check API credentials'
+      }
     }
+    
+    // Generate a test upload URL to verify basic configuration
+    const timestamp = Math.round(new Date().getTime() / 1000)
+    const uploadUrl = `https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload`
     
     return NextResponse.json({
       status: 'Cloudinary configuration test',
@@ -35,6 +44,8 @@ export async function GET() {
       connected: resources !== null,
       resourceCount: resources,
       error: errorMessage,
+      uploadUrl,
+      timestamp,
     })
   } catch (error) {
     return NextResponse.json({
