@@ -21,18 +21,11 @@ export default defineConfig({
   }),
   
   media: {
-    // Use Cloudinary if configured, otherwise fallback to local
-    ...(process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME ? {
-      loadCustomStore: async () => {
-        const pack = await import('next-tinacms-cloudinary')
-        return pack.TinaCloudCloudinaryMediaStore
-      },
-    } : {
-      tina: {
-        mediaRoot: 'uploads',
-        publicFolder: 'public',
-      },
-    }),
+    // Use Cloudinary when available
+    loadCustomStore: async () => {
+      const pack = await import('next-tinacms-cloudinary')
+      return pack.TinaCloudCloudinaryMediaStore
+    },
   },
   
   schema: {
