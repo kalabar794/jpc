@@ -89,7 +89,10 @@ export async function getProjects(): Promise<Project[]> {
     const upstashData = await getUpstashContent('project')
     upstashProjects = upstashData.map(p => ({
       ...p,
-      content: p.content || p.description || ''
+      content: p.content || p.description || '',
+      metrics: p.metrics || {},
+      techStack: p.techStack || [],
+      gallery: p.gallery || []
     })) as Project[]
   } catch (error) {
     console.error('Error fetching from Upstash:', error)
@@ -144,7 +147,13 @@ export async function getPosts(): Promise<Post[]> {
   let upstashPosts: Post[] = []
   try {
     const upstashData = await getUpstashContent('post')
-    upstashPosts = upstashData as Post[]
+    upstashPosts = upstashData.map(p => ({
+      ...p,
+      content: p.content || '',
+      tags: p.tags || [],
+      category: p.category || 'industry-insights',
+      excerpt: p.excerpt || ''
+    })) as Post[]
   } catch (error) {
     console.error('Error fetching from Upstash:', error)
   }
