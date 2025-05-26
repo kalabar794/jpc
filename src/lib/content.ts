@@ -1,5 +1,5 @@
-// Temporary content layer until TinaCMS is fully configured
-// This provides the same interface as TinaCMS but reads from static files
+// Content layer that reads directly from markdown files
+// This replaces TinaCMS with a simpler, more reliable solution
 
 import fs from 'fs'
 import path from 'path'
@@ -7,7 +7,7 @@ import matter from 'gray-matter'
 
 const contentDirectory = path.join(process.cwd(), 'content')
 
-// Types based on our TinaCMS schema
+// Content types
 export interface Project {
   title: string
   slug: string

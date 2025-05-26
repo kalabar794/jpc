@@ -2,7 +2,6 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
 import { ThemeProvider } from '@/components/providers/ThemeProvider'
-import { TinaProvider } from '@/components/providers/TinaProvider'
 import Navigation from '@/components/ui/Navigation'
 import { defaultMetadata } from '@/lib/metadata'
 
@@ -23,12 +22,10 @@ export default function RootLayout({
     <html lang="en" className={inter.variable} suppressHydrationWarning>
       <body className="min-h-screen bg-white dark:bg-dark-background text-gray-900 dark:text-dark-text antialiased">
         <ThemeProvider defaultTheme="light" storageKey="portfolio-theme">
-          <TinaProvider>
-            <Navigation />
-            <div className="relative">
-              {children}
-            </div>
-          </TinaProvider>
+          <Navigation />
+          <div className="relative">
+            {children}
+          </div>
         </ThemeProvider>
       </body>
     </html>

@@ -51,17 +51,8 @@ export function getOptimizedImageUrl(
   return `https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload/${transformations}/${publicId}`
 }
 
-// Upload image to Cloudinary (for use in admin)
-export async function uploadImage(file: File, folder: string = 'portfolio'): Promise<{
-  public_id: string
-  secure_url: string
-  width: number
-  height: number
-}> {
-  // This function is deprecated - use TinaCMS media handler instead
-  // The TinaCMS Cloudinary integration handles secure uploads with proper authentication
-  throw new Error('Direct uploads disabled. Please use the TinaCMS media manager.')
-}
+// Note: Direct upload is handled through the /api/upload endpoint
+// This keeps the Cloudinary API credentials secure on the server side
 
 // Generate responsive image sizes
 export function getResponsiveImageUrls(publicId: string): {
