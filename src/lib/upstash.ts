@@ -67,9 +67,13 @@ export async function createContent(data: Omit<ContentData, 'id'>): Promise<bool
   try {
     const id = Date.now().toString()
     const contentData: ContentData = {
-      ...data,
       id,
-      date: data.date || new Date().toISOString()
+      type: data.type,
+      slug: data.slug,
+      title: data.title,
+      status: data.status,
+      date: data.date || new Date().toISOString(),
+      ...data
     }
     
     await redis.set(`content:${data.type}:${data.slug}`, contentData)
