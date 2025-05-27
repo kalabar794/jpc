@@ -8,7 +8,7 @@ const services = [
   {
     id: 1,
     icon: "🤖",
-    title: "AI Marketing Automation",
+    title: "AI Marketing Strategy",
     description: "Advanced AI systems that create, optimize, and execute marketing campaigns autonomously. From content generation to audience targeting.",
     features: ["GPT-4 Integration", "Predictive Analytics", "Auto-optimization", "Real-time Insights"],
     stats: { campaigns: 150, efficiency: 85, roi: 340 }
@@ -16,7 +16,7 @@ const services = [
   {
     id: 2,
     icon: "📊",
-    title: "Data-Driven Strategy",
+    title: "Data Analytics",
     description: "Transform raw data into actionable marketing strategies. Advanced analytics, customer insights, and performance optimization.",
     features: ["Advanced Analytics", "Customer Segmentation", "Performance Tracking", "Market Research"],
     stats: { insights: 500, accuracy: 92, growth: 250 }
@@ -24,7 +24,7 @@ const services = [
   {
     id: 3,
     icon: "⚡",
-    title: "Creative Automation",
+    title: "Marketing Automation",
     description: "Scalable creative production using AI tools. Generate thousands of variations, test everything, and optimize for maximum impact.",
     features: ["AI Content Generation", "A/B Testing", "Creative Optimization", "Brand Consistency"],
     stats: { creatives: 1000, variations: 50, performance: 180 }
@@ -170,10 +170,10 @@ export default function ServicesSection() {
               transition={{ duration: 0.8, delay: 0.2 }}
               viewport={{ once: true }}
             >
-              <span className="text-gray-900 dark:text-white">AI-Powered</span>
+              <span className="text-gray-900 dark:text-white">Transform Your</span>
               <br />
               <span className="bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 bg-clip-text text-transparent">
-                Marketing Solutions
+                Business
               </span>
             </motion.h2>
 

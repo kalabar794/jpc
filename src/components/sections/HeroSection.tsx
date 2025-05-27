@@ -196,7 +196,7 @@ export default function HeroSection() {
             stiffness: 100
           }}
         >
-          <span className="block">Transforming</span>
+          <span className="block">AI Marketing</span>
           <motion.span 
             className="block bg-gradient-to-r from-yellow-300 via-pink-300 to-purple-300 bg-clip-text text-transparent"
             animate={{ 
@@ -211,7 +211,7 @@ export default function HeroSection() {
               backgroundSize: '200% 200%'
             }}
           >
-            Businesses
+            Specialist
           </motion.span>
         </motion.h1>
 

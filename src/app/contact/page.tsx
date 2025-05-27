@@ -1,31 +1,58 @@
 'use client'
 
 import { motion } from 'framer-motion'
+import { useState } from 'react'
 
 export default function ContactPage() {
-  const contactOptions = [
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    subject: '',
+    message: ''
+  })
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle')
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setIsSubmitting(true)
+    
+    // Simulate form submission
+    try {
+      await new Promise(resolve => setTimeout(resolve, 2000))
+      setSubmitStatus('success')
+      setFormData({ name: '', email: '', subject: '', message: '' })
+    } catch (error) {
+      setSubmitStatus('error')
+    } finally {
+      setIsSubmitting(false)
+    }
+  }
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    })
+  }
+
+  const contactInfo = [
     {
       icon: '📧',
-      title: 'Email Me',
-      description: 'For project inquiries and proposals',
-      action: 'jonathon@example.com',
-      link: 'mailto:jonathon@example.com',
+      title: 'Email',
+      value: 'jonathon@example.com',
       color: 'from-blue-500 to-purple-600'
     },
     {
-      icon: '📅',
-      title: 'Schedule a Call',
-      description: 'Book a free 30-minute consultation',
-      action: 'View Calendar',
-      link: '#',
+      icon: '📱',
+      title: 'Phone',
+      value: '+1 (555) 123-4567',
       color: 'from-purple-500 to-pink-600'
     },
     {
-      icon: '💬',
-      title: 'Quick Question?',
-      description: 'Response within 24 hours',
-      action: 'Send Message',
-      link: '#',
+      icon: '📍',
+      title: 'Location',
+      value: 'San Francisco, CA',
       color: 'from-pink-500 to-red-600'
     }
   ]
@@ -50,111 +77,174 @@ export default function ContactPage() {
           </p>
         </motion.div>
 
-        {/* Contact Cards Grid */}
-        <div className="grid md:grid-cols-3 gap-6 mb-16">
-          {contactOptions.map((option, index) => (
-            <motion.a
-              key={option.title}
-              href={option.link}
-              className="group relative overflow-hidden rounded-2xl bg-white dark:bg-dark-surface border border-gray-200 dark:border-gray-700 p-8 text-center hover:shadow-2xl transition-all duration-300"
-              initial={{ opacity: 0, y: 50 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 + index * 0.1 }}
-              whileHover={{ y: -5 }}
-            >
-              {/* Background Gradient on Hover */}
-              <motion.div
-                className={`absolute inset-0 bg-gradient-to-br ${option.color} opacity-0 group-hover:opacity-10 transition-opacity duration-300`}
-              />
-              
-              {/* Icon */}
-              <motion.div
-                className="text-5xl mb-4"
-                whileHover={{ scale: 1.2, rotate: [0, -10, 10, -10, 0] }}
-                transition={{ duration: 0.3 }}
+        <div className="grid lg:grid-cols-2 gap-12">
+          {/* Contact Form */}
+          <motion.div
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+          >
+            <h2 className="text-2xl font-bold mb-6 text-gray-900 dark:text-white">Send a Message</h2>
+            <form onSubmit={handleSubmit} className="space-y-6">
+              <div>
+                <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                  Name
+                </label>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  required
+                  className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-dark-surface text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                />
+              </div>
+
+              <div>
+                <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                  Email
+                </label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  required
+                  className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-dark-surface text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                />
+              </div>
+
+              <div>
+                <label htmlFor="subject" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                  Subject
+                </label>
+                <input
+                  type="text"
+                  id="subject"
+                  name="subject"
+                  value={formData.subject}
+                  onChange={handleChange}
+                  required
+                  className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-dark-surface text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                />
+              </div>
+
+              <div>
+                <label htmlFor="message" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                  Message
+                </label>
+                <textarea
+                  id="message"
+                  name="message"
+                  value={formData.message}
+                  onChange={handleChange}
+                  required
+                  rows={5}
+                  className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-dark-surface text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
+                />
+              </div>
+
+              <motion.button
+                type="submit"
+                disabled={isSubmitting}
+                className="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white font-bold py-3 px-6 rounded-lg hover:shadow-lg transform transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
               >
-                {option.icon}
-              </motion.div>
-              
-              {/* Title */}
-              <h3 className="text-xl font-bold mb-2 text-gray-900 dark:text-white">
-                {option.title}
-              </h3>
-              
-              {/* Description */}
-              <p className="text-gray-600 dark:text-gray-400 mb-4">
-                {option.description}
-              </p>
-              
-              {/* Action */}
-              <div className={`inline-flex items-center gap-2 font-semibold bg-gradient-to-r ${option.color} bg-clip-text text-transparent`}>
-                {option.action}
-                <motion.span
-                  className="inline-block"
-                  animate={{ x: [0, 5, 0] }}
-                  transition={{ duration: 1.5, repeat: Infinity }}
+                {isSubmitting ? 'Sending...' : 'Send Message'}
+              </motion.button>
+
+              {submitStatus === 'success' && (
+                <motion.div
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 p-4 rounded-lg"
                 >
-                  →
-                </motion.span>
+                  Message sent successfully! I'll get back to you within 24 hours.
+                </motion.div>
+              )}
+
+              {submitStatus === 'error' && (
+                <motion.div
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-400 p-4 rounded-lg"
+                >
+                  Something went wrong. Please try again or email me directly.
+                </motion.div>
+              )}
+            </form>
+          </motion.div>
+
+          {/* Contact Information */}
+          <motion.div
+            initial={{ opacity: 0, x: 50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            className="space-y-8"
+          >
+            <div>
+              <h2 className="text-2xl font-bold mb-6 text-gray-900 dark:text-white">Contact Information</h2>
+              <p className="text-gray-600 dark:text-gray-300 mb-8">
+                Feel free to reach out through any of these channels. I typically respond within 24 hours.
+              </p>
+            </div>
+
+            {/* Contact Cards */}
+            <div className="space-y-4">
+              {contactInfo.map((info, index) => (
+                <motion.div
+                  key={info.title}
+                  className="flex items-center gap-4 p-4 rounded-lg bg-gray-50 dark:bg-dark-surface border border-gray-200 dark:border-gray-700"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.4, delay: 0.6 + index * 0.1 }}
+                >
+                  <div className={`w-12 h-12 rounded-lg bg-gradient-to-br ${info.color} flex items-center justify-center text-white text-2xl`}>
+                    {info.icon}
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-gray-900 dark:text-white">{info.title}</h3>
+                    <p className="text-gray-600 dark:text-gray-400">{info.value}</p>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+
+            {/* Availability Status */}
+            <motion.div
+              className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-green-500 to-emerald-600 text-white p-6"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.9 }}
+            >
+              <div className="relative z-10">
+                <div className="flex items-center gap-3 mb-3">
+                  <motion.div
+                    className="w-3 h-3 bg-white rounded-full"
+                    animate={{ scale: [1, 1.2, 1], opacity: [1, 0.7, 1] }}
+                    transition={{ duration: 2, repeat: Infinity }}
+                  />
+                  <span className="font-bold">Currently Available</span>
+                </div>
+                <h3 className="text-xl font-bold mb-2">
+                  Open for New Projects
+                </h3>
+                <p className="text-white/90">
+                  I'm currently accepting new projects for Q1 2025. Let's discuss your needs!
+                </p>
               </div>
-            </motion.a>
-          ))}
+              
+              {/* Background Pattern */}
+              <div className="absolute inset-0 opacity-10">
+                <div className="absolute -top-4 -right-4 w-32 h-32 bg-white rounded-full" />
+                <div className="absolute -bottom-6 -left-6 w-48 h-48 bg-white rounded-full" />
+              </div>
+            </motion.div>
+          </motion.div>
         </div>
-
-        {/* Availability Status */}
-        <motion.div
-          className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-green-500 to-emerald-600 text-white p-8 md:p-12"
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.5 }}
-        >
-          <div className="relative z-10">
-            <div className="flex items-center gap-3 mb-4">
-              <motion.div
-                className="w-3 h-3 bg-white rounded-full"
-                animate={{ scale: [1, 1.2, 1], opacity: [1, 0.7, 1] }}
-                transition={{ duration: 2, repeat: Infinity }}
-              />
-              <span className="font-bold text-lg">Currently Available</span>
-            </div>
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              Let's Create Something Amazing Together
-            </h2>
-            <p className="text-xl text-white/90 mb-6 max-w-2xl">
-              I'm currently accepting new projects for Q1 2025. Whether you need AI-powered marketing automation, 
-              data-driven strategies, or creative solutions, I'm here to help transform your business.
-            </p>
-            <div className="flex flex-wrap gap-4">
-              <div className="bg-white/20 backdrop-blur-sm rounded-lg px-4 py-2">
-                <span className="font-semibold">Response Time:</span> Within 24 hours
-              </div>
-              <div className="bg-white/20 backdrop-blur-sm rounded-lg px-4 py-2">
-                <span className="font-semibold">Project Start:</span> 2-3 weeks
-              </div>
-            </div>
-          </div>
-          
-          {/* Background Pattern */}
-          <div className="absolute inset-0 opacity-10">
-            <div className="absolute -top-4 -right-4 w-40 h-40 bg-white rounded-full" />
-            <div className="absolute -bottom-8 -left-8 w-64 h-64 bg-white rounded-full" />
-          </div>
-        </motion.div>
-
-        {/* Additional Info */}
-        <motion.div
-          className="mt-16 text-center"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 0.7 }}
-        >
-          <p className="text-gray-600 dark:text-gray-400">
-            Prefer a different method? Feel free to reach out through any channel that works best for you.
-          </p>
-          <p className="text-gray-600 dark:text-gray-400 mt-2">
-            Based in [Your Location] • Working with clients globally
-          </p>
-        </motion.div>
       </div>
     </main>
   )
