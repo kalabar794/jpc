@@ -9,5 +9,210 @@
   <body>
     <!-- Include the script that builds the page and powers Decap CMS -->
     <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+    <script>
+      // Initialize CMS with inline config
+      CMS.init({
+        config: {
+          backend: {
+            name: 'github',
+            repo: 'kalabar794/jpc',
+            branch: 'main'
+          },
+          media_folder: 'public/uploads',
+          public_folder: '/uploads',
+          collections: [
+            {
+              name: 'posts',
+              label: 'Blog Posts',
+              folder: 'content/posts',
+              create: true,
+              slug: '{{slug}}',
+              editor: {
+                preview: false
+              },
+              fields: [
+                {label: 'Title', name: 'title', widget: 'string'},
+                {label: 'Slug', name: 'slug', widget: 'string'},
+                {label: 'Date', name: 'date', widget: 'datetime'},
+                {label: 'Hero Image', name: 'heroImage', widget: 'image', required: false},
+                {label: 'Excerpt', name: 'excerpt', widget: 'text'},
+                {label: 'Category', name: 'category', widget: 'string'},
+                {label: 'Tags', name: 'tags', widget: 'list'},
+                {label: 'Featured', name: 'featured', widget: 'boolean', default: false},
+                {label: 'Status', name: 'status', widget: 'select', options: ['draft', 'published'], default: 'draft'},
+                {label: 'Body', name: 'body', widget: 'markdown'},
+                {
+                  label: 'SEO',
+                  name: 'seo',
+                  widget: 'object',
+                  fields: [
+                    {label: 'Title', name: 'title', widget: 'string', required: false},
+                    {label: 'Description', name: 'description', widget: 'text', required: false},
+                    {label: 'Keywords', name: 'keywords', widget: 'string', required: false}
+                  ]
+                }
+              ]
+            },
+            {
+              name: 'projects',
+              label: 'Projects',
+              folder: 'content/projects',
+              create: true,
+              slug: '{{slug}}',
+              editor: {
+                preview: false
+              },
+              fields: [
+                {label: 'Title', name: 'title', widget: 'string'},
+                {label: 'Slug', name: 'slug', widget: 'string'},
+                {label: 'Date', name: 'date', widget: 'datetime'},
+                {label: 'Hero Image', name: 'heroImage', widget: 'image', required: false},
+                {label: 'Excerpt', name: 'excerpt', widget: 'text'},
+                {label: 'Category', name: 'category', widget: 'string'},
+                {label: 'Tags', name: 'tags', widget: 'list'},
+                {label: 'Featured', name: 'featured', widget: 'boolean', default: false},
+                {label: 'Status', name: 'status', widget: 'select', options: ['draft', 'published'], default: 'draft'},
+                {label: 'Demo URL', name: 'demoUrl', widget: 'string', required: false},
+                {label: 'GitHub URL', name: 'githubUrl', widget: 'string', required: false},
+                {label: 'Body', name: 'body', widget: 'markdown'},
+                {
+                  label: 'Technologies',
+                  name: 'technologies',
+                  widget: 'list',
+                  fields: [
+                    {label: 'Technology', name: 'technology', widget: 'string'}
+                  ]
+                },
+                {
+                  label: 'Results',
+                  name: 'results',
+                  widget: 'list',
+                  fields: [
+                    {label: 'Result', name: 'result', widget: 'string'}
+                  ]
+                },
+                {
+                  label: 'Features',
+                  name: 'features',
+                  widget: 'list',
+                  fields: [
+                    {label: 'Feature', name: 'feature', widget: 'string'}
+                  ]
+                },
+                {
+                  label: 'Gallery',
+                  name: 'gallery',
+                  widget: 'list',
+                  fields: [
+                    {label: 'Image', name: 'image', widget: 'image'},
+                    {label: 'Caption', name: 'caption', widget: 'string', required: false}
+                  ]
+                },
+                {
+                  label: 'SEO',
+                  name: 'seo',
+                  widget: 'object',
+                  fields: [
+                    {label: 'Title', name: 'title', widget: 'string', required: false},
+                    {label: 'Description', name: 'description', widget: 'text', required: false},
+                    {label: 'Keywords', name: 'keywords', widget: 'string', required: false}
+                  ]
+                }
+              ]
+            },
+            {
+              name: 'settings',
+              label: 'Settings',
+              files: [
+                {
+                  name: 'site',
+                  label: 'Site Settings',
+                  file: 'content/settings/site.md',
+                  fields: [
+                    {label: 'Title', name: 'title', widget: 'string'},
+                    {label: 'Description', name: 'description', widget: 'text'},
+                    {label: 'Keywords', name: 'keywords', widget: 'string'},
+                    {label: 'Author', name: 'author', widget: 'string'},
+                    {
+                      label: 'Social Links',
+                      name: 'social',
+                      widget: 'object',
+                      fields: [
+                        {label: 'Twitter', name: 'twitter', widget: 'string', required: false},
+                        {label: 'LinkedIn', name: 'linkedin', widget: 'string', required: false},
+                        {label: 'GitHub', name: 'github', widget: 'string', required: false},
+                        {label: 'Email', name: 'email', widget: 'string', required: false}
+                      ]
+                    }
+                  ]
+                },
+                {
+                  name: 'about',
+                  label: 'About Page',
+                  file: 'content/pages/about.md',
+                  fields: [
+                    {label: 'Title', name: 'title', widget: 'string'},
+                    {label: 'Hero Title', name: 'heroTitle', widget: 'string'},
+                    {label: 'Hero Subtitle', name: 'heroSubtitle', widget: 'string'},
+                    {label: 'Bio', name: 'bio', widget: 'text'},
+                    {
+                      label: 'Expertise',
+                      name: 'expertise',
+                      widget: 'list',
+                      fields: [
+                        {label: 'Name', name: 'name', widget: 'string'},
+                        {label: 'Gradient', name: 'gradient', widget: 'string'}
+                      ]
+                    },
+                    {
+                      label: 'Industries',
+                      name: 'industries',
+                      widget: 'list',
+                      fields: [
+                        {label: 'Name', name: 'name', widget: 'string'},
+                        {label: 'Gradient', name: 'gradient', widget: 'string'}
+                      ]
+                    },
+                    {
+                      label: 'Experience',
+                      name: 'experience',
+                      widget: 'list',
+                      fields: [
+                        {label: 'Company', name: 'company', widget: 'string'},
+                        {label: 'Role', name: 'role', widget: 'string'},
+                        {label: 'Description', name: 'description', widget: 'text'},
+                        {label: 'Gradient', name: 'gradient', widget: 'string'},
+                        {label: 'Icon', name: 'icon', widget: 'string'}
+                      ]
+                    },
+                    {
+                      label: 'Education',
+                      name: 'education',
+                      widget: 'list',
+                      fields: [
+                        {label: 'Degree', name: 'degree', widget: 'string'},
+                        {label: 'Institution', name: 'institution', widget: 'string'},
+                        {label: 'Icon', name: 'icon', widget: 'string'},
+                        {label: 'Gradient', name: 'gradient', widget: 'string'}
+                      ]
+                    },
+                    {
+                      label: 'SEO',
+                      name: 'seo',
+                      widget: 'object',
+                      fields: [
+                        {label: 'Title', name: 'title', widget: 'string', required: false},
+                        {label: 'Description', name: 'description', widget: 'text', required: false},
+                        {label: 'Keywords', name: 'keywords', widget: 'string', required: false}
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      });
+    </script>
   </body>
 </html>
