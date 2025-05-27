@@ -50,3 +50,10 @@ Thumbs.db
 
 # TinaCMS
 .tina/__generated__
+# Local Netlify folder
+.netlify
+
+# Playwright
+/test-results/
+/playwright-report/
+/playwright/.cache/
