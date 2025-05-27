@@ -1,9 +1,8 @@
-// Content layer that reads from both Upstash (for new content) and markdown files (for existing content)
+// Content layer for reading markdown files
 
 import fs from 'fs'
 import path from 'path'
 import matter from 'gray-matter'
-import { getAllContent as getUpstashContent } from './upstash'
 
 const contentDirectory = path.join(process.cwd(), 'content')
 
@@ -81,50 +80,7 @@ function readMarkdownFile(filePath: string) {
 
 // Get all projects
 export async function getProjects(): Promise<Project[]> {
-  const projectsDirectory = path.join(contentDirectory, 'projects')
-  
-  // Get projects from Upstash
-  let upstashProjects: Project[] = []
-  try {
-    const upstashData = await getUpstashContent('project')
-    upstashProjects = upstashData.map(p => ({
-      ...p,
-      content: p.content || p.description || '',
-      metrics: p.metrics || {},
-      techStack: p.techStack || [],
-      gallery: p.gallery || []
-    })) as Project[]
-  } catch (error) {
-    console.error('Error fetching from Upstash:', error)
-  }
-  
-  // Get projects from filesystem
-  let fileProjects: Project[] = []
-  if (fs.existsSync(projectsDirectory)) {
-    const filenames = fs.readdirSync(projectsDirectory)
-    fileProjects = filenames
-      .filter(name => name.endsWith('.md'))
-      .map(name => {
-        const filePath = path.join(projectsDirectory, name)
-        const { frontmatter, content } = readMarkdownFile(filePath)
-        
-        return {
-          ...frontmatter,
-          content,
-          slug: frontmatter.slug || name.replace(/\.md$/, ''),
-        } as Project
-      })
-  }
-  
-  // Combine and deduplicate by slug
-  const allProjects = [...upstashProjects]
-  fileProjects.forEach(fp => {
-    if (!allProjects.find(p => p.slug === fp.slug)) {
-      allProjects.push(fp)
-    }
-  })
-  
-  return allProjects.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+  return getAllProjects()
 }
 
 // Get a single project by slug
@@ -141,50 +97,7 @@ export async function getFeaturedProjects(): Promise<Project[]> {
 
 // Get all blog posts
 export async function getPosts(): Promise<Post[]> {
-  const postsDirectory = path.join(contentDirectory, 'posts')
-  
-  // Get posts from Upstash
-  let upstashPosts: Post[] = []
-  try {
-    const upstashData = await getUpstashContent('post')
-    upstashPosts = upstashData.map(p => ({
-      ...p,
-      content: p.content || '',
-      tags: p.tags || [],
-      category: p.category || 'industry-insights',
-      excerpt: p.excerpt || ''
-    })) as Post[]
-  } catch (error) {
-    console.error('Error fetching from Upstash:', error)
-  }
-  
-  // Get posts from filesystem
-  let filePosts: Post[] = []
-  if (fs.existsSync(postsDirectory)) {
-    const filenames = fs.readdirSync(postsDirectory)
-    filePosts = filenames
-      .filter(name => name.endsWith('.md'))
-      .map(name => {
-        const filePath = path.join(postsDirectory, name)
-        const { frontmatter, content } = readMarkdownFile(filePath)
-        
-        return {
-          ...frontmatter,
-          content,
-          slug: frontmatter.slug || name.replace(/\.md$/, ''),
-        } as Post
-      })
-  }
-  
-  // Combine and deduplicate by slug
-  const allPosts = [...upstashPosts]
-  filePosts.forEach(fp => {
-    if (!allPosts.find(p => p.slug === fp.slug)) {
-      allPosts.push(fp)
-    }
-  })
-  
-  return allPosts.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+  return getAllPosts()
 }
 
 // Get a single post by slug
@@ -201,29 +114,7 @@ export async function getFeaturedPosts(): Promise<Post[]> {
 
 // Get gallery images
 export async function getGalleryImages(category?: string): Promise<GalleryImage[]> {
-  const galleryDirectory = path.join(contentDirectory, 'gallery')
-  
-  if (!fs.existsSync(galleryDirectory)) {
-    return []
-  }
-  
-  const filenames = fs.readdirSync(galleryDirectory)
-  
-  let images = filenames
-    .filter(name => name.endsWith('.md'))
-    .map(name => {
-      const filePath = path.join(galleryDirectory, name)
-      const { frontmatter } = readMarkdownFile(filePath)
-      
-      return frontmatter as GalleryImage
-    })
-    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
-  
-  if (category) {
-    images = images.filter(image => image.category === category)
-  }
-  
-  return images
+  return getAllGalleryImages(category)
 }
 
 // Get site settings
