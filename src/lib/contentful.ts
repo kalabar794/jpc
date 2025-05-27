@@ -1,12 +1,15 @@
 import { createClient } from 'contentful'
 
-const client = createClient({
-  space: process.env.CONTENTFUL_SPACE_ID!,
-  accessToken: process.env.CONTENTFUL_ACCESS_TOKEN!,
-})
+const client = process.env.CONTENTFUL_SPACE_ID && process.env.CONTENTFUL_ACCESS_TOKEN 
+  ? createClient({
+      space: process.env.CONTENTFUL_SPACE_ID,
+      accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
+    })
+  : null
 
 // Blog Post type
 export interface BlogPost {
+  contentTypeId: 'blogPost'
   fields: {
     title: string
     slug: string
@@ -25,43 +28,69 @@ export interface BlogPost {
     seoTitle?: string
     seoDescription?: string
     seoKeywords?: string[]
-  }
-  sys: {
-    id: string
-    createdAt: string
-    updatedAt: string
+    featured?: boolean
   }
 }
 
 // Get all blog posts
 export async function getBlogPosts() {
-  const entries = await client.getEntries<BlogPost>({
-    content_type: 'blogPost',
-    order: ['-fields.publishedDate'],
-  })
+  if (!client) {
+    console.log('Contentful not configured, skipping blog posts fetch')
+    return []
+  }
   
-  return entries.items
+  try {
+    const entries = await client.getEntries({
+      content_type: 'blogPost',
+      order: ['-fields.publishedDate'],
+    })
+    
+    return entries.items
+  } catch (error) {
+    console.error('Error fetching blog posts from Contentful:', error)
+    return []
+  }
 }
 
 // Get single blog post by slug
 export async function getBlogPost(slug: string) {
-  const entries = await client.getEntries<BlogPost>({
-    content_type: 'blogPost',
-    'fields.slug': slug,
-    limit: 1,
-  })
+  if (!client) {
+    console.log('Contentful not configured, skipping blog post fetch')
+    return null
+  }
   
-  return entries.items[0] || null
+  try {
+    const entries = await client.getEntries({
+      content_type: 'blogPost',
+      'fields.slug': slug,
+      limit: 1,
+    })
+    
+    return entries.items[0] || null
+  } catch (error) {
+    console.error('Error fetching blog post from Contentful:', error)
+    return null
+  }
 }
 
 // Get featured posts
 export async function getFeaturedPosts() {
-  const entries = await client.getEntries<BlogPost>({
-    content_type: 'blogPost',
-    'fields.featured': true,
-    order: ['-fields.publishedDate'],
-    limit: 3,
-  })
+  if (!client) {
+    console.log('Contentful not configured, skipping featured posts fetch')
+    return []
+  }
   
-  return entries.items
+  try {
+    const entries = await client.getEntries({
+      content_type: 'blogPost',
+      'fields.featured': true,
+      order: ['-fields.publishedDate'],
+      limit: 3,
+    })
+    
+    return entries.items
+  } catch (error) {
+    console.error('Error fetching featured posts from Contentful:', error)
+    return []
+  }
 }

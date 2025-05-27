@@ -15,21 +15,21 @@ export default async function BlogPage() {
   try {
     // Try Contentful first
     const contentfulPosts = await getBlogPosts()
-    posts = contentfulPosts.map(post => ({
-      title: post.fields.title,
-      slug: post.fields.slug,
-      excerpt: post.fields.excerpt,
-      date: post.fields.publishedDate,
-      category: post.fields.category,
-      tags: post.fields.tags || [],
-      heroImage: post.fields.heroImage?.fields.file.url,
-      status: 'published',
-      featured: post.fields.featured || false,
+    posts = contentfulPosts.map((post: any) => ({
+      title: post.fields?.title || '',
+      slug: post.fields?.slug || '',
+      excerpt: post.fields?.excerpt || '',
+      date: post.fields?.publishedDate || new Date().toISOString(),
+      category: post.fields?.category || '',
+      tags: post.fields?.tags || [],
+      heroImage: post.fields?.heroImage?.fields?.file?.url || null,
+      status: 'published' as const,
+      featured: post.fields?.featured || false,
       content: '',
       seo: {
-        title: post.fields.seoTitle,
-        description: post.fields.seoDescription,
-        keywords: post.fields.seoKeywords
+        title: post.fields?.seoTitle || '',
+        description: post.fields?.seoDescription || '',
+        keywords: post.fields?.seoKeywords || ''
       }
     }))
   } catch (error) {
