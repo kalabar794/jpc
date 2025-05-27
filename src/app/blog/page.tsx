@@ -1,4 +1,5 @@
 import { getPosts } from '@/lib/content'
+import { getBlogPosts } from '@/lib/contentful'
 import BlogPageClient from './BlogPageClient'
 import { generateMetadata as generateMeta } from '@/lib/metadata'
 
@@ -9,9 +10,34 @@ export const metadata = generateMeta(
 )
 
 export default async function BlogPage() {
-  // Get all published posts
-  const allPosts = await getPosts()
-  const publishedPosts = allPosts.filter(post => post.status === 'published')
+  let posts = []
+  
+  try {
+    // Try Contentful first
+    const contentfulPosts = await getBlogPosts()
+    posts = contentfulPosts.map(post => ({
+      title: post.fields.title,
+      slug: post.fields.slug,
+      excerpt: post.fields.excerpt,
+      date: post.fields.publishedDate,
+      category: post.fields.category,
+      tags: post.fields.tags || [],
+      heroImage: post.fields.heroImage?.fields.file.url,
+      status: 'published',
+      featured: post.fields.featured || false,
+      content: '',
+      seo: {
+        title: post.fields.seoTitle,
+        description: post.fields.seoDescription,
+        keywords: post.fields.seoKeywords
+      }
+    }))
+  } catch (error) {
+    // Fallback to markdown files if Contentful not configured
+    console.log('Using local markdown files')
+    const allPosts = await getPosts()
+    posts = allPosts.filter(post => post.status === 'published')
+  }
 
-  return <BlogPageClient posts={publishedPosts} />
+  return <BlogPageClient posts={posts} />
 }

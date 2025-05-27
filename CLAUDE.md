@@ -1,0 +1,1 @@
+- When making a Vercel deployment, wait for 5 minutes and check whether it was successful so the user doesn't have to copy build logs from Vercel and paste them into the Claude code terminal window
