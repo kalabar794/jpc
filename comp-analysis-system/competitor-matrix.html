@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WEO Media - Deep Competitor Intelligence Matrix</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0a0f1b;
+            color: #e0e6ed;
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1800px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, #60a5fa 0%, #c084fc 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #94a3b8;
+            margin-bottom: 40px;
+            font-size: 1.2em;
+        }
+
+        .run-analysis {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .analyze-btn {
+            background: linear-gradient(135deg, #60a5fa 0%, #c084fc 100%);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.1em;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(96, 165, 250, 0.3);
+        }
+
+        .analyze-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(96, 165, 250, 0.4);
+        }
+
+        .analyze-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .matrix-container {
+            overflow-x: auto;
+            margin-bottom: 40px;
+            background: rgba(30, 41, 59, 0.5);
+            border-radius: 16px;
+            padding: 20px;
+            border: 1px solid rgba(71, 85, 105, 0.3);
+        }
+
+        .competitor-matrix {
+            width: 100%;
+            min-width: 1200px;
+            border-collapse: collapse;
+        }
+
+        .competitor-matrix th {
+            background: rgba(30, 41, 59, 0.8);
+            color: #e0e6ed;
+            padding: 15px 10px;
+            text-align: left;
+            font-weight: 600;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            border-bottom: 2px solid rgba(96, 165, 250, 0.3);
+        }
+
+        .competitor-matrix th:first-child {
+            position: sticky;
+            left: 0;
+            z-index: 11;
+            background: rgba(30, 41, 59, 0.95);
+            min-width: 200px;
+        }
+
+        .competitor-matrix td {
+            padding: 12px 10px;
+            border-bottom: 1px solid rgba(71, 85, 105, 0.2);
+            vertical-align: top;
+        }
+
+        .competitor-matrix tr:hover {
+            background: rgba(96, 165, 250, 0.05);
+        }
+
+        .competitor-name {
+            font-weight: 600;
+            color: #60a5fa;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .domain {
+            font-size: 0.85em;
+            color: #94a3b8;
+            font-weight: 400;
+        }
+
+        .metric-value {
+            font-weight: 600;
+            color: #f1f5f9;
+        }
+
+        .metric-subtext {
+            font-size: 0.85em;
+            color: #94a3b8;
+        }
+
+        .blog-metric {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .blog-count {
+            font-size: 1.8em;
+            font-weight: 700;
+            color: #60a5fa;
+        }
+
+        .blog-frequency {
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-size: 0.8em;
+            display: inline-block;
+        }
+
+        .frequency-weekly {
+            background: rgba(34, 197, 94, 0.2);
+            color: #4ade80;
+            border: 1px solid rgba(34, 197, 94, 0.3);
+        }
+
+        .frequency-monthly {
+            background: rgba(96, 165, 250, 0.2);
+            color: #60a5fa;
+            border: 1px solid rgba(96, 165, 250, 0.3);
+        }
+
+        .frequency-sporadic {
+            background: rgba(251, 146, 60, 0.2);
+            color: #fb923c;
+            border: 1px solid rgba(251, 146, 60, 0.3);
+        }
+
+        .price-display {
+            font-size: 1.4em;
+            font-weight: 700;
+            color: #4ade80;
+        }
+
+        .price-model {
+            font-size: 0.85em;
+            color: #94a3b8;
+        }
+
+        .social-channels {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .social-icon {
+            width: 30px;
+            height: 30px;
+            background: rgba(51, 65, 85, 0.6);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8em;
+            border: 1px solid rgba(71, 85, 105, 0.3);
+        }
+
+        .content-types {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .content-type {
+            padding: 3px 8px;
+            background: rgba(192, 132, 252, 0.2);
+            color: #c084fc;
+            border-radius: 8px;
+            font-size: 0.75em;
+            display: inline-block;
+            border: 1px solid rgba(192, 132, 252, 0.3);
+        }
+
+        .service-count {
+            font-size: 1.2em;
+            font-weight: 600;
+            color: #60a5fa;
+        }
+
+        .dental-badge {
+            background: rgba(34, 197, 94, 0.2);
+            color: #4ade80;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.8em;
+            margin-top: 5px;
+            display: inline-block;
+            border: 1px solid rgba(34, 197, 94, 0.3);
+        }
+
+        .tech-stack {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .tech-item {
+            font-size: 0.85em;
+            color: #94a3b8;
+        }
+
+        .channel-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+        }
+
+        .channel-tag {
+            padding: 2px 8px;
+            background: rgba(96, 165, 250, 0.1);
+            color: #60a5fa;
+            border-radius: 10px;
+            font-size: 0.75em;
+            border: 1px solid rgba(96, 165, 250, 0.3);
+        }
+
+        .insights-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .insight-card {
+            background: rgba(30, 41, 59, 0.6);
+            border: 1px solid rgba(71, 85, 105, 0.3);
+            border-radius: 12px;
+            padding: 20px;
+        }
+
+        .insight-card h3 {
+            color: #60a5fa;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .insight-list {
+            list-style: none;
+        }
+
+        .insight-list li {
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(71, 85, 105, 0.2);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .insight-list li:last-child {
+            border-bottom: none;
+        }
+
+        .leader-name {
+            font-weight: 600;
+            color: #f1f5f9;
+        }
+
+        .leader-metric {
+            color: #60a5fa;
+            font-weight: 500;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+        }
+
+        .loading-spinner {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            border: 4px solid rgba(96, 165, 250, 0.3);
+            border-radius: 50%;
+            border-top-color: #60a5fa;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .weo-highlight {
+            background: rgba(96, 165, 250, 0.1);
+            border: 2px solid rgba(96, 165, 250, 0.3);
+        }
+
+        .icon {
+            width: 20px;
+            height: 20px;
+            display: inline-block;
+        }
+
+        .last-updated {
+            text-align: center;
+            color: #64748b;
+            font-size: 0.9em;
+            margin-top: 20px;
+        }
+
+        .no-data {
+            color: #64748b;
+            font-style: italic;
+        }
+
+        .section-header {
+            background: rgba(30, 41, 59, 0.8);
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .section-title {
+            font-size: 1.4em;
+            color: #f1f5f9;
+        }
+
+        .refresh-btn {
+            background: rgba(96, 165, 250, 0.2);
+            color: #60a5fa;
+            border: 1px solid rgba(96, 165, 250, 0.4);
+            padding: 8px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9em;
+        }
+
+        .refresh-btn:hover {
+            background: rgba(96, 165, 250, 0.3);
+            transform: translateY(-1px);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>WEO Media Deep Competitor Intelligence Matrix</h1>
+        <p class="subtitle">Comprehensive Analysis of Dental Marketing Competition</p>
+
+        <div class="run-analysis">
+            <button class="analyze-btn" onclick="runDeepAnalysis()">
+                🔍 Run Deep Analysis
+            </button>
+            <p style="margin-top: 10px; color: #64748b; font-size: 0.9em;">
+                This will analyze all competitors and count blog posts, pricing, services, and more.
+            </p>
+        </div>
+
+        <div id="matrixContainer" class="matrix-container" style="display: none;">
+            <div class="section-header">
+                <h2 class="section-title">📊 Competitor Intelligence Matrix</h2>
+                <button class="refresh-btn" onclick="refreshData()">🔄 Refresh</button>
+            </div>
+            
+            <table class="competitor-matrix">
+                <thead>
+                    <tr>
+                        <th>Competitor</th>
+                        <th>📝 Blog Activity</th>
+                        <th>💰 Pricing</th>
+                        <th>📱 Social Media</th>
+                        <th>📚 Content Strategy</th>
+                        <th>🛠️ Services</th>
+                        <th>🔧 Technology</th>
+                        <th>📣 Marketing Channels</th>
+                    </tr>
+                </thead>
+                <tbody id="matrixBody">
+                    <tr>
+                        <td colspan="8" class="loading">
+                            <div class="loading-spinner"></div>
+                            <p style="margin-top: 20px;">Analyzing competitors...</p>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div id="insightsContainer" class="insights-section" style="display: none;">
+            <!-- Insights will be populated here -->
+        </div>
+
+        <div id="lastUpdated" class="last-updated"></div>
+    </div>
+
+    <script>
+        let analysisData = null;
+
+        async function runDeepAnalysis() {
+            const btn = document.querySelector('.analyze-btn');
+            btn.disabled = true;
+            btn.textContent = '⏳ Analyzing...';
+            
+            document.getElementById('matrixContainer').style.display = 'block';
+            
+            try {
+                // Call the API to run analysis
+                const response = await fetch('http://localhost:3457/api/deep-analysis', {
+                    method: 'POST'
+                });
+                
+                if (!response.ok) {
+                    throw new Error('Analysis failed');
+                }
+                
+                const data = await response.json();
+                analysisData = data;
+                displayMatrix(data);
+                displayInsights(data);
+                
+                btn.textContent = '✓ Analysis Complete';
+                document.getElementById('lastUpdated').textContent = 
+                    `Last updated: ${new Date().toLocaleString()}`;
+                
+            } catch (error) {
+                console.error('Analysis error:', error);
+                btn.textContent = '❌ Analysis Failed';
+                alert('Failed to run analysis. Make sure the server is running.');
+            } finally {
+                setTimeout(() => {
+                    btn.disabled = false;
+                    btn.textContent = '🔍 Run Deep Analysis';
+                }, 3000);
+            }
+        }
+
+        function displayMatrix(data) {
+            const tbody = document.getElementById('matrixBody');
+            tbody.innerHTML = '';
+            
+            // Add WEO Media row first
+            const weoRow = createCompetitorRow({
+                name: 'WEO Media',
+                domain: 'weomedia.com',
+                isWeo: true,
+                metrics: {
+                    blogs: { totalPosts: '50+', postingFrequency: 'Weekly' },
+                    pricing: { pricingModel: 'Custom Solutions', startingPrice: 'Contact' },
+                    social: { activeChannels: ['Facebook', 'LinkedIn', 'Twitter', 'Instagram'] },
+                    content: { contentTypes: ['Case Studies', 'Whitepapers', 'Webinars', 'Videos'] },
+                    services: { coreServices: 15, dentalFocus: true },
+                    technology: { cms: 'Custom', analytics: ['Google Analytics', 'Custom Dashboard'] },
+                    marketing: { channels: ['SEO', 'PPC', 'Social', 'Content', 'Email'] }
+                }
+            });
+            tbody.appendChild(weoRow);
+            
+            // Add competitor rows
+            for (const [competitorId, competitor] of Object.entries(data.competitors || {})) {
+                const row = createCompetitorRow(competitor);
+                tbody.appendChild(row);
+            }
+        }
+
+        function createCompetitorRow(competitor) {
+            const row = document.createElement('tr');
+            if (competitor.isWeo) {
+                row.classList.add('weo-highlight');
+            }
+            
+            // Competitor Name
+            const nameCell = document.createElement('td');
+            nameCell.innerHTML = `
+                <div class="competitor-name">
+                    <div>
+                        <div>${competitor.name}</div>
+                        <div class="domain">${competitor.domain}</div>
+                    </div>
+                </div>
+            `;
+            row.appendChild(nameCell);
+            
+            // Blog Activity
+            const blogCell = document.createElement('td');
+            const blogData = competitor.metrics?.blogs || {};
+            blogCell.innerHTML = `
+                <div class="blog-metric">
+                    <div class="blog-count">${blogData.totalPosts || '0'}</div>
+                    <div class="blog-frequency frequency-${(blogData.postingFrequency || 'Unknown').toLowerCase()}">
+                        ${blogData.postingFrequency || 'No activity'}
+                    </div>
+                    ${blogData.lastPostDate ? `<div class="metric-subtext">Last: ${new Date(blogData.lastPostDate).toLocaleDateString()}</div>` : ''}
+                </div>
+            `;
+            row.appendChild(blogCell);
+            
+            // Pricing
+            const pricingCell = document.createElement('td');
+            const pricingData = competitor.metrics?.pricing || {};
+            pricingCell.innerHTML = `
+                <div>
+                    <div class="price-display">${pricingData.startingPrice || 'Not Listed'}</div>
+                    <div class="price-model">${pricingData.pricingModel || 'Unknown'}</div>
+                    ${pricingData.packages?.length ? `<div class="metric-subtext">${pricingData.packages.length} packages</div>` : ''}
+                </div>
+            `;
+            row.appendChild(pricingCell);
+            
+            // Social Media
+            const socialCell = document.createElement('td');
+            const socialData = competitor.metrics?.social || {};
+            const channels = socialData.activeChannels || [];
+            socialCell.innerHTML = `
+                <div>
+                    <div class="social-channels">
+                        ${channels.map(ch => `<div class="social-icon">${ch.charAt(0).toUpperCase()}</div>`).join('')}
+                    </div>
+                    <div class="metric-subtext">${channels.length} channels - ${socialData.engagementLevel || 'Unknown'}</div>
+                </div>
+            `;
+            row.appendChild(socialCell);
+            
+            // Content Strategy
+            const contentCell = document.createElement('td');
+            const contentData = competitor.metrics?.content || {};
+            const contentTypes = contentData.contentTypes || [];
+            contentCell.innerHTML = `
+                <div class="content-types">
+                    ${contentTypes.map(type => `<span class="content-type">${type}</span>`).join('')}
+                    ${contentData.hasResourceCenter ? '<span class="content-type">Resource Center</span>' : ''}
+                    ${contentTypes.length === 0 ? '<span class="no-data">No content strategy detected</span>' : ''}
+                </div>
+            `;
+            row.appendChild(contentCell);
+            
+            // Services
+            const servicesCell = document.createElement('td');
+            const servicesData = competitor.metrics?.services || {};
+            servicesCell.innerHTML = `
+                <div>
+                    <div class="service-count">${servicesData.coreServices?.length || 0} services</div>
+                    ${servicesData.dentalFocus ? '<div class="dental-badge">🦷 Dental Focused</div>' : ''}
+                </div>
+            `;
+            row.appendChild(servicesCell);
+            
+            // Technology
+            const techCell = document.createElement('td');
+            const techData = competitor.metrics?.technology || {};
+            techCell.innerHTML = `
+                <div class="tech-stack">
+                    <div class="tech-item">CMS: ${techData.cms || 'Unknown'}</div>
+                    <div class="tech-item">Analytics: ${(techData.analytics || []).join(', ') || 'None detected'}</div>
+                    ${techData.ssl ? '<div class="tech-item">✓ SSL</div>' : ''}
+                </div>
+            `;
+            row.appendChild(techCell);
+            
+            // Marketing Channels
+            const marketingCell = document.createElement('td');
+            const marketingData = competitor.metrics?.marketing || {};
+            const activeChannels = Object.entries(marketingData)
+                .filter(([channel, active]) => active)
+                .map(([channel]) => channel.replace(/([A-Z])/g, ' $1').trim());
+            
+            marketingCell.innerHTML = `
+                <div class="channel-list">
+                    ${activeChannels.map(ch => `<span class="channel-tag">${ch}</span>`).join('')}
+                </div>
+            `;
+            row.appendChild(marketingCell);
+            
+            return row;
+        }
+
+        function displayInsights(data) {
+            const container = document.getElementById('insightsContainer');
+            container.style.display = 'grid';
+            container.innerHTML = '';
+            
+            // Blog Leaders
+            const blogCard = document.createElement('div');
+            blogCard.className = 'insight-card';
+            blogCard.innerHTML = `
+                <h3>📝 Content Marketing Leaders</h3>
+                <ul class="insight-list">
+                    ${(data.summary?.mostActiveBlogs || []).map(item => `
+                        <li>
+                            <span class="leader-name">${item.split('(')[0].trim()}</span>
+                            <span class="leader-metric">${item.match(/\(([^)]+)\)/)[1]}</span>
+                        </li>
+                    `).join('')}
+                </ul>
+            `;
+            container.appendChild(blogCard);
+            
+            // Social Media Leaders
+            const socialCard = document.createElement('div');
+            socialCard.className = 'insight-card';
+            socialCard.innerHTML = `
+                <h3>📱 Social Media Presence</h3>
+                <ul class="insight-list">
+                    ${(data.summary?.socialMediaLeaders || []).map(item => `
+                        <li>
+                            <span class="leader-name">${item.split('(')[0].trim()}</span>
+                            <span class="leader-metric">${item.match(/\(([^)]+)\)/)[1]}</span>
+                        </li>
+                    `).join('')}
+                </ul>
+            `;
+            container.appendChild(socialCard);
+            
+            // Content Diversity Leaders
+            const contentCard = document.createElement('div');
+            contentCard.className = 'insight-card';
+            contentCard.innerHTML = `
+                <h3>📚 Content Diversity</h3>
+                <ul class="insight-list">
+                    ${(data.summary?.contentLeaders || []).map(item => `
+                        <li>
+                            <span class="leader-name">${item.split('(')[0].trim()}</span>
+                            <span class="leader-metric">${item.match(/\(([^)]+)\)/)[1]}</span>
+                        </li>
+                    `).join('')}
+                </ul>
+            `;
+            container.appendChild(contentCard);
+        }
+
+        async function refreshData() {
+            if (analysisData) {
+                displayMatrix(analysisData);
+                displayInsights(analysisData);
+            }
+        }
+
+        // Load existing data on page load
+        async function loadExistingData() {
+            try {
+                const response = await fetch('http://localhost:3457/api/deep-analysis');
+                if (response.ok) {
+                    const data = await response.json();
+                    if (data && Object.keys(data).length > 0) {
+                        analysisData = data;
+                        document.getElementById('matrixContainer').style.display = 'block';
+                        displayMatrix(data);
+                        displayInsights(data);
+                        document.getElementById('lastUpdated').textContent = 
+                            `Last updated: ${new Date(data.timestamp || Date.now()).toLocaleString()}`;
+                    }
+                }
+            } catch (error) {
+                console.error('Failed to load existing data:', error);
+            }
+        }
+
+        // Load on page ready
+        document.addEventListener('DOMContentLoaded', loadExistingData);
+    </script>
+</body>
+</html>

@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WEO Media - Competitor Analysis Summary</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0a0f1b;
+            color: #e0e6ed;
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, #60a5fa 0%, #c084fc 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #94a3b8;
+            margin-bottom: 40px;
+            font-size: 1.2em;
+        }
+
+        .competitors-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .competitor-card {
+            background: rgba(30, 41, 59, 0.8);
+            border: 1px solid rgba(71, 85, 105, 0.3);
+            border-radius: 16px;
+            padding: 25px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .competitor-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #60a5fa, #c084fc);
+        }
+
+        .competitor-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            border-color: rgba(96, 165, 250, 0.5);
+        }
+
+        .competitor-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 15px;
+        }
+
+        .competitor-name {
+            font-size: 1.4em;
+            font-weight: 600;
+            color: #f1f5f9;
+        }
+
+        .competitor-domain {
+            font-size: 0.9em;
+            color: #60a5fa;
+            background: rgba(96, 165, 250, 0.1);
+            padding: 4px 12px;
+            border-radius: 20px;
+            border: 1px solid rgba(96, 165, 250, 0.3);
+        }
+
+        .competitor-position {
+            color: #94a3b8;
+            margin-bottom: 10px;
+            font-style: italic;
+        }
+
+        .competitor-focus {
+            color: #c084fc;
+            font-weight: 500;
+            margin-bottom: 15px;
+        }
+
+        .urls-section {
+            margin-top: 20px;
+        }
+
+        .urls-title {
+            font-size: 0.9em;
+            color: #94a3b8;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .urls-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .url-tag {
+            background: rgba(51, 65, 85, 0.6);
+            color: #e2e8f0;
+            padding: 6px 12px;
+            border-radius: 15px;
+            font-size: 0.85em;
+            border: 1px solid rgba(71, 85, 105, 0.3);
+            transition: all 0.2s ease;
+        }
+
+        .url-tag:hover {
+            background: rgba(96, 165, 250, 0.2);
+            border-color: rgba(96, 165, 250, 0.5);
+        }
+
+        .tracking-section {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(71, 85, 105, 0.3);
+        }
+
+        .tracking-title {
+            font-size: 0.9em;
+            color: #94a3b8;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .tracking-items {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .tracking-item {
+            background: rgba(34, 197, 94, 0.1);
+            color: #4ade80;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.8em;
+            border: 1px solid rgba(34, 197, 94, 0.3);
+        }
+
+        .weo-section {
+            background: rgba(96, 165, 250, 0.1);
+            border: 2px solid rgba(96, 165, 250, 0.3);
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .weo-title {
+            font-size: 2em;
+            color: #60a5fa;
+            margin-bottom: 10px;
+        }
+
+        .weo-subtitle {
+            color: #94a3b8;
+            margin-bottom: 20px;
+        }
+
+        .weo-strengths {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .strength-item {
+            background: rgba(96, 165, 250, 0.2);
+            color: #60a5fa;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 500;
+            border: 1px solid rgba(96, 165, 250, 0.4);
+        }
+
+        .summary-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .stat-card {
+            background: rgba(30, 41, 59, 0.6);
+            border: 1px solid rgba(71, 85, 105, 0.3);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5em;
+            font-weight: 700;
+            color: #60a5fa;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            color: #94a3b8;
+            font-size: 0.9em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .monitoring-status {
+            background: rgba(34, 197, 94, 0.1);
+            border: 1px solid rgba(34, 197, 94, 0.3);
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .status-indicator {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            color: #4ade80;
+            font-weight: 600;
+        }
+
+        .status-dot {
+            width: 12px;
+            height: 12px;
+            background: #4ade80;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>WEO Media Competitive Intelligence</h1>
+        <p class="subtitle">Monitoring 7 Key Dental Marketing Agencies</p>
+
+        <!-- WEO Media Section -->
+        <div class="weo-section">
+            <h2 class="weo-title">WEO Media</h2>
+            <p class="weo-subtitle">Leading Dental Marketing Agency</p>
+            <div class="weo-strengths">
+                <span class="strength-item">Comprehensive Digital Solutions</span>
+                <span class="strength-item">Proven ROI</span>
+                <span class="strength-item">Industry Leadership</span>
+                <span class="strength-item">Advanced Analytics</span>
+            </div>
+        </div>
+
+        <!-- Competitors Grid -->
+        <div class="competitors-grid">
+            <!-- Progressive Dental -->
+            <div class="competitor-card">
+                <div class="competitor-header">
+                    <h3 class="competitor-name">Progressive Dental</h3>
+                    <span class="competitor-domain">progressivedental.com</span>
+                </div>
+                <p class="competitor-position">Dental practice marketing and patient acquisition</p>
+                <p class="competitor-focus">Focus: Lead generation and patient conversion</p>
+                
+                <div class="urls-section">
+                    <div class="urls-title">Monitoring Pages</div>
+                    <div class="urls-list">
+                        <span class="url-tag">Home</span>
+                        <span class="url-tag">Services</span>
+                        <span class="url-tag">About</span>
+                        <span class="url-tag">Contact</span>
+                    </div>
+                </div>
+
+                <div class="tracking-section">
+                    <div class="tracking-title">Tracking</div>
+                    <div class="tracking-items">
+                        <span class="tracking-item">Service Offerings</span>
+                        <span class="tracking-item">Pricing Changes</span>
+                        <span class="tracking-item">Client Testimonials</span>
+                        <span class="tracking-item">Results Metrics</span>
+                        <span class="tracking-item">Team Updates</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- WordStream -->
+            <div class="competitor-card">
+                <div class="competitor-header">
+                    <h3 class="competitor-name">WordStream</h3>
+                    <span class="competitor-domain">wordstream.com</span>
+                </div>
+                <p class="competitor-position">PPC and digital advertising platform with dental focus</p>
+                <p class="competitor-focus">Focus: Google Ads management and optimization</p>
+                
+                <div class="urls-section">
+                    <div class="urls-title">Monitoring Pages</div>
+                    <div class="urls-list">
+                        <span class="url-tag">Home</span>
+                        <span class="url-tag">Dental</span>
+                        <span class="url-tag">Pricing</span>
+                        <span class="url-tag">Blog</span>
+                        <span class="url-tag">Resources</span>
+                    </div>
+                </div>
+
+                <div class="tracking-section">
+                    <div class="tracking-title">Tracking</div>
+                    <div class="tracking-items">
+                        <span class="tracking-item">Dental Content</span>
+                        <span class="tracking-item">Pricing Changes</span>
+                        <span class="tracking-item">Blog Frequency</span>
+                        <span class="tracking-item">Case Studies</span>
+                        <span class="tracking-item">Feature Updates</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- My Social Practice -->
+            <div class="competitor-card">
+                <div class="competitor-header">
+                    <h3 class="competitor-name">My Social Practice</h3>
+                    <span class="competitor-domain">mysocialpractice.com</span>
+                </div>
+                <p class="competitor-position">Social media marketing for dental practices</p>
+                <p class="competitor-focus">Focus: Social media management and patient engagement</p>
+                
+                <div class="urls-section">
+                    <div class="urls-title">Monitoring Pages</div>
+                    <div class="urls-list">
+                        <span class="url-tag">Home</span>
+                        <span class="url-tag">Services</span>
+                        <span class="url-tag">Pricing</span>
+                        <span class="url-tag">Portfolio</span>
+                        <span class="url-tag">Blog</span>
+                    </div>
+                </div>
+
+                <div class="tracking-section">
+                    <div class="tracking-title">Tracking</div>
+                    <div class="tracking-items">
+                        <span class="tracking-item">Social Services</span>
+                        <span class="tracking-item">Portfolio Updates</span>
+                        <span class="tracking-item">Pricing Changes</span>
+                        <span class="tracking-item">Client Showcase</span>
+                        <span class="tracking-item">Content Marketing</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Wonderist Agency -->
+            <div class="competitor-card">
+                <div class="competitor-header">
+                    <h3 class="competitor-name">Wonderist Agency</h3>
+                    <span class="competitor-domain">wonderistagency.com</span>
+                </div>
+                <p class="competitor-position">Digital marketing agency with healthcare focus</p>
+                <p class="competitor-focus">Focus: Comprehensive digital marketing solutions</p>
+                
+                <div class="urls-section">
+                    <div class="urls-title">Monitoring Pages</div>
+                    <div class="urls-list">
+                        <span class="url-tag">Home</span>
+                        <span class="url-tag">Services</span>
+                        <span class="url-tag">Healthcare</span>
+                        <span class="url-tag">Case Studies</span>
+                        <span class="url-tag">About</span>
+                    </div>
+                </div>
+
+                <div class="tracking-section">
+                    <div class="tracking-title">Tracking</div>
+                    <div class="tracking-items">
+                        <span class="tracking-item">Healthcare Focus</span>
+                        <span class="tracking-item">Service Expansion</span>
+                        <span class="tracking-item">Case Study Updates</span>
+                        <span class="tracking-item">Team Growth</span>
+                        <span class="tracking-item">Industry Recognition</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Firegang -->
+            <div class="competitor-card">
+                <div class="competitor-header">
+                    <h3 class="competitor-name">Firegang</h3>
+                    <span class="competitor-domain">firegang.com</span>
+                </div>
+                <p class="competitor-position">Dental marketing and website development</p>
+                <p class="competitor-focus">Focus: Websites, SEO, and practice growth</p>
+                
+                <div class="urls-section">
+                    <div class="urls-title">Monitoring Pages</div>
+                    <div class="urls-list">
+                        <span class="url-tag">Home</span>
+                        <span class="url-tag">Dental</span>
+                        <span class="url-tag">Services</span>
+                        <span class="url-tag">Portfolio</span>
+                        <span class="url-tag">Pricing</span>
+                    </div>
+                </div>
+
+                <div class="tracking-section">
+                    <div class="tracking-title">Tracking</div>
+                    <div class="tracking-items">
+                        <span class="tracking-item">Dental Specialization</span>
+                        <span class="tracking-item">Portfolio Growth</span>
+                        <span class="tracking-item">Pricing Strategy</span>
+                        <span class="tracking-item">SEO Services</span>
+                        <span class="tracking-item">Client Feedback</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Roadside Dental Marketing -->
+            <div class="competitor-card">
+                <div class="competitor-header">
+                    <h3 class="competitor-name">Roadside Dental Marketing</h3>
+                    <span class="competitor-domain">roadsidedentalmarketing.com</span>
+                </div>
+                <p class="competitor-position">Established dental marketing with recent rebrand</p>
+                <p class="competitor-focus">Focus: Comprehensive dental practice marketing</p>
+                
+                <div class="urls-section">
+                    <div class="urls-title">Monitoring Pages</div>
+                    <div class="urls-list">
+                        <span class="url-tag">Home</span>
+                        <span class="url-tag">Services</span>
+                        <span class="url-tag">About</span>
+                        <span class="url-tag">Contact</span>
+                        <span class="url-tag">Blog</span>
+                    </div>
+                </div>
+
+                <div class="tracking-section">
+                    <div class="tracking-title">Tracking</div>
+                    <div class="tracking-items">
+                        <span class="tracking-item">Rebrand Progress</span>
+                        <span class="tracking-item">Service Offerings</span>
+                        <span class="tracking-item">Client Testimonials</span>
+                        <span class="tracking-item">Team Changes</span>
+                        <span class="tracking-item">Content Strategy</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SMC National -->
+            <div class="competitor-card">
+                <div class="competitor-header">
+                    <h3 class="competitor-name">SMC National</h3>
+                    <span class="competitor-domain">smcnational.com</span>
+                </div>
+                <p class="competitor-position">National dental marketing and practice consulting</p>
+                <p class="competitor-focus">Focus: Practice management and marketing solutions</p>
+                
+                <div class="urls-section">
+                    <div class="urls-title">Monitoring Pages</div>
+                    <div class="urls-list">
+                        <span class="url-tag">Home</span>
+                        <span class="url-tag">Services</span>
+                        <span class="url-tag">Consulting</span>
+                        <span class="url-tag">Training</span>
+                        <span class="url-tag">About</span>
+                    </div>
+                </div>
+
+                <div class="tracking-section">
+                    <div class="tracking-title">Tracking</div>
+                    <div class="tracking-items">
+                        <span class="tracking-item">Service Portfolio</span>
+                        <span class="tracking-item">Consulting Services</span>
+                        <span class="tracking-item">Training Programs</span>
+                        <span class="tracking-item">Client Results</span>
+                        <span class="tracking-item">Testimonial Updates</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Summary Statistics -->
+        <div class="summary-stats">
+            <div class="stat-card">
+                <div class="stat-number">7</div>
+                <div class="stat-label">Competitors Tracked</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">34</div>
+                <div class="stat-label">Pages Monitored</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">6</div>
+                <div class="stat-label">Hours Between Checks</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">35+</div>
+                <div class="stat-label">Tracking Elements</div>
+            </div>
+        </div>
+
+        <!-- Monitoring Status -->
+        <div class="monitoring-status">
+            <div class="status-indicator">
+                <div class="status-dot"></div>
+                <span>System Active - Monitoring All Competitors</span>
+            </div>
+            <p style="margin-top: 10px; color: #94a3b8;">
+                Next automated check scheduled every 6 hours. 
+                Dashboard available at <strong>localhost:3456</strong>
+            </p>
+        </div>
+    </div>
+</body>
+</html>

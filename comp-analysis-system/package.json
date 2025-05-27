@@ -1,0 +1,22 @@
+{
+  "name": "weo-competitive-intelligence",
+  "version": "2.0.0",
+  "description": "Competitive intelligence system for WEO Media",
+  "type": "module",
+  "scripts": {
+    "dev": "node server.js",
+    "build": "echo 'No build required'",
+    "deploy": "vercel --prod"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.20.0",
+    "@octokit/rest": "^20.0.2",
+    "cheerio": "^1.0.0-rc.12",
+    "express": "^5.1.0",
+    "node-fetch": "^3.3.2",
+    "xlsx": "^0.18.5"
+  },
+  "devDependencies": {
+    "vercel": "^32.0.0"
+  }
+}

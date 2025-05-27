@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WEO Competitive Intelligence Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-gray-900 text-gray-100">
+    <div class="container mx-auto px-4 py-8">
+        <!-- Header -->
+        <div class="mb-8">
+            <h1 class="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500">
+                WEO Competitive Intelligence
+            </h1>
+            <p class="text-gray-400 mt-2">Real-time competitor tracking and analysis</p>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="mb-6 flex flex-wrap gap-4">
+            <button onclick="showImportModal()" class="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-lg flex items-center gap-2">
+                <i class="fas fa-file-excel"></i> Import Excel
+            </button>
+            <button onclick="runFullAnalysis()" class="bg-purple-600 hover:bg-purple-700 px-4 py-2 rounded-lg flex items-center gap-2">
+                <i class="fas fa-chart-line"></i> Run Full Analysis
+            </button>
+            <button onclick="analyzeCompetitor()" class="bg-indigo-600 hover:bg-indigo-700 px-4 py-2 rounded-lg flex items-center gap-2">
+                <i class="fas fa-brain"></i> Quick AI Analysis
+            </button>
+            <button onclick="exportData()" class="bg-green-600 hover:bg-green-700 px-4 py-2 rounded-lg flex items-center gap-2">
+                <i class="fas fa-download"></i> Export Data
+            </button>
+            <button onclick="refreshData()" class="bg-gray-600 hover:bg-gray-700 px-4 py-2 rounded-lg flex items-center gap-2">
+                <i class="fas fa-sync"></i> Refresh
+            </button>
+        </div>
+
+        <!-- Loading State -->
+        <div id="loading" class="text-center py-8">
+            <div class="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500"></div>
+            <p class="mt-2 text-gray-400">Loading competitor data...</p>
+        </div>
+
+        <!-- Competitors Grid -->
+        <div id="competitorsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 hidden">
+            <!-- Competitor cards will be inserted here -->
+        </div>
+    </div>
+
+    <!-- Import Modal -->
+    <div id="importModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center">
+        <div class="bg-gray-800 p-6 rounded-lg max-w-md w-full">
+            <h2 class="text-xl font-bold mb-4">Import Excel Data</h2>
+            <input type="file" id="excelFile" accept=".xlsx,.xls" class="mb-4 w-full">
+            <div class="flex gap-4">
+                <button onclick="importExcel()" class="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded">
+                    Import
+                </button>
+                <button onclick="closeImportModal()" class="bg-gray-600 hover:bg-gray-700 px-4 py-2 rounded">
+                    Cancel
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Modal -->
+    <div id="editModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center overflow-y-auto">
+        <div class="bg-gray-800 p-6 rounded-lg max-w-2xl w-full my-8">
+            <h2 class="text-xl font-bold mb-4">Edit Competitor Data</h2>
+            <div id="editForm" class="space-y-4">
+                <!-- Form fields will be inserted here -->
+            </div>
+            <div class="flex gap-4 mt-6">
+                <button onclick="saveCompetitor()" class="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded">
+                    Save
+                </button>
+                <button onclick="closeEditModal()" class="bg-gray-600 hover:bg-gray-700 px-4 py-2 rounded">
+                    Cancel
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let competitorsData = {};
+        let currentEditId = null;
+
+        // Load competitors on page load
+        async function loadCompetitors() {
+            try {
+                const response = await fetch('/api/get-competitors');
+                const data = await response.json();
+                competitorsData = data.competitors || data;
+                renderCompetitors();
+            } catch (error) {
+                console.error('Error loading competitors:', error);
+                document.getElementById('loading').innerHTML = 
+                    '<p class="text-red-500">Error loading data. Please refresh.</p>';
+            }
+        }
+
+        // Render competitor cards
+        function renderCompetitors() {
+            const grid = document.getElementById('competitorsGrid');
+            const loading = document.getElementById('loading');
+            
+            grid.innerHTML = '';
+            
+            for (const [id, competitor] of Object.entries(competitorsData)) {
+                const card = createCompetitorCard(id, competitor);
+                grid.appendChild(card);
+            }
+            
+            loading.classList.add('hidden');
+            grid.classList.remove('hidden');
+        }
+
+        // Create competitor card
+        function createCompetitorCard(id, data) {
+            const card = document.createElement('div');
+            card.className = 'bg-gray-800 border border-gray-700 rounded-lg p-6 hover:border-blue-500 transition-colors relative';
+            
+            // Add performance indicator if available
+            const perfScore = data.metrics?.performance?.mobile || null;
+            const scoreColor = perfScore >= 90 ? 'text-green-400' : perfScore >= 50 ? 'text-yellow-400' : 'text-red-400';
+            
+            card.innerHTML = `
+                <div class="flex justify-between items-start mb-4">
+                    <div>
+                        <h3 class="text-xl font-bold text-blue-400">${data.name || id}</h3>
+                        <p class="text-sm text-gray-400">${data.domain || 'No domain'}</p>
+                    </div>
+                    <div class="flex gap-2">
+                        ${perfScore ? `<span class="${scoreColor} text-lg font-bold" title="Mobile Performance Score">${perfScore}</span>` : ''}
+                        <button onclick="editCompetitor('${id}')" class="text-gray-400 hover:text-blue-400">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="space-y-2 text-sm">
+                    ${data.location ? `<p><span class="text-gray-500">Location:</span> ${data.location}</p>` : ''}
+                    ${data.companySize ? `<p><span class="text-gray-500">Size:</span> ${data.companySize} employees</p>` : ''}
+                    ${data.founded ? `<p><span class="text-gray-500">Founded:</span> ${data.founded}</p>` : ''}
+                    ${data.coreFocus ? `<p><span class="text-gray-500">Focus:</span> ${data.coreFocus}</p>` : ''}
+                    ${data.clientsEstimated ? `<p><span class="text-gray-500">Clients:</span> ~${data.clientsEstimated}</p>` : ''}
+                </div>
+                
+                <!-- Automated Metrics Section -->
+                ${data.metrics ? `
+                <div class="mt-4 p-3 bg-gray-900 rounded-lg">
+                    <h4 class="text-xs font-semibold text-gray-400 mb-2">LIVE METRICS</h4>
+                    <div class="grid grid-cols-2 gap-2 text-xs">
+                        ${data.metrics.blogPosts ? `<div><i class="fas fa-blog text-blue-400"></i> ${data.metrics.blogPosts} posts</div>` : ''}
+                        ${data.metrics.publishingFreq ? `<div><i class="fas fa-calendar text-green-400"></i> ${data.metrics.publishingFreq}</div>` : ''}
+                        ${data.metrics.sslGrade ? `<div><i class="fas fa-shield-alt text-yellow-400"></i> SSL: ${data.metrics.sslGrade}</div>` : ''}
+                        ${data.metrics.securityScore ? `<div><i class="fas fa-lock text-purple-400"></i> Security: ${data.metrics.securityScore}%</div>` : ''}
+                    </div>
+                </div>
+                ` : ''}
+                
+                <div class="mt-4 flex flex-wrap gap-2">
+                    ${data.seo ? '<span class="px-2 py-1 bg-green-900 text-green-300 rounded text-xs">SEO</span>' : ''}
+                    ${data.emailMarketing ? '<span class="px-2 py-1 bg-blue-900 text-blue-300 rounded text-xs">Email</span>' : ''}
+                    ${data.dsoMarketing ? '<span class="px-2 py-1 bg-purple-900 text-purple-300 rounded text-xs">DSO</span>' : ''}
+                </div>
+                
+                <div class="mt-4 flex justify-between items-center">
+                    ${data.lastAnalyzed ? `
+                        <p class="text-xs text-gray-500">
+                            Analyzed: ${new Date(data.lastAnalyzed).toLocaleDateString()}
+                        </p>
+                    ` : '<p class="text-xs text-gray-500">Not analyzed yet</p>'}
+                    <button onclick="runAnalysisForCompetitor('${id}')" class="text-xs bg-blue-600 hover:bg-blue-700 px-2 py-1 rounded">
+                        <i class="fas fa-sync"></i> Analyze
+                    </button>
+                </div>
+            `;
+            
+            return card;
+        }
+
+        // Edit competitor
+        function editCompetitor(id) {
+            currentEditId = id;
+            const data = competitorsData[id] || {};
+            
+            const form = document.getElementById('editForm');
+            form.innerHTML = `
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm font-medium mb-1">Company Name</label>
+                        <input type="text" id="edit_name" value="${data.name || ''}" 
+                               class="w-full bg-gray-700 rounded px-3 py-2">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium mb-1">Domain</label>
+                        <input type="text" id="edit_domain" value="${data.domain || ''}" 
+                               class="w-full bg-gray-700 rounded px-3 py-2">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium mb-1">Location</label>
+                        <input type="text" id="edit_location" value="${data.location || ''}" 
+                               class="w-full bg-gray-700 rounded px-3 py-2">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium mb-1">Company Size</label>
+                        <input type="number" id="edit_companySize" value="${data.companySize || ''}" 
+                               class="w-full bg-gray-700 rounded px-3 py-2">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium mb-1">Founded</label>
+                        <input type="number" id="edit_founded" value="${data.founded || ''}" 
+                               class="w-full bg-gray-700 rounded px-3 py-2">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium mb-1">Estimated Clients</label>
+                        <input type="number" id="edit_clientsEstimated" value="${data.clientsEstimated || ''}" 
+                               class="w-full bg-gray-700 rounded px-3 py-2">
+                    </div>
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-medium mb-1">Core Focus</label>
+                    <textarea id="edit_coreFocus" rows="2" 
+                              class="w-full bg-gray-700 rounded px-3 py-2">${data.coreFocus || ''}</textarea>
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-medium mb-1">Brand Messaging</label>
+                    <textarea id="edit_brandMessaging" rows="2" 
+                              class="w-full bg-gray-700 rounded px-3 py-2">${data.brandMessaging || ''}</textarea>
+                </div>
+                
+                <div class="grid grid-cols-3 gap-4">
+                    <label class="flex items-center">
+                        <input type="checkbox" id="edit_seo" ${data.seo ? 'checked' : ''} 
+                               class="mr-2">
+                        SEO Services
+                    </label>
+                    <label class="flex items-center">
+                        <input type="checkbox" id="edit_emailMarketing" ${data.emailMarketing ? 'checked' : ''} 
+                               class="mr-2">
+                        Email Marketing
+                    </label>
+                    <label class="flex items-center">
+                        <input type="checkbox" id="edit_dsoMarketing" ${data.dsoMarketing ? 'checked' : ''} 
+                               class="mr-2">
+                        DSO Marketing
+                    </label>
+                </div>
+            `;
+            
+            document.getElementById('editModal').classList.remove('hidden');
+            document.getElementById('editModal').classList.add('flex');
+        }
+
+        // Save competitor
+        async function saveCompetitor() {
+            const data = {
+                name: document.getElementById('edit_name').value,
+                domain: document.getElementById('edit_domain').value,
+                location: document.getElementById('edit_location').value,
+                companySize: parseInt(document.getElementById('edit_companySize').value) || null,
+                founded: parseInt(document.getElementById('edit_founded').value) || null,
+                clientsEstimated: parseInt(document.getElementById('edit_clientsEstimated').value) || null,
+                coreFocus: document.getElementById('edit_coreFocus').value,
+                brandMessaging: document.getElementById('edit_brandMessaging').value,
+                seo: document.getElementById('edit_seo').checked,
+                emailMarketing: document.getElementById('edit_emailMarketing').checked,
+                dsoMarketing: document.getElementById('edit_dsoMarketing').checked
+            };
+            
+            try {
+                const response = await fetch('/api/save-competitor', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ competitorId: currentEditId, data })
+                });
+                
+                if (response.ok) {
+                    closeEditModal();
+                    await loadCompetitors();
+                } else {
+                    alert('Error saving data');
+                }
+            } catch (error) {
+                console.error('Error saving:', error);
+                alert('Error saving data');
+            }
+        }
+
+        // Analyze competitor with AI
+        async function analyzeCompetitor() {
+            const url = prompt('Enter competitor website URL:');
+            if (!url) return;
+            
+            const name = prompt('Enter competitor name:');
+            
+            try {
+                const response = await fetch('/api/analyze-competitor', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ url, competitorName: name })
+                });
+                
+                const result = await response.json();
+                console.log('Analysis result:', result);
+                alert('Analysis complete! Check console for details.');
+                
+                // TODO: Display results in UI
+            } catch (error) {
+                console.error('Error analyzing:', error);
+                alert('Error analyzing competitor');
+            }
+        }
+
+        // Import Excel
+        async function importExcel() {
+            const fileInput = document.getElementById('excelFile');
+            const file = fileInput.files[0];
+            
+            if (!file) {
+                alert('Please select a file');
+                return;
+            }
+            
+            const reader = new FileReader();
+            reader.onload = async function(e) {
+                const data = e.target.result.split(',')[1]; // Get base64 part
+                
+                try {
+                    const response = await fetch('/api/import-excel', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ data })
+                    });
+                    
+                    const result = await response.json();
+                    console.log('Import result:', result);
+                    
+                    if (result.success) {
+                        alert(`Imported ${result.count} competitors`);
+                        closeImportModal();
+                        
+                        // Merge with existing data
+                        competitorsData = { ...competitorsData, ...result.competitors };
+                        renderCompetitors();
+                    } else {
+                        alert('Error importing data');
+                    }
+                } catch (error) {
+                    console.error('Error importing:', error);
+                    alert('Error importing file');
+                }
+            };
+            
+            reader.readAsDataURL(file);
+        }
+
+        // Export data
+        function exportData() {
+            const dataStr = JSON.stringify(competitorsData, null, 2);
+            const dataUri = 'data:application/json;charset=utf-8,' + encodeURIComponent(dataStr);
+            
+            const exportFileDefaultName = `weo-competitors-${new Date().toISOString().split('T')[0]}.json`;
+            
+            const linkElement = document.createElement('a');
+            linkElement.setAttribute('href', dataUri);
+            linkElement.setAttribute('download', exportFileDefaultName);
+            linkElement.click();
+        }
+
+        // Modal functions
+        function showImportModal() {
+            document.getElementById('importModal').classList.remove('hidden');
+            document.getElementById('importModal').classList.add('flex');
+        }
+
+        function closeImportModal() {
+            document.getElementById('importModal').classList.add('hidden');
+            document.getElementById('importModal').classList.remove('flex');
+        }
+
+        function closeEditModal() {
+            document.getElementById('editModal').classList.add('hidden');
+            document.getElementById('editModal').classList.remove('flex');
+        }
+
+        function refreshData() {
+            loadCompetitors();
+        }
+
+        // Run full analysis for all competitors
+        async function runFullAnalysis() {
+            const btn = event.target;
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Analyzing...';
+            
+            try {
+                const competitorIds = Object.keys(competitorsData);
+                let completed = 0;
+                
+                for (const id of competitorIds) {
+                    await runAnalysisForCompetitor(id, false);
+                    completed++;
+                    btn.innerHTML = `<i class="fas fa-spinner fa-spin"></i> Analyzing... (${completed}/${competitorIds.length})`;
+                }
+                
+                alert('Full analysis complete!');
+                await loadCompetitors();
+            } catch (error) {
+                console.error('Full analysis error:', error);
+                alert('Error running full analysis');
+            } finally {
+                btn.disabled = false;
+                btn.innerHTML = '<i class="fas fa-chart-line"></i> Run Full Analysis';
+            }
+        }
+        
+        // Run analysis for a single competitor
+        async function runAnalysisForCompetitor(competitorId, showAlert = true) {
+            try {
+                const response = await fetch('/api/run-full-analysis', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ competitorId })
+                });
+                
+                const result = await response.json();
+                
+                if (response.ok) {
+                    // Update the competitor data with new metrics
+                    if (competitorsData[competitorId]) {
+                        competitorsData[competitorId].metrics = {
+                            performance: {
+                                mobile: result.performance?.results?.mobile?.scores?.performance,
+                                desktop: result.performance?.results?.desktop?.scores?.performance
+                            },
+                            blogPosts: result.content?.content?.totalBlogPosts,
+                            publishingFreq: result.content?.content?.publishingFrequency,
+                            sslGrade: result.security?.security?.ssl?.valid ? 'A' : 'F',
+                            securityScore: result.security?.security?.score,
+                            overallScore: result.overallScore
+                        };
+                        competitorsData[competitorId].lastAnalyzed = result.timestamp;
+                        
+                        // Re-render the grid
+                        renderCompetitors();
+                    }
+                    
+                    if (showAlert) {
+                        alert(`Analysis complete for ${competitorsData[competitorId]?.name || competitorId}!`);
+                    }
+                } else {
+                    throw new Error(result.error || 'Analysis failed');
+                }
+            } catch (error) {
+                console.error('Analysis error:', error);
+                if (showAlert) {
+                    alert('Error running analysis: ' + error.message);
+                }
+            }
+        }
+        
+        // Load data on page load
+        loadCompetitors();
+    </script>
+</body>
+</html>

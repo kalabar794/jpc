@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WEO Competitive Intelligence Dashboard</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0f0f23;
+            color: #e0e0e0;
+            line-height: 1.6;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(102, 126, 234, 0.4);
+        }
+        
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .header p {
+            opacity: 0.9;
+            font-size: 1.1rem;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .status-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+        
+        .status-card {
+            background: #1a1a2e;
+            border-radius: 12px;
+            padding: 1.5rem;
+            border: 1px solid #333;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .status-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+        }
+        
+        .status-card h3 {
+            color: #667eea;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .status-indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            display: inline-block;
+            animation: pulse 2s infinite;
+        }
+        
+        .status-active { background: #4ade80; }
+        .status-pending { background: #facc15; }
+        .status-error { background: #f87171; }
+        
+        @keyframes pulse {
+            0% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.7; transform: scale(1.1); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+        
+        .competitor-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .competitor-card {
+            background: #1a1a2e;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid #333;
+        }
+        
+        .competitor-header {
+            background: #252542;
+            padding: 1.5rem;
+            border-bottom: 1px solid #333;
+        }
+        
+        .competitor-name {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #fff;
+            margin-bottom: 0.5rem;
+        }
+        
+        .competitor-url {
+            color: #888;
+            font-size: 0.9rem;
+        }
+        
+        .competitor-body {
+            padding: 1.5rem;
+        }
+        
+        .metric-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid #252542;
+        }
+        
+        .metric-row:last-child {
+            border-bottom: none;
+        }
+        
+        .metric-label {
+            color: #888;
+        }
+        
+        .metric-value {
+            font-weight: bold;
+        }
+        
+        .change-badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: bold;
+        }
+        
+        .change-new { background: #4ade80; color: #000; }
+        .change-update { background: #facc15; color: #000; }
+        .change-removed { background: #f87171; color: #fff; }
+        
+        .screenshot-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        
+        .screenshot-card {
+            background: #252542;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid #333;
+        }
+        
+        .screenshot-preview {
+            width: 100%;
+            height: 150px;
+            background: #333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+        }
+        
+        .screenshot-info {
+            padding: 1rem;
+            font-size: 0.9rem;
+        }
+        
+        .activity-log {
+            background: #1a1a2e;
+            border-radius: 12px;
+            padding: 1.5rem;
+            border: 1px solid #333;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        
+        .log-entry {
+            padding: 0.75rem;
+            border-bottom: 1px solid #252542;
+            display: flex;
+            gap: 1rem;
+            align-items: start;
+        }
+        
+        .log-time {
+            color: #667eea;
+            font-size: 0.85rem;
+            white-space: nowrap;
+        }
+        
+        .log-message {
+            flex: 1;
+        }
+        
+        .rankings-table {
+            background: #1a1a2e;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid #333;
+        }
+        
+        .rankings-table table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .rankings-table th {
+            background: #252542;
+            padding: 1rem;
+            text-align: left;
+            color: #667eea;
+            font-weight: bold;
+        }
+        
+        .rankings-table td {
+            padding: 1rem;
+            border-top: 1px solid #252542;
+        }
+        
+        .position-change {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.25rem;
+            font-weight: bold;
+        }
+        
+        .position-up { color: #4ade80; }
+        .position-down { color: #f87171; }
+        .position-same { color: #888; }
+        
+        .chart-container {
+            background: #1a1a2e;
+            border-radius: 12px;
+            padding: 1.5rem;
+            border: 1px solid #333;
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🔍 WEO Competitive Intelligence Dashboard</h1>
+        <p>Real-time monitoring of dental marketing competitors</p>
+    </div>
+
+    <div class="container">
+        <!-- System Status -->
+        <div class="status-grid">
+            <div class="status-card">
+                <h3><span class="status-indicator status-active"></span> System Status</h3>
+                <div class="metric-row">
+                    <span class="metric-label">Status</span>
+                    <span class="metric-value" style="color: #4ade80;">Active</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Last Check</span>
+                    <span class="metric-value">2 minutes ago</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Next Scheduled</span>
+                    <span class="metric-value">5:58 remaining</span>
+                </div>
+            </div>
+
+            <div class="status-card">
+                <h3>📊 Monitoring Stats</h3>
+                <div class="metric-row">
+                    <span class="metric-label">Competitors Tracked</span>
+                    <span class="metric-value">4</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Keywords Monitored</span>
+                    <span class="metric-value">50</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Checks Today</span>
+                    <span class="metric-value">12</span>
+                </div>
+            </div>
+
+            <div class="status-card">
+                <h3>🚨 Alerts</h3>
+                <div class="metric-row">
+                    <span class="metric-label">Sent Today</span>
+                    <span class="metric-value">2</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Pending</span>
+                    <span class="metric-value">0</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Email Status</span>
+                    <span class="metric-value" style="color: #4ade80;">Connected</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Competitors Overview -->
+        <h2 style="margin-bottom: 1.5rem;">🏢 Competitor Monitoring</h2>
+        <div class="competitor-grid">
+            <div class="competitor-card">
+                <div class="competitor-header">
+                    <div class="competitor-name">ProSites</div>
+                    <div class="competitor-url">prosites.com</div>
+                </div>
+                <div class="competitor-body">
+                    <div class="metric-row">
+                        <span class="metric-label">Last Checked</span>
+                        <span class="metric-value">7:33 AM</span>
+                    </div>
+                    <div class="metric-row">
+                        <span class="metric-label">Changes Detected</span>
+                        <span class="metric-value"><span class="change-badge change-update">2 Updates</span></span>
+                    </div>
+                    <div class="metric-row">
+                        <span class="metric-label">Pricing</span>
+                        <span class="metric-value">$299-$599/mo</span>
+                    </div>
+                    <div class="metric-row">
+                        <span class="metric-label">Client Count</span>
+                        <span class="metric-value">7,500+</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="competitor-card">
+                <div class="competitor-header">
+                    <div class="competitor-name">SmileShop Marketing</div>
+                    <div class="competitor-url">smileshopmarketing.com</div>
+                </div>
+                <div class="competitor-body">
+                    <div class="metric-row">
+                        <span class="metric-label">Last Checked</span>
+                        <span class="metric-value">7:33 AM</span>
+                    </div>
+                    <div class="metric-row">
+                        <span class="metric-label">Changes Detected</span>
+                        <span class="metric-value">None</span>
+                    </div>
+                    <div class="metric-row">
+                        <span class="metric-label">Partnership</span>
+                        <span class="metric-value">Patterson Dental</span>
+                    </div>
+                    <div class="metric-row">
+                        <span class="metric-label">New Features</span>
+                        <span class="metric-value"><span class="change-badge change-new">AI Tools</span></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="competitor-card">
+                <div class="competitor-header">
+                    <div class="competitor-name">Golden Proportions Marketing</div>
+                    <div class="competitor-url">goldenproportions.com</div>
+                </div>
+                <div class="competitor-body">
+                    <div class="metric-row">
+                        <span class="metric-label">Last Checked</span>
+                        <span class="metric-value">7:33 AM</span>
+                    </div>
+                    <div class="metric-row">
+                        <span class="metric-label">Changes Detected</span>
+                        <span class="metric-value">None</span>
+                    </div>
+                    <div class="metric-row">
+                        <span class="metric-label">Avg Patients/Mo</span>
+                        <span class="metric-value">32-60</span>
+                    </div>
+                    <div class="metric-row">
+                        <span class="metric-label">Focus</span>
+                        <span class="metric-value">Custom Solutions</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="competitor-card">
+                <div class="competitor-header">
+                    <div class="competitor-name">Roadside/Marketly</div>
+                    <div class="competitor-url">roadsidedentalmarketing.com</div>
+                </div>
+                <div class="competitor-body">
+                    <div class="metric-row">
+                        <span class="metric-label">Last Checked</span>
+                        <span class="metric-value">7:33 AM</span>
+                    </div>
+                    <div class="metric-row">
+                        <span class="metric-label">Changes Detected</span>
+                        <span class="metric-value"><span class="change-badge change-update">Rebrand</span></span>
+                    </div>
+                    <div class="metric-row">
+                        <span class="metric-label">Status</span>
+                        <span class="metric-value">Transitioning</span>
+                    </div>
+                    <div class="metric-row">
+                        <span class="metric-label">Brand Progress</span>
+                        <span class="metric-value">60%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Rankings Overview -->
+        <h2 style="margin-bottom: 1.5rem;">📈 Keyword Rankings</h2>
+        <div class="rankings-table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Keyword</th>
+                        <th>WEO Position</th>
+                        <th>Change</th>
+                        <th>Top Competitor</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>dental marketing agency</td>
+                        <td>#12</td>
+                        <td><span class="position-change position-down">↓ 2</span></td>
+                        <td>ProSites (#3)</td>
+                    </tr>
+                    <tr>
+                        <td>dental SEO services</td>
+                        <td>#8</td>
+                        <td><span class="position-change position-up">↑ 3</span></td>
+                        <td>SmileShop (#5)</td>
+                    </tr>
+                    <tr>
+                        <td>dental website design</td>
+                        <td>#15</td>
+                        <td><span class="position-change position-same">—</span></td>
+                        <td>GPM (#7)</td>
+                    </tr>
+                    <tr>
+                        <td>dental practice marketing</td>
+                        <td>#6</td>
+                        <td><span class="position-change position-up">↑ 1</span></td>
+                        <td>ProSites (#2)</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Recent Activity -->
+        <h2 style="margin: 2rem 0 1.5rem;">📋 Recent Activity</h2>
+        <div class="activity-log">
+            <div class="log-entry">
+                <span class="log-time">7:33 AM</span>
+                <span class="log-message">✅ Email test successful - System configured</span>
+            </div>
+            <div class="log-entry">
+                <span class="log-time">7:33 AM</span>
+                <span class="log-message">🔍 Started competitor monitoring cycle</span>
+            </div>
+            <div class="log-entry">
+                <span class="log-time">7:34 AM</span>
+                <span class="log-message">📸 Screenshot captured: ProSites homepage</span>
+            </div>
+            <div class="log-entry">
+                <span class="log-time">7:34 AM</span>
+                <span class="log-message">⚠️ Change detected: ProSites pricing update</span>
+            </div>
+            <div class="log-entry">
+                <span class="log-time">7:35 AM</span>
+                <span class="log-message">📧 Alert sent: 2 changes at ProSites</span>
+            </div>
+            <div class="log-entry">
+                <span class="log-time">7:35 AM</span>
+                <span class="log-message">✅ Monitoring cycle complete - 4 competitors checked</span>
+            </div>
+        </div>
+
+        <!-- Screenshots Preview -->
+        <h2 style="margin: 2rem 0 1.5rem;">📸 Recent Screenshots</h2>
+        <div class="screenshot-grid">
+            <div class="screenshot-card">
+                <div class="screenshot-preview">Screenshot</div>
+                <div class="screenshot-info">
+                    <strong>ProSites - Homepage</strong><br>
+                    <small>May 27, 7:34 AM</small>
+                </div>
+            </div>
+            <div class="screenshot-card">
+                <div class="screenshot-preview">Screenshot</div>
+                <div class="screenshot-info">
+                    <strong>ProSites - Pricing</strong><br>
+                    <small>May 27, 7:34 AM</small>
+                </div>
+            </div>
+            <div class="screenshot-card">
+                <div class="screenshot-preview">Screenshot</div>
+                <div class="screenshot-info">
+                    <strong>SmileShop - Services</strong><br>
+                    <small>May 27, 7:35 AM</small>
+                </div>
+            </div>
+            <div class="screenshot-card">
+                <div class="screenshot-preview">Screenshot</div>
+                <div class="screenshot-info">
+                    <strong>Rankings - dental SEO</strong><br>
+                    <small>May 27, 2:00 AM</small>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Auto-refresh every 30 seconds
+        setInterval(() => {
+            // In a real implementation, this would fetch actual data
+            console.log('Refreshing dashboard data...');
+        }, 30000);
+    </script>
+</body>
+</html>
