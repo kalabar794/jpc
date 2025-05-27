@@ -4,6 +4,7 @@ import './globals.css'
 import { ThemeProvider } from '@/components/providers/ThemeProvider'
 import Navigation from '@/components/ui/Navigation'
 import { defaultMetadata } from '@/lib/metadata'
+import Script from 'next/script'
 
 const inter = Inter({ 
   subsets: ['latin'],
@@ -20,6 +21,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={inter.variable} suppressHydrationWarning>
+      <head>
+        <Script src="https://identity.netlify.com/v1/netlify-identity-widget.js" strategy="beforeInteractive" />
+      </head>
       <body className="min-h-screen bg-white dark:bg-dark-background text-gray-900 dark:text-dark-text antialiased">
         <ThemeProvider defaultTheme="light" storageKey="portfolio-theme">
           <Navigation />
@@ -27,6 +31,23 @@ export default function RootLayout({
             {children}
           </div>
         </ThemeProvider>
+        <Script
+          id="netlify-identity-redirect"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+              if (window.netlifyIdentity) {
+                window.netlifyIdentity.on("init", user => {
+                  if (!user) {
+                    window.netlifyIdentity.on("login", () => {
+                      document.location.href = "/admin/";
+                    });
+                  }
+                });
+              }
+            `
+          }}
+        />
       </body>
     </html>
   )
