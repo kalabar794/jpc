@@ -1,0 +1,58 @@
+{
+  "name": "weo-competitive-intelligence",
+  "version": "1.0.0",
+  "description": "Automated competitive intelligence system for WEO Media",
+  "main": "src/index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node src/index.js",
+    "start:dev": "NODE_ENV=development node src/index.js",
+    "start:prod": "NODE_ENV=production pm2 start src/index.js --name weo-intelligence",
+    "test": "node src/test-run.js",
+    "test:email": "node src/test-email.js",
+    "report": "node src/generate-report.js",
+    "clean": "node src/cleanup.js",
+    "setup": "node src/setup.js",
+    "monitor": "pm2 monit",
+    "logs": "pm2 logs weo-intelligence",
+    "stop": "pm2 stop weo-intelligence",
+    "restart": "pm2 restart weo-intelligence"
+  },
+  "keywords": [
+    "competitive-intelligence",
+    "monitoring",
+    "automation",
+    "dental-marketing"
+  ],
+  "author": "WEO Media",
+  "license": "PRIVATE",
+  "dependencies": {
+    "playwright": "^1.40.0",
+    "node-cron": "^3.0.3",
+    "nodemailer": "^6.9.7",
+    "dotenv": "^16.3.1",
+    "winston": "^3.11.0",
+    "winston-daily-rotate-file": "^4.7.1",
+    "express": "^4.18.2",
+    "chart.js": "^4.4.1",
+    "dayjs": "^1.11.10",
+    "lodash": "^4.17.21",
+    "axios": "^1.6.2"
+  },
+  "devDependencies": {
+    "eslint": "^8.55.0",
+    "prettier": "^3.1.1",
+    "nodemon": "^3.0.2"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  },
+  "os": [
+    "darwin"
+  ],
+  "cpu": [
+    "arm64",
+    "x64"
+  ]
+}
