@@ -7,3 +7,20 @@
 
 [build.environment]
   NEXT_TELEMETRY_DISABLED = "1"
+
+[[headers]]
+  for = "/admin/*"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+  for = "*.yml"
+  [headers.values]
+    Content-Type = "text/yaml"
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+  for = "/admin/config.yml"
+  [headers.values]
+    Content-Type = "text/yaml"
+    Cache-Control = "public, max-age=0, must-revalidate"
