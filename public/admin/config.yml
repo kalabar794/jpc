@@ -3,6 +3,12 @@ backend:
   repo: Kalabar794/jpc
   branch: main
 
+media_library:
+  name: cloudinary
+  config:
+    cloud_name: dqltlwqi2
+    api_key: 194453126296877
+
 media_folder: public/uploads
 public_folder: /uploads
 
