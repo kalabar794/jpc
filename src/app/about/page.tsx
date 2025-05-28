@@ -1,62 +1,118 @@
 'use client'
 
 import { motion } from 'framer-motion'
+import { useEffect, useState } from 'react'
+import { getAboutContentSync } from '@/lib/content'
 
 export default function AboutPage() {
-  const expertise = [
-    { name: 'Marketing Management & Strategy', gradient: 'from-blue-500 to-purple-500' },
-    { name: 'Team Leadership', gradient: 'from-green-500 to-teal-500' },
-    { name: 'Social Media Management', gradient: 'from-pink-500 to-rose-500' },
-    { name: 'SEO & SEM', gradient: 'from-yellow-500 to-orange-500' },
-    { name: 'Email Marketing', gradient: 'from-purple-500 to-pink-500' },
-    { name: 'Trade Shows/Events', gradient: 'from-indigo-500 to-blue-500' },
-    { name: 'Emerging AI Technologies', gradient: 'from-cyan-500 to-blue-500' },
-    { name: 'Competitive Analysis', gradient: 'from-red-500 to-pink-500' },
-    { name: 'Content Marketing/Development', gradient: 'from-green-500 to-emerald-500' },
-    { name: 'PR', gradient: 'from-violet-500 to-purple-500' },
-    { name: 'eCommerce', gradient: 'from-orange-500 to-red-500' },
-    { name: 'B2B/B2C', gradient: 'from-blue-500 to-indigo-500' },
-    { name: 'Marketing Research', gradient: 'from-teal-500 to-cyan-500' },
-    { name: 'Mobile Apps', gradient: 'from-pink-500 to-purple-500' },
-    { name: 'Traditional Marketing', gradient: 'from-amber-500 to-orange-500' },
-    { name: 'Conversion Optimization', gradient: 'from-emerald-500 to-green-500' }
-  ]
+  const [aboutData, setAboutData] = useState<any>(null)
+  const [loading, setLoading] = useState(true)
 
-  const industries = [
-    { name: 'Financial Services', gradient: 'from-blue-600 to-indigo-600' },
-    { name: 'FinTech', gradient: 'from-purple-600 to-pink-600' },
-    { name: 'Consumer Packaged Goods', gradient: 'from-green-600 to-teal-600' },
-    { name: 'Internet', gradient: 'from-cyan-600 to-blue-600' },
-    { name: 'Music', gradient: 'from-pink-600 to-rose-600' },
-    { name: 'Computer Software', gradient: 'from-indigo-600 to-purple-600' },
-    { name: 'E-Commerce', gradient: 'from-orange-600 to-red-600' },
-    { name: 'Health & Wellness', gradient: 'from-emerald-600 to-green-600' },
-    { name: 'Marketing Agency', gradient: 'from-violet-600 to-indigo-600' }
-  ]
-
-  const experience = [
-    {
-      company: 'WEO Media - Dental Marketing',
-      role: 'Senior Marketing Manager',
-      description: 'Led digital marketing strategies for dental practices, optimizing marketing ROI through data-driven decisions',
-      gradient: 'from-blue-500 to-purple-500',
-      icon: '🦷'
-    },
-    {
-      company: 'SoundSplore Inc.',
-      role: 'Marketing Director',
-      description: 'Directed marketing initiatives for music technology startup',
-      gradient: 'from-pink-500 to-rose-500',
-      icon: '🎵'
-    },
-    {
-      company: 'LA Photo Party',
-      role: 'Marketing Manager',
-      description: 'Managed event marketing strategy and brand development',
-      gradient: 'from-yellow-500 to-orange-500',
-      icon: '📸'
+  useEffect(() => {
+    // Load about content
+    try {
+      const content = getAboutContentSync()
+      if (content) {
+        setAboutData(content)
+      }
+    } catch (error) {
+      console.error('Failed to load about content:', error)
+    } finally {
+      setLoading(false)
     }
-  ]
+  }, [])
+
+  // Fallback data if CMS content not available
+  const fallbackData = {
+    title: "About Jonathon",
+    heroTitle: "Jonathon Carter",
+    heroSubtitle: "Marketing Director • 20+ Years of Experience • Digital Marketing Strategist",
+    bio: "Jonathon is a Los Angeles-based Marketing Director with over 20 years of experience in digital marketing strategy. With a Master's in Marketing Management, he specializes in driving business growth and optimizing user engagement across multiple platforms and industries.",
+    expertise: [
+      { name: 'Marketing Management & Strategy', gradient: 'from-blue-500 to-purple-500' },
+      { name: 'Team Leadership', gradient: 'from-green-500 to-teal-500' },
+      { name: 'Social Media Management', gradient: 'from-pink-500 to-rose-500' },
+      { name: 'SEO & SEM', gradient: 'from-yellow-500 to-orange-500' },
+      { name: 'Email Marketing', gradient: 'from-purple-500 to-pink-500' },
+      { name: 'Trade Shows/Events', gradient: 'from-indigo-500 to-blue-500' },
+      { name: 'Emerging AI Technologies', gradient: 'from-cyan-500 to-blue-500' },
+      { name: 'Competitive Analysis', gradient: 'from-red-500 to-pink-500' },
+      { name: 'Content Marketing/Development', gradient: 'from-green-500 to-emerald-500' },
+      { name: 'PR', gradient: 'from-violet-500 to-purple-500' },
+      { name: 'eCommerce', gradient: 'from-orange-500 to-red-500' },
+      { name: 'B2B/B2C', gradient: 'from-blue-500 to-indigo-500' },
+      { name: 'Marketing Research', gradient: 'from-teal-500 to-cyan-500' },
+      { name: 'Mobile Apps', gradient: 'from-pink-500 to-purple-500' },
+      { name: 'Traditional Marketing', gradient: 'from-amber-500 to-orange-500' },
+      { name: 'Conversion Optimization', gradient: 'from-emerald-500 to-green-500' }
+    ],
+    industries: [
+      { name: 'Financial Services', gradient: 'from-blue-600 to-indigo-600' },
+      { name: 'FinTech', gradient: 'from-purple-600 to-pink-600' },
+      { name: 'Consumer Packaged Goods', gradient: 'from-green-600 to-teal-600' },
+      { name: 'Internet', gradient: 'from-cyan-600 to-blue-600' },
+      { name: 'Music', gradient: 'from-pink-600 to-rose-600' },
+      { name: 'Computer Software', gradient: 'from-indigo-600 to-purple-600' },
+      { name: 'E-Commerce', gradient: 'from-orange-600 to-red-600' },
+      { name: 'Health & Wellness', gradient: 'from-emerald-600 to-green-600' },
+      { name: 'Marketing Agency', gradient: 'from-violet-600 to-indigo-600' }
+    ],
+    experience: [
+      {
+        company: 'WEO Media - Dental Marketing',
+        role: 'Senior Marketing Manager',
+        description: 'Led digital marketing strategies for dental practices, optimizing marketing ROI through data-driven decisions',
+        gradient: 'from-blue-500 to-purple-500',
+        icon: '🦷'
+      },
+      {
+        company: 'SoundSplore Inc.',
+        role: 'Marketing Director',
+        description: 'Directed marketing initiatives for music technology startup',
+        gradient: 'from-pink-500 to-rose-500',
+        icon: '🎵'
+      },
+      {
+        company: 'LA Photo Party',
+        role: 'Marketing Manager',
+        description: 'Managed event marketing strategy and brand development',
+        gradient: 'from-yellow-500 to-orange-500',
+        icon: '📸'
+      }
+    ],
+    education: [
+      {
+        degree: 'Master\'s in Marketing Management',
+        institution: 'University of Leicester, UK',
+        icon: '🎓',
+        gradient: 'from-purple-600 to-blue-600'
+      },
+      {
+        degree: 'Bachelor\'s (Hons.) Business Studies',
+        institution: 'De Montfort University, Leicester, UK',
+        icon: '📚',
+        gradient: 'from-pink-600 to-orange-600'
+      }
+    ]
+  }
+
+  // Use CMS data if available, otherwise fallback
+  const data = aboutData || fallbackData
+  const expertise = data.expertise || fallbackData.expertise
+  const industries = data.industries || fallbackData.industries
+  const experience = data.experience || fallbackData.experience
+  const education = data.education || fallbackData.education
+
+  if (loading) {
+    return (
+      <main className="min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-purple-500 mx-auto mb-4"></div>
+          <p className="text-gray-600 dark:text-gray-300">Loading...</p>
+        </div>
+      </main>
+    )
+  }
 
   return (
     <main className="min-h-screen relative overflow-hidden">
@@ -94,21 +150,18 @@ export default function AboutPage() {
             >
               <div className="w-2 h-2 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full mr-2 animate-pulse" />
               <span className="bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent font-semibold">
-                About Me
+                {aboutData ? 'CMS Content Loaded' : 'Fallback Content'}
               </span>
             </motion.div>
 
             <h1 className="text-5xl md:text-6xl font-bold mb-6">
               <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent animate-gradient bg-300%">
-                Jonathon Carter
+                {data.heroTitle || data.title}
               </span>
             </h1>
             
             <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-300 max-w-4xl mx-auto leading-relaxed">
-              <span className="text-gradient font-semibold">Marketing Director</span> • 
-              <span className="text-gradient font-semibold">20+ Years of Experience</span> • 
-              <span className="text-gradient font-semibold">Digital Marketing Strategist</span> • 
-              Driving Business Growth & User Engagement • Master's in Marketing Management
+              {data.heroSubtitle}
             </p>
           </motion.div>
 
@@ -125,15 +178,16 @@ export default function AboutPage() {
             <div className="absolute bottom-0 left-0 w-64 h-64 bg-gradient-to-tr from-blue-500/10 to-cyan-500/10 rounded-full blur-3xl" />
             <h2 className="text-3xl font-bold mb-6 relative z-10">
               <span className="bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
-                Transforming Businesses Through Strategic Marketing
+                {data.title}
               </span>
             </h2>
-            <p className="text-lg text-gray-600 dark:text-gray-300 leading-relaxed relative z-10">
-              Jonathon is a Los Angeles-based Marketing Director with over 20 years of experience in digital marketing strategy. 
-              With a Master's in Marketing Management, he specializes in driving business growth and optimizing user engagement 
-              across multiple platforms and industries. His expertise spans from traditional marketing to cutting-edge AI technologies, 
-              helping businesses achieve measurable results and sustainable growth.
-            </p>
+            <div className="text-lg text-gray-600 dark:text-gray-300 leading-relaxed relative z-10">
+              {data.content ? (
+                <div dangerouslySetInnerHTML={{ __html: data.content.replace(/\n/g, '<br />') }} />
+              ) : (
+                <p>{data.bio}</p>
+              )}
+            </div>
           </motion.div>
 
           {/* Expertise Grid */}
@@ -150,7 +204,7 @@ export default function AboutPage() {
               </span>
             </h2>
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-              {expertise.map((skill, index) => (
+              {expertise.map((skill: any, index: number) => (
                 <motion.div
                   key={skill.name}
                   className="relative group"
@@ -184,7 +238,7 @@ export default function AboutPage() {
               </span>
             </h2>
             <div className="flex flex-wrap justify-center gap-4">
-              {industries.map((industry, index) => (
+              {industries.map((industry: any, index: number) => (
                 <motion.div
                   key={industry.name}
                   className="relative group"
@@ -216,7 +270,7 @@ export default function AboutPage() {
               </span>
             </h2>
             <div className="space-y-6">
-              {experience.map((job, index) => (
+              {experience.map((job: any, index: number) => (
                 <motion.div
                   key={job.company}
                   className="relative group"
@@ -263,38 +317,25 @@ export default function AboutPage() {
               </span>
             </h2>
             <div className="grid md:grid-cols-2 gap-6">
-              <motion.div
-                className="relative group overflow-hidden rounded-xl"
-                whileHover={{ scale: 1.02 }}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6 }}
-                viewport={{ once: true }}
-              >
-                <div className="absolute inset-0 bg-gradient-to-br from-purple-600 to-blue-600" />
-                <div className="absolute inset-0 bg-gradient-to-br from-purple-600/50 to-blue-600/50 translate-y-full group-hover:translate-y-0 transition-transform duration-500" />
-                <div className="relative p-6 text-white">
-                  <div className="text-4xl mb-3">🎓</div>
-                  <h3 className="text-xl font-bold mb-2">Master's in Marketing Management</h3>
-                  <p className="opacity-90">University of Leicester, UK</p>
-                </div>
-              </motion.div>
-              <motion.div
-                className="relative group overflow-hidden rounded-xl"
-                whileHover={{ scale: 1.02 }}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.1 }}
-                viewport={{ once: true }}
-              >
-                <div className="absolute inset-0 bg-gradient-to-br from-pink-600 to-orange-600" />
-                <div className="absolute inset-0 bg-gradient-to-br from-pink-600/50 to-orange-600/50 translate-y-full group-hover:translate-y-0 transition-transform duration-500" />
-                <div className="relative p-6 text-white">
-                  <div className="text-4xl mb-3">📚</div>
-                  <h3 className="text-xl font-bold mb-2">Bachelor's (Hons.) Business Studies</h3>
-                  <p className="opacity-90">De Montfort University, Leicester, UK</p>
-                </div>
-              </motion.div>
+              {education.map((edu: any, index: number) => (
+                <motion.div
+                  key={edu.degree}
+                  className="relative group overflow-hidden rounded-xl"
+                  whileHover={{ scale: 1.02 }}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: index * 0.1 }}
+                  viewport={{ once: true }}
+                >
+                  <div className={`absolute inset-0 bg-gradient-to-br ${edu.gradient}`} />
+                  <div className={`absolute inset-0 bg-gradient-to-br ${edu.gradient}/50 translate-y-full group-hover:translate-y-0 transition-transform duration-500`} />
+                  <div className="relative p-6 text-white">
+                    <div className="text-4xl mb-3">{edu.icon}</div>
+                    <h3 className="text-xl font-bold mb-2">{edu.degree}</h3>
+                    <p className="opacity-90">{edu.institution}</p>
+                  </div>
+                </motion.div>
+              ))}
             </div>
           </motion.div>
 

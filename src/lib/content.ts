@@ -129,6 +129,30 @@ export async function getSiteSettings() {
   return frontmatter
 }
 
+// Get About page content
+export async function getAboutContent() {
+  const aboutPath = path.join(contentDirectory, 'pages', 'about.md')
+  
+  if (!fs.existsSync(aboutPath)) {
+    return null
+  }
+  
+  const { frontmatter, content } = readMarkdownFile(aboutPath)
+  return { ...frontmatter, content }
+}
+
+// Sync version for SSG
+export function getAboutContentSync() {
+  const aboutPath = path.join(contentDirectory, 'pages', 'about.md')
+  
+  if (!fs.existsSync(aboutPath)) {
+    return null
+  }
+  
+  const { frontmatter, content } = readMarkdownFile(aboutPath)
+  return { ...frontmatter, content }
+}
+
 // Sync versions for SSG
 export function getAllProjects(): Project[] {
   const projectsDirectory = path.join(contentDirectory, 'projects')
@@ -196,7 +220,70 @@ export function getAllGalleryImages(category?: string): GalleryImage[] {
   const galleryDirectory = path.join(contentDirectory, 'gallery')
   
   if (!fs.existsSync(galleryDirectory)) {
-    // Return some sample gallery images for demo
+    return []
+  }
+
+  // Read from AI and Photography subdirectories
+  const aiDir = path.join(galleryDirectory, 'ai')
+  const photoDir = path.join(galleryDirectory, 'photography')
+  
+  let images: GalleryImage[] = []
+  
+  // Read AI gallery
+  if (fs.existsSync(aiDir)) {
+    const aiFiles = fs.readdirSync(aiDir).filter(name => name.endsWith('.md'))
+    const aiImages = aiFiles.map(name => {
+      const filePath = path.join(aiDir, name)
+      const { frontmatter } = readMarkdownFile(filePath)
+      
+      return {
+        id: frontmatter.slug || name.replace(/\.md$/, ''),
+        title: frontmatter.title,
+        imageUrl: frontmatter.image,
+        alt: frontmatter.title,
+        description: frontmatter.description,
+        category: 'AI Art',
+        tool: frontmatter.model || 'AI Generated',
+        date: frontmatter.date,
+        tags: frontmatter.tags || [],
+        featured: frontmatter.featured || false,
+        prompt: frontmatter.prompt,
+        style: frontmatter.style,
+        order: frontmatter.order || 0
+      } as GalleryImage & { prompt?: string; style?: string; order: number }
+    })
+    images = [...images, ...aiImages]
+  }
+  
+  // Read Photography gallery
+  if (fs.existsSync(photoDir)) {
+    const photoFiles = fs.readdirSync(photoDir).filter(name => name.endsWith('.md'))
+    const photoImages = photoFiles.map(name => {
+      const filePath = path.join(photoDir, name)
+      const { frontmatter } = readMarkdownFile(filePath)
+      
+      return {
+        id: frontmatter.slug || name.replace(/\.md$/, ''),
+        title: frontmatter.title,
+        imageUrl: frontmatter.image,
+        alt: frontmatter.title,
+        description: frontmatter.description,
+        category: frontmatter.category || 'Photography',
+        tool: frontmatter.camera || 'Camera',
+        date: frontmatter.date,
+        tags: frontmatter.tags || [],
+        featured: frontmatter.featured || false,
+        location: frontmatter.location,
+        camera: frontmatter.camera,
+        settings: frontmatter.settings,
+        order: frontmatter.order || 0
+      } as GalleryImage & { location?: string; camera?: string; settings?: string; order: number }
+    })
+    images = [...images, ...photoImages]
+  }
+  
+  // If no CMS content, return some sample images
+  if (images.length === 0) {
     return [
       {
         id: '1',

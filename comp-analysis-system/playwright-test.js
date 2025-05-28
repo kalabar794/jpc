@@ -16,6 +16,12 @@ import runFullAnalysis from './api/run-full-analysis.js';
 // Create test server
 const app = express();
 app.use(express.json());
+
+// Serve dashboard.html as index
+app.get('/', (req, res) => {
+    res.sendFile('dashboard.html', { root: './public' });
+});
+
 app.use(express.static('public'));
 
 // API routes

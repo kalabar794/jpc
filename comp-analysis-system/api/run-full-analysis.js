@@ -85,20 +85,43 @@ export default async function handler(req, res) {
 }
 
 async function getCompetitorData(competitorId) {
-  // Import the competitor data
-  const module = await import('./get-competitors.js');
-  const handler = module.default;
-  
-  // Create mock req/res to call the handler
-  const mockReq = { method: 'GET' };
-  const mockRes = {
-    status: () => ({
-      json: (data) => data
-    })
+  // Return hardcoded competitor data (same as in get-competitors.js)
+  const competitors = {
+    'weo_media': {
+      name: 'WEO Media',
+      domain: 'weomedia.com'
+    },
+    'progressive_dental': {
+      name: 'Progressive Dental',
+      domain: 'progressivedental.com'
+    },
+    'wordstream': {
+      name: 'WordStream',
+      domain: 'wordstream.com'
+    },
+    'my_social_practice': {
+      name: 'My Social Practice',
+      domain: 'mysocialpractice.com'
+    },
+    'wonderist_agency': {
+      name: 'Wonderist Agency',
+      domain: 'wonderistagency.com'
+    },
+    'firegang': {
+      name: 'Firegang',
+      domain: 'firegang.com'
+    },
+    'roadside_dental': {
+      name: 'Roadside Dental',
+      domain: 'roadsidedental.com'
+    },
+    'smc_national': {
+      name: 'SMC National',
+      domain: 'smcnational.com'
+    }
   };
   
-  const data = await handler(mockReq, mockRes);
-  return data.competitors?.[competitorId];
+  return competitors[competitorId];
 }
 
 function calculateOverallScore(analysis) {
