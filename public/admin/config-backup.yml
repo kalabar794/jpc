@@ -57,6 +57,34 @@ collections:
       - {label: "Demo URL", name: "demoUrl", widget: "string", required: false}
       - {label: "GitHub URL", name: "githubUrl", widget: "string", required: false}
       - {label: "Body", name: "body", widget: "markdown"}
+      - label: "Technologies"
+        name: "technologies"
+        widget: "list"
+        fields:
+          - {label: "Technology", name: "technology", widget: "string"}
+      - label: "Results"
+        name: "results"
+        widget: "list"
+        fields:
+          - {label: "Result", name: "result", widget: "string"}
+      - label: "Features"
+        name: "features"
+        widget: "list"
+        fields:
+          - {label: "Feature", name: "feature", widget: "string"}
+      - label: "Gallery"
+        name: "gallery"
+        widget: "list"
+        fields:
+          - {label: "Image", name: "image", widget: "image"}
+          - {label: "Caption", name: "caption", widget: "string", required: false}
+      - label: "SEO"
+        name: "seo"
+        widget: "object"
+        fields:
+          - {label: "Title", name: "title", widget: "string", required: false}
+          - {label: "Description", name: "description", widget: "text", required: false}
+          - {label: "Keywords", name: "keywords", widget: "string", required: false}
 
   - name: ai_gallery
     label: AI Gallery
@@ -78,6 +106,7 @@ collections:
       - {label: "Style", name: "style", widget: "string"}
       - {label: "Tags", name: "tags", widget: "list"}
       - {label: "Featured", name: "featured", widget: "boolean", default: false}
+      - {label: "Order", name: "order", widget: "number", default: 0}
 
   - name: photo_gallery
     label: Photography Gallery
@@ -100,12 +129,13 @@ collections:
       - {label: "Category", name: "category", widget: "select", options: ["landscape", "portrait", "street", "nature", "architecture", "abstract"]}
       - {label: "Tags", name: "tags", widget: "list"}
       - {label: "Featured", name: "featured", widget: "boolean", default: false}
+      - {label: "Order", name: "order", widget: "number", default: 0}
 
-  - name: about_page
+  - name: about
     label: About Page
     files:
       - name: about
-        label: About Page Content
+        label: About Page
         file: content/pages/about.md
         fields:
           - {label: "Title", name: "title", widget: "string"}
@@ -118,6 +148,12 @@ collections:
             fields:
               - {label: "Name", name: "name", widget: "string"}
               - {label: "Gradient", name: "gradient", widget: "string"}
+          - label: "Industries"
+            name: "industries"
+            widget: "list"
+            fields:
+              - {label: "Name", name: "name", widget: "string"}
+              - {label: "Gradient", name: "gradient", widget: "string"}
           - label: "Experience"
             name: "experience"
             widget: "list"
@@ -125,7 +161,23 @@ collections:
               - {label: "Company", name: "company", widget: "string"}
               - {label: "Role", name: "role", widget: "string"}
               - {label: "Description", name: "description", widget: "text"}
+              - {label: "Gradient", name: "gradient", widget: "string"}
               - {label: "Icon", name: "icon", widget: "string"}
+          - label: "Education"
+            name: "education"
+            widget: "list"
+            fields:
+              - {label: "Degree", name: "degree", widget: "string"}
+              - {label: "Institution", name: "institution", widget: "string"}
+              - {label: "Icon", name: "icon", widget: "string"}
+              - {label: "Gradient", name: "gradient", widget: "string"}
+          - label: "SEO"
+            name: "seo"
+            widget: "object"
+            fields:
+              - {label: "Title", name: "title", widget: "string", required: false}
+              - {label: "Description", name: "description", widget: "text", required: false}
+              - {label: "Keywords", name: "keywords", widget: "string", required: false}
 
   - name: settings
     label: Settings
@@ -136,6 +188,7 @@ collections:
         fields:
           - {label: "Title", name: "title", widget: "string"}
           - {label: "Description", name: "description", widget: "text"}
+          - {label: "Keywords", name: "keywords", widget: "string"}
           - {label: "Author", name: "author", widget: "string"}
           - label: "Social Links"
             name: "social"

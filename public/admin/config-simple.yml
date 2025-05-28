@@ -1,0 +1,28 @@
+backend:
+  name: github
+  repo: Kalabar794/jpc
+  branch: main
+
+media_folder: public/uploads
+public_folder: /uploads
+
+collections:
+  - name: posts
+    label: Blog Posts
+    folder: content/posts
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "Body", name: "body", widget: "markdown"}
+
+  - name: about
+    label: About Page
+    files:
+      - name: about
+        label: About Page Content
+        file: content/pages/about.md
+        fields:
+          - {label: "Title", name: "title", widget: "string"}
+          - {label: "Hero Title", name: "heroTitle", widget: "string"}
+          - {label: "Bio", name: "bio", widget: "text"}
