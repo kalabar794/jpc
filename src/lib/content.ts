@@ -71,6 +71,25 @@ export interface GalleryImage {
   coverImage?: string
 }
 
+export interface SiteSettings {
+  site: {
+    title: string
+    description: string
+    author: string
+    email: string
+  }
+  social?: {
+    twitter?: string
+    linkedin?: string
+    github?: string
+    instagram?: string
+  }
+  seo?: {
+    defaultTitle?: string
+    defaultDescription?: string
+  }
+}
+
 // Helper function to read and parse markdown files
 function readMarkdownFile(filePath: string) {
   const fileContents = fs.readFileSync(filePath, 'utf8')
@@ -118,7 +137,12 @@ export async function getGalleryImages(category?: string): Promise<GalleryImage[
 }
 
 // Get site settings
-export async function getSiteSettings() {
+export async function getSiteSettings(): Promise<SiteSettings | null> {
+  return getSiteSettingsSync()
+}
+
+// Sync version for SSG
+export function getSiteSettingsSync(): SiteSettings | null {
   const settingsPath = path.join(contentDirectory, 'settings', 'site.md')
   
   if (!fs.existsSync(settingsPath)) {
@@ -126,7 +150,7 @@ export async function getSiteSettings() {
   }
   
   const { frontmatter } = readMarkdownFile(settingsPath)
-  return frontmatter
+  return frontmatter as SiteSettings
 }
 
 // Get About page content

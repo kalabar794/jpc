@@ -1,18 +1,43 @@
 import { Metadata } from 'next'
+import { getSiteSettingsSync } from './content'
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://jpc-kappa.vercel.app'
+
+// Get site settings for metadata
+function getSiteMetadata() {
+  const settings = getSiteSettingsSync()
+  
+  if (settings) {
+    return {
+      title: settings.seo?.defaultTitle || settings.site.title,
+      description: settings.seo?.defaultDescription || settings.site.description,
+      author: settings.site.author,
+      siteName: settings.site.title
+    }
+  }
+  
+  // Fallback if no settings file
+  return {
+    title: 'Jonathon | AI Marketing & Automation Expert',
+    description: 'Transform your business with AI-powered marketing strategies. Specializing in automated campaigns, data-driven solutions, and measurable ROI improvements.',
+    author: 'Jonathon',
+    siteName: 'Jonathon - AI Marketing Expert'
+  }
+}
+
+const siteMetadata = getSiteMetadata()
 
 export const defaultMetadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: 'Jonathon | AI Marketing & Automation Expert',
-    template: '%s | Jonathon'
+    default: siteMetadata.title,
+    template: `%s | ${siteMetadata.author}`
   },
-  description: 'Transform your business with AI-powered marketing strategies. Specializing in automated campaigns, data-driven solutions, and measurable ROI improvements.',
+  description: siteMetadata.description,
   keywords: ['AI marketing', 'marketing automation', 'data-driven marketing', 'digital transformation', 'GPT-4 marketing', 'AI campaigns'],
-  authors: [{ name: 'Jonathon' }],
-  creator: 'Jonathon',
-  publisher: 'Jonathon',
+  authors: [{ name: siteMetadata.author }],
+  creator: siteMetadata.author,
+  publisher: siteMetadata.author,
   robots: {
     index: true,
     follow: true,
@@ -28,24 +53,24 @@ export const defaultMetadata: Metadata = {
     type: 'website',
     locale: 'en_US',
     url: siteUrl,
-    siteName: 'Jonathon - AI Marketing Expert',
-    title: 'Jonathon | AI Marketing & Automation Expert',
-    description: 'Transform your business with AI-powered marketing strategies. Specializing in automated campaigns, data-driven solutions, and measurable ROI improvements.',
+    siteName: siteMetadata.siteName,
+    title: siteMetadata.title,
+    description: siteMetadata.description,
     images: [
       {
         url: '/api/og',
         width: 1200,
         height: 630,
-        alt: 'Jonathon - AI Marketing Expert',
+        alt: siteMetadata.siteName,
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Jonathon | AI Marketing & Automation Expert',
-    description: 'Transform your business with AI-powered marketing strategies.',
+    title: siteMetadata.title,
+    description: siteMetadata.description,
     images: ['/api/og'],
-    creator: '@jonathon', // Update with your Twitter handle
+    creator: `@${siteMetadata.author.toLowerCase()}`,
   },
   verification: {
     google: '', // Add your Google Search Console verification code later
