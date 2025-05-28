@@ -1,7 +1,9 @@
 backend:
   name: github
-  repo: Kalabar794/jpc
+  repo: kalabar794/jpc
   branch: main
+  base_url: https://api.netlify.com
+  auth_endpoint: auth
 
 media_library:
   name: cloudinary
