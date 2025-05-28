@@ -1,10 +1,19 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import CloudinaryUpload from '@/components/admin/CloudinaryUpload'
 import { motion } from 'framer-motion'
+import { useRouter } from 'next/navigation'
 
 export default function UploadPage() {
+  const router = useRouter()
+  
+  useEffect(() => {
+    // Simple check - redirect if no upload key is configured
+    if (!process.env.NEXT_PUBLIC_UPLOAD_SECRET_KEY) {
+      router.push('/')
+    }
+  }, [router])
   const [uploadedUrls, setUploadedUrls] = useState<string[]>([])
 
   const handleUploadComplete = (url: string) => {

@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation';
 import { getPost, getAllPosts } from '@/lib/content';
 import Link from 'next/link';
 import { ArrowLeft, Calendar, Clock, User } from 'lucide-react';
+import SanitizedContent from '@/components/ui/SanitizedContent';
 
 interface BlogPostPageProps {
   params: {
@@ -113,7 +114,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             </header>
 
             <div className="prose prose-gray dark:prose-invert prose-lg max-w-none">
-              <div dangerouslySetInnerHTML={{ __html: post.content }} />
+              <SanitizedContent content={post.content} />
             </div>
           </div>
         </article>

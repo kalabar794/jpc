@@ -10,6 +10,17 @@ cloudinary.config({
 
 export async function POST(request: NextRequest) {
   try {
+    // Check for upload secret key
+    const authHeader = request.headers.get('authorization')
+    const providedKey = authHeader?.replace('Bearer ', '')
+    
+    if (!process.env.UPLOAD_SECRET_KEY || providedKey !== process.env.UPLOAD_SECRET_KEY) {
+      return NextResponse.json(
+        { error: 'Unauthorized' },
+        { status: 401 }
+      )
+    }
+
     // Check if Cloudinary is configured
     if (!process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME || 
         !process.env.CLOUDINARY_API_KEY || 

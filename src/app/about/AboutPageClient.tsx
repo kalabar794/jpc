@@ -1,6 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
+import SanitizedContent from '@/components/ui/SanitizedContent'
 
 interface AboutPageClientProps {
   aboutData: any
@@ -157,7 +158,7 @@ export default function AboutPageClient({ aboutData }: AboutPageClientProps) {
             </h2>
             <div className="text-lg text-gray-600 dark:text-gray-300 leading-relaxed relative z-10">
               {data.content ? (
-                <div dangerouslySetInnerHTML={{ __html: data.content.replace(/\n/g, '<br />') }} />
+                <SanitizedContent content={data.content} replaceNewlines={true} />
               ) : (
                 <p>{data.bio}</p>
               )}

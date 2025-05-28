@@ -46,6 +46,9 @@ export default function CloudinaryUpload({
       const response = await fetch('/api/upload', {
         method: 'POST',
         body: formData,
+        headers: {
+          'Authorization': `Bearer ${process.env.NEXT_PUBLIC_UPLOAD_SECRET_KEY || ''}`
+        }
       })
 
       const result = await response.json()
