@@ -1,5 +1,33 @@
 import * as cheerio from 'cheerio';
 
+// Add retry logic and better error handling
+async function fetchWithRetry(url, retries = 3) {
+  for (let i = 0; i < retries; i++) {
+    try {
+      const response = await fetch(url, {
+        headers: {
+          'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
+          'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+          'Accept-Language': 'en-US,en;q=0.5',
+          'Accept-Encoding': 'gzip, deflate',
+          'Connection': 'keep-alive',
+          'Upgrade-Insecure-Requests': '1'
+        },
+        timeout: 10000
+      });
+      
+      if (response.ok) {
+        return response;
+      }
+      throw new Error(`HTTP ${response.status}`);
+    } catch (error) {
+      console.log(`Attempt ${i + 1} failed for ${url}:`, error.message);
+      if (i === retries - 1) throw error;
+      await new Promise(resolve => setTimeout(resolve, 1000 * (i + 1))); // Exponential backoff
+    }
+  }
+}
+
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
@@ -35,11 +63,7 @@ export default async function handler(req, res) {
     for (const pattern of blogPatterns) {
       try {
         const blogUrl = new URL(pattern, `https://${domain}`).href;
-        const response = await fetch(blogUrl, {
-          headers: {
-            'User-Agent': 'Mozilla/5.0 (compatible; WEO-CompetitorBot/1.0)'
-          }
-        });
+        const response = await fetchWithRetry(blogUrl);
         
         if (response.ok) {
           const html = await response.text();
@@ -143,7 +167,7 @@ export default async function handler(req, res) {
     
     // Also check for RSS feeds
     try {
-      const homePage = await fetch(`https://${domain}`);
+      const homePage = await fetchWithRetry(`https://${domain}`);
       const homeHtml = await homePage.text();
       const $home = cheerio.load(homeHtml);
       
