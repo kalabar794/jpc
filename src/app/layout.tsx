@@ -25,7 +25,7 @@ export default function RootLayout({
         <Script src="https://identity.netlify.com/v1/netlify-identity-widget.js" strategy="beforeInteractive" />
       </head>
       <body className="min-h-screen bg-white dark:bg-dark-background text-gray-900 dark:text-dark-text antialiased">
-        <ThemeProvider defaultTheme="light" storageKey="portfolio-theme">
+        <ThemeProvider defaultTheme="dark" storageKey="portfolio-theme">
           <Navigation />
           <div className="relative">
             {children}
