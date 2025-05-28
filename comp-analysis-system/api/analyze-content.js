@@ -69,7 +69,7 @@ export default async function handler(req, res) {
           const html = await response.text();
           const $ = cheerio.load(html);
           
-          // Extract blog posts - common selectors
+          // Extract blog posts - comprehensive selectors
           const postSelectors = [
             'article',
             '.blog-post',
@@ -77,7 +77,19 @@ export default async function handler(req, res) {
             '.article',
             '.entry',
             '[class*="blog-item"]',
-            '[class*="post-item"]'
+            '[class*="post-item"]',
+            '[class*="blog-card"]',
+            '[class*="post-card"]',
+            '.card:has(h1, h2, h3)',
+            '.item:has(h1, h2, h3)',
+            'div[class*="post"]:has(h1, h2, h3)',
+            'div[class*="blog"]:has(h1, h2, h3)',
+            '.content-item',
+            '.news-item',
+            '.insight',
+            '.resource',
+            'main article',
+            '[role="article"]'
           ];
           
           let posts = [];
@@ -123,24 +135,49 @@ export default async function handler(req, res) {
             results.recentPosts = [...results.recentPosts, ...posts].slice(0, 5);
           }
           
-          // Try to find pagination to estimate total posts
+          // Better pagination detection and total count estimation
           const paginationSelectors = [
             '.pagination',
             '.page-numbers',
             '.pager',
-            '[class*="pagination"]'
+            '[class*="pagination"]',
+            '.wp-pagenavi',
+            '.page-nav',
+            '.pages',
+            '.paginate',
+            'nav[aria-label*="page" i]'
           ];
+          
+          let estimatedTotal = posts.length;
           
           for (const selector of paginationSelectors) {
             const pagination = $(selector);
             if (pagination.length > 0) {
-              const lastPage = pagination.find('a').last().text();
-              const pageNum = parseInt(lastPage);
-              if (!isNaN(pageNum)) {
-                results.totalPosts = Math.max(results.totalPosts, pageNum * posts.length);
+              // Look for page numbers
+              const pageLinks = pagination.find('a, span').map((i, el) => $(el).text()).get();
+              const numbers = pageLinks.map(text => parseInt(text.trim())).filter(n => !isNaN(n));
+              const maxPage = Math.max(...numbers);
+              
+              if (maxPage > 1) {
+                estimatedTotal = Math.max(estimatedTotal, maxPage * posts.length);
+                console.log(`Found pagination: max page ${maxPage}, estimated ${estimatedTotal} total posts`);
+                break;
+              }
+              
+              // Look for "Page X of Y" or "Showing X-Y of Z"
+              const paginationText = pagination.text();
+              const ofMatch = paginationText.match(/of\s+(\d+)/i);
+              const showingMatch = paginationText.match(/showing\s+\d+\s*-\s*\d+\s+of\s+(\d+)/i);
+              
+              if (ofMatch) {
+                estimatedTotal = Math.max(estimatedTotal, parseInt(ofMatch[1]));
+              } else if (showingMatch) {
+                estimatedTotal = Math.max(estimatedTotal, parseInt(showingMatch[1]));
               }
             }
           }
+          
+          results.totalPosts = estimatedTotal;
         }
       } catch (error) {
         console.error(`Error fetching ${pattern}:`, error.message);
