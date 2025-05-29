@@ -5,11 +5,12 @@ backend:
   base_url: https://api.netlify.com
   auth_endpoint: auth
 
-media_library:
-  name: cloudinary
-  config:
-    cloud_name: dqltlwqi2
-    api_key: 194453126296877
+# Switched back to simple file uploads to avoid Cloudinary session timeouts
+# media_library:
+#   name: cloudinary
+#   config:
+#     cloud_name: dqltlwqi2
+#     api_key: 194453126296877
 
 media_folder: public/uploads
 public_folder: /uploads
