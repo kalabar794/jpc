@@ -14,10 +14,11 @@ test.describe('Blog', () => {
     
     // Check posts are displayed
     const posts = page.locator('article');
-    await expect(posts).toHaveCount(2); // Should have 2 posts now
+    await expect(posts).toHaveCount(5); // Should have 5 posts now
     
     // Check specific posts
     await expect(page.getByText('The Future of AI in Marketing')).toBeVisible();
+    await expect(page.getByText('ChatGPT Prompts for Marketing', { exact: false })).toBeVisible();
     await expect(page.getByText('test')).toBeVisible();
   });
 
@@ -60,7 +61,7 @@ test.describe('Blog', () => {
 
   test('should display correct post count', async ({ page }) => {
     // Check the post count indicator
-    await expect(page.getByText('2 Articles')).toBeVisible();
+    await expect(page.getByText('5 Articles')).toBeVisible();
   });
 
   test('should have category filter buttons', async ({ page }) => {
