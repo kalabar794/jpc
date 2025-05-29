@@ -5,6 +5,7 @@ export { default as Modal, ModalHeader, ModalBody, ModalFooter, ImageModal } fro
 export { default as AnimatedCard, SampleAnimatedCard } from './AnimatedCard'
 export { default as Navigation } from './Navigation'
 export { default as OptimizedImage, HeroImage, GalleryThumbnail } from './OptimizedImage'
+export { default as AnimatedBackground } from './AnimatedBackground'
 
 // Animation Components
 export { default as AnimatedWrapper, StaggeredWrapper, StaggeredItem } from '../animations/AnimatedWrapper'

@@ -4,6 +4,7 @@ import { useState, useRef } from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { Project } from '@/lib/content'
 import Link from 'next/link'
+import { AnimatedBackground } from '@/components/ui'
 
 interface ProjectsPageClientProps {
   projects: Project[]
@@ -33,18 +34,8 @@ export default function ProjectsPageClient({ projects }: ProjectsPageClientProps
   const backgroundY = useTransform(scrollY, [0, 1000], [0, -300])
 
   return (
-    <main ref={containerRef} className="min-h-screen">
-      {/* Background Elements */}
-      <div className="fixed inset-0 pointer-events-none overflow-hidden">
-        <motion.div
-          className="absolute top-20 right-20 w-96 h-96 bg-gradient-to-br from-primary-500/10 to-secondary-500/10 rounded-full blur-3xl"
-          style={{ y: backgroundY }}
-        />
-        <motion.div
-          className="absolute bottom-20 left-20 w-64 h-64 bg-gradient-to-tr from-accent-500/10 to-primary-500/10 rounded-full blur-2xl"
-          style={{ y: useTransform(scrollY, [0, 1000], [0, 200]) }}
-        />
-      </div>
+    <AnimatedBackground variant="page" className="min-h-screen">
+      <main ref={containerRef} className="relative z-10">
 
       {/* Header Section */}
       <section className="relative pt-32 pb-16 px-6">
@@ -338,6 +329,7 @@ export default function ProjectsPageClient({ projects }: ProjectsPageClientProps
           </motion.div>
         </div>
       </section>
-    </main>
+      </main>
+    </AnimatedBackground>
   )
 }

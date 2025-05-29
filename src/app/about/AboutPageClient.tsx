@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion'
 import SanitizedContent from '@/components/ui/SanitizedContent'
+import { AnimatedBackground } from '@/components/ui'
 
 interface AboutPageClientProps {
   aboutData: any
@@ -90,22 +91,7 @@ export default function AboutPageClient({ aboutData }: AboutPageClientProps) {
   const education = data.education || fallbackData.education
 
   return (
-    <main className="min-h-screen relative overflow-hidden">
-      {/* Animated Background */}
-      <div className="fixed inset-0 -z-10">
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 dark:from-gray-900 dark:via-purple-900/20 dark:to-blue-900/20" />
-        <motion.div
-          className="absolute inset-0"
-          animate={{
-            background: [
-              'radial-gradient(circle at 20% 80%, rgba(147, 51, 234, 0.1) 0%, transparent 50%)',
-              'radial-gradient(circle at 80% 20%, rgba(236, 72, 153, 0.1) 0%, transparent 50%)',
-              'radial-gradient(circle at 20% 80%, rgba(147, 51, 234, 0.1) 0%, transparent 50%)'
-            ]
-          }}
-          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-        />
-      </div>
+    <AnimatedBackground variant="page" className="min-h-screen overflow-hidden">
 
       <div className="relative z-10 py-20 px-6">
         <div className="max-w-6xl mx-auto">
@@ -350,6 +336,6 @@ export default function AboutPageClient({ aboutData }: AboutPageClientProps) {
           </motion.div>
         </div>
       </div>
-    </main>
+    </AnimatedBackground>
   )
 }

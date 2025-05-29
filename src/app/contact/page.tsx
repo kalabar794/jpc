@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion'
 import { useState } from 'react'
+import { AnimatedBackground } from '@/components/ui'
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -58,7 +59,8 @@ export default function ContactPage() {
   ]
 
   return (
-    <main className="min-h-screen pt-24 pb-12 px-6">
+    <AnimatedBackground variant="page" className="min-h-screen">
+      <main className="relative z-10 pt-24 pb-12 px-6">
       <div className="max-w-6xl mx-auto">
         <motion.div
           className="text-center mb-16"
@@ -246,6 +248,7 @@ export default function ContactPage() {
           </motion.div>
         </div>
       </div>
-    </main>
+      </main>
+    </AnimatedBackground>
   )
 }
