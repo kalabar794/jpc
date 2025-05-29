@@ -14,10 +14,9 @@ const categories = [
   { value: 'all', label: 'All Posts' },
   { value: 'ai-marketing', label: 'AI Marketing' },
   { value: 'automation', label: 'Marketing Automation' },
-  { value: 'case-studies', label: 'Case Studies' },
   { value: 'tutorials', label: 'Tutorials' },
   { value: 'industry-insights', label: 'Industry Insights' },
-  { value: 'tools-reviews', label: 'Tools & Reviews' }
+  { value: 'tools-reviews', label: 'Tools' }
 ]
 
 export default function BlogPageClient({ posts }: BlogPageClientProps) {
