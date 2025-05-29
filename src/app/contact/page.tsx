@@ -37,26 +37,6 @@ export default function ContactPage() {
     })
   }
 
-  const contactInfo = [
-    {
-      icon: '📧',
-      title: 'Email',
-      value: 'jonathon@example.com',
-      color: 'from-blue-500 to-purple-600'
-    },
-    {
-      icon: '📱',
-      title: 'Phone',
-      value: '+1 (555) 123-4567',
-      color: 'from-purple-500 to-pink-600'
-    },
-    {
-      icon: '📍',
-      title: 'Location',
-      value: 'San Francisco, CA',
-      color: 'from-pink-500 to-red-600'
-    }
-  ]
 
   return (
     <AnimatedBackground variant="page" className="min-h-screen">
@@ -79,11 +59,11 @@ export default function ContactPage() {
           </p>
         </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-12">
+        <div className="max-w-2xl mx-auto">
           {/* Contact Form */}
           <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            animate={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
             <h2 className="text-2xl font-bold mb-6 text-gray-900 dark:text-white">Send a Message</h2>
@@ -180,72 +160,6 @@ export default function ContactPage() {
             </form>
           </motion.div>
 
-          {/* Contact Information */}
-          <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            className="space-y-8"
-          >
-            <div>
-              <h2 className="text-2xl font-bold mb-6 text-gray-900 dark:text-white">Contact Information</h2>
-              <p className="text-gray-600 dark:text-gray-300 mb-8">
-                Feel free to reach out through any of these channels. I typically respond within 24 hours.
-              </p>
-            </div>
-
-            {/* Contact Cards */}
-            <div className="space-y-4">
-              {contactInfo.map((info, index) => (
-                <motion.div
-                  key={info.title}
-                  className="flex items-center gap-4 p-4 rounded-lg bg-gray-50 dark:bg-dark-surface border border-gray-200 dark:border-gray-700"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.4, delay: 0.6 + index * 0.1 }}
-                >
-                  <div className={`w-12 h-12 rounded-lg bg-gradient-to-br ${info.color} flex items-center justify-center text-white text-2xl`}>
-                    {info.icon}
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-gray-900 dark:text-white">{info.title}</h3>
-                    <p className="text-gray-600 dark:text-gray-400">{info.value}</p>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-
-            {/* Availability Status */}
-            <motion.div
-              className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-green-500 to-emerald-600 text-white p-6"
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.9 }}
-            >
-              <div className="relative z-10">
-                <div className="flex items-center gap-3 mb-3">
-                  <motion.div
-                    className="w-3 h-3 bg-white rounded-full"
-                    animate={{ scale: [1, 1.2, 1], opacity: [1, 0.7, 1] }}
-                    transition={{ duration: 2, repeat: Infinity }}
-                  />
-                  <span className="font-bold">Currently Available</span>
-                </div>
-                <h3 className="text-xl font-bold mb-2">
-                  Open for New Projects
-                </h3>
-                <p className="text-white/90">
-                  I'm currently accepting new projects for Q1 2025. Let's discuss your needs!
-                </p>
-              </div>
-              
-              {/* Background Pattern */}
-              <div className="absolute inset-0 opacity-10">
-                <div className="absolute -top-4 -right-4 w-32 h-32 bg-white rounded-full" />
-                <div className="absolute -bottom-6 -left-6 w-48 h-48 bg-white rounded-full" />
-              </div>
-            </motion.div>
-          </motion.div>
         </div>
       </div>
       </main>
