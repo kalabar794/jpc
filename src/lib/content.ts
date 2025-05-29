@@ -197,6 +197,11 @@ export function getAllProjects(): Project[] {
         ...frontmatter,
         content,
         slug: frontmatter.slug || name.replace(/\.md$/, ''),
+        // Provide defaults for missing required fields
+        techStack: frontmatter.techStack || frontmatter.tags || [],
+        metrics: frontmatter.metrics || {},
+        projectUrl: frontmatter.projectUrl || frontmatter.demoUrl,
+        githubUrl: frontmatter.githubUrl
       } as Project
     })
     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
