@@ -3,6 +3,7 @@
 import fs from 'fs'
 import path from 'path'
 import matter from 'gray-matter'
+import { marked } from 'marked'
 
 const contentDirectory = path.join(process.cwd(), 'content')
 
@@ -94,7 +95,11 @@ export interface SiteSettings {
 function readMarkdownFile(filePath: string) {
   const fileContents = fs.readFileSync(filePath, 'utf8')
   const { data, content } = matter(fileContents)
-  return { frontmatter: data, content }
+  
+  // Convert markdown to HTML
+  const htmlContent = marked(content)
+  
+  return { frontmatter: data, content: htmlContent }
 }
 
 // Get all projects
