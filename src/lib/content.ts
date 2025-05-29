@@ -53,7 +53,7 @@ export interface Post {
   seo?: {
     title?: string
     description?: string
-    keywords?: string[]
+    keywords?: string | string[]
   }
 }
 

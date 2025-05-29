@@ -1,9 +1,11 @@
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { getPost, getAllPosts } from '@/lib/content';
+import { generateBlogPostMetadata, generateBlogPostStructuredData, generateBreadcrumbStructuredData } from '@/lib/seo';
 import Link from 'next/link';
 import { ArrowLeft, Calendar, Clock, User } from 'lucide-react';
 import SanitizedContent from '@/components/ui/SanitizedContent';
+import { StructuredData, Breadcrumb, ReadingProgress } from '@/components/seo';
 
 interface BlogPostPageProps {
   params: {
@@ -27,18 +29,7 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
     };
   }
 
-  return {
-    title: post.title,
-    description: post.excerpt,
-    openGraph: {
-      title: post.title,
-      description: post.excerpt,
-      type: 'article',
-      publishedTime: post.date,
-      authors: [post.author || 'Jonathon'],
-      images: post.heroImage ? [post.heroImage] : undefined,
-    },
-  };
+  return generateBlogPostMetadata(post);
 }
 
 export default async function BlogPostPage({ params }: BlogPostPageProps) {
@@ -49,10 +40,24 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   }
 
   const readingTime = Math.ceil(post.content.split(' ').length / 200);
+  const structuredData = generateBlogPostStructuredData(post);
+  const breadcrumbData = generateBreadcrumbStructuredData(`/blog/${post.slug}`, post.title);
+
+  const breadcrumbItems = [
+    { name: 'Home', href: '/' },
+    { name: 'Blog', href: '/blog' },
+    { name: post.title }
+  ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+    <>
+      <StructuredData data={structuredData} />
+      <StructuredData data={breadcrumbData} />
+      <ReadingProgress />
+      
+      <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+          <Breadcrumb items={breadcrumbItems} />
         <Link
           href="/blog"
           className="inline-flex items-center gap-2 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 transition-colors mb-8"
@@ -127,8 +132,9 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             <ArrowLeft className="w-4 h-4" />
             View All Posts
           </Link>
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }
