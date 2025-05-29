@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion'
 import { GalleryImage } from '@/lib/content'
+import { AnimatedBackground } from '@/components/ui'
 
 interface AIGalleryClientProps {
   images: GalleryImage[]
@@ -9,7 +10,8 @@ interface AIGalleryClientProps {
 
 export default function AIGalleryClient({ images }: AIGalleryClientProps) {
   return (
-    <main className="min-h-screen pt-24 pb-12 px-6">
+    <AnimatedBackground variant="page" className="min-h-screen">
+      <main className="relative z-10 pt-24 pb-12 px-6">
       <div className="max-w-7xl mx-auto">
         <motion.div
           className="text-center mb-16"
@@ -140,6 +142,7 @@ export default function AIGalleryClient({ images }: AIGalleryClientProps) {
           </div>
         )}
       </div>
-    </main>
+      </main>
+    </AnimatedBackground>
   )
 }

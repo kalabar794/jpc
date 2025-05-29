@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion'
 import { useState } from 'react'
 import { GalleryImage } from '@/lib/content'
+import { AnimatedBackground } from '@/components/ui'
 
 interface PhotographyClientProps {
   images: GalleryImage[]
@@ -17,7 +18,8 @@ export default function PhotographyClient({ images }: PhotographyClientProps) {
     : images
 
   return (
-    <main className="min-h-screen pt-24 pb-12 px-6">
+    <AnimatedBackground variant="page" className="min-h-screen">
+      <main className="relative z-10 pt-24 pb-12 px-6">
       <div className="max-w-7xl mx-auto">
         <motion.div
           className="text-center mb-16"
@@ -201,6 +203,7 @@ export default function PhotographyClient({ images }: PhotographyClientProps) {
           </>
         )}
       </div>
-    </main>
+      </main>
+    </AnimatedBackground>
   )
 }
