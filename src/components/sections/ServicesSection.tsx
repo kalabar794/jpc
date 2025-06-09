@@ -139,167 +139,46 @@ export default function ServicesSection() {
         className="max-w-7xl mx-auto relative z-10"
         style={{ opacity }}
       >
-        {/* Section Header */}
-        <div className="grid lg:grid-cols-2 gap-16 items-center mb-20">
-          {/* Left Column - Content */}
+        {/* Section Header - Simplified */}
+        <div className="text-center mb-20">
           <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true, amount: 0.3 }}
+            className="inline-flex items-center px-4 py-2 rounded-full bg-gradient-to-r from-blue-100 to-purple-100 dark:from-blue-900/30 dark:to-purple-900/30 text-blue-600 dark:text-blue-400 mb-6"
+            initial={{ scale: 0 }}
+            whileInView={{ scale: 1 }}
+            transition={{ duration: 0.5, type: "spring", stiffness: 200 }}
+            viewport={{ once: true }}
           >
             <motion.div
-              className="inline-flex items-center px-4 py-2 rounded-full bg-gradient-to-r from-blue-100 to-purple-100 dark:from-blue-900/30 dark:to-purple-900/30 text-blue-600 dark:text-blue-400 mb-6"
-              initial={{ scale: 0 }}
-              whileInView={{ scale: 1 }}
-              transition={{ duration: 0.5, type: "spring", stiffness: 200 }}
-              viewport={{ once: true }}
-            >
-              <motion.div
-                className="w-2 h-2 bg-blue-500 rounded-full mr-2"
-                animate={{ scale: [1, 1.2, 1] }}
-                transition={{ duration: 2, repeat: Infinity }}
-              />
-              Expertise & Services
-            </motion.div>
-
-            <motion.h2
-              className="text-5xl md:text-6xl font-bold mb-6 leading-tight"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              viewport={{ once: true }}
-            >
-              <span className="text-gray-900 dark:text-white">Transform Your</span>
-              <br />
-              <span className="bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 bg-clip-text text-transparent">
-                Business
-              </span>
-            </motion.h2>
-
-            <motion.p
-              className="text-xl text-gray-600 dark:text-gray-300 leading-relaxed mb-8"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
-              viewport={{ once: true }}
-            >
-              Combining cutting-edge artificial intelligence with proven marketing strategies 
-              to deliver unprecedented results and drive sustainable business growth.
-            </motion.p>
-
-            {/* Key Benefits */}
-            <motion.div
-              className="space-y-4"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.6 }}
-              viewport={{ once: true }}
-            >
-              {[
-                "24/7 Automated Campaign Management",
-                "Real-time Performance Optimization",
-                "Scalable Creative Production"
-              ].map((benefit, index) => (
-                <motion.div
-                  key={benefit}
-                  className="flex items-center space-x-3"
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.6, delay: 0.8 + index * 0.1 }}
-                  viewport={{ once: true }}
-                >
-                  <motion.div
-                    className="w-6 h-6 bg-gradient-to-r from-green-400 to-blue-500 rounded-full flex items-center justify-center"
-                    whileHover={{ scale: 1.2, rotate: 180 }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    <svg className="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
-                    </svg>
-                  </motion.div>
-                  <span className="text-gray-700 dark:text-gray-300 font-medium">{benefit}</span>
-                </motion.div>
-              ))}
-            </motion.div>
+              className="w-2 h-2 bg-blue-500 rounded-full mr-2"
+              animate={{ scale: [1, 1.2, 1] }}
+              transition={{ duration: 2, repeat: Infinity }}
+            />
+            Expertise & Services
           </motion.div>
 
-          {/* Right Column - Stats */}
-          <motion.div
-            className="grid grid-cols-2 gap-6"
-            initial={{ opacity: 0, x: 50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, delay: 0.3 }}
-            viewport={{ once: true, amount: 0.3 }}
+          <motion.h2
+            className="text-5xl md:text-6xl font-bold mb-6 leading-tight"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            viewport={{ once: true }}
           >
-            {[
-              { number: 500, suffix: "+", label: "Projects Completed", color: "from-blue-500 to-cyan-500" },
-              { number: 350, suffix: "%", label: "Average ROI Increase", color: "from-purple-500 to-pink-500" },
-              { number: 24, suffix: "/7", label: "AI Automation", color: "from-green-500 to-teal-500" },
-              { number: 95, suffix: "%", label: "Client Satisfaction", color: "from-orange-500 to-red-500" }
-            ].map((stat, index) => (
-              <motion.div
-                key={stat.label}
-                className="relative group"
-                initial={{ opacity: 0, y: 50, rotateX: 10 }}
-                whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
-                transition={{ 
-                  duration: 0.6, 
-                  delay: 0.5 + index * 0.1,
-                  type: "spring",
-                  stiffness: 100
-                }}
-                viewport={{ once: true }}
-                whileHover={{ 
-                  scale: 1.05,
-                  rotateY: 5,
-                  z: 20
-                }}
-                style={{ transformStyle: 'preserve-3d' }}
-              >
-                <div className="bg-white dark:bg-dark-surface rounded-2xl p-6 shadow-lg border border-gray-200 dark:border-gray-700 text-center relative overflow-hidden">
-                  {/* Background gradient */}
-                  <motion.div
-                    className={`absolute inset-0 bg-gradient-to-br ${stat.color} opacity-0 group-hover:opacity-10 transition-opacity duration-300`}
-                  />
-                  
-                  {/* Floating icon */}
-                  <motion.div
-                    className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                    animate={{ 
-                      rotate: [0, 360],
-                      scale: [0.8, 1, 0.8]
-                    }}
-                    transition={{ 
-                      duration: 4,
-                      repeat: Infinity,
-                      ease: "easeInOut"
-                    }}
-                  >
-                    <div className={`w-8 h-8 bg-gradient-to-br ${stat.color} rounded-full opacity-20`} />
-                  </motion.div>
-                  
-                  <motion.div
-                    className={`text-4xl font-bold mb-2 bg-gradient-to-r ${stat.color} bg-clip-text text-transparent`}
-                    initial={{ scale: 0 }}
-                    whileInView={{ scale: 1 }}
-                    transition={{ 
-                      duration: 0.5, 
-                      delay: 0.7 + index * 0.1,
-                      type: "spring",
-                      stiffness: 200
-                    }}
-                    viewport={{ once: true }}
-                  >
-                    <AnimatedCounter value={stat.number} suffix={stat.suffix} />
-                  </motion.div>
-                  <div className="text-sm text-gray-600 dark:text-gray-400 font-medium">
-                    {stat.label}
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </motion.div>
+            <span className="text-gray-900 dark:text-white">AI-Powered</span>
+            {' '}
+            <span className="bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 bg-clip-text text-transparent">
+              Solutions
+            </span>
+          </motion.h2>
+
+          <motion.p
+            className="text-xl text-gray-600 dark:text-gray-300 leading-relaxed max-w-3xl mx-auto"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            viewport={{ once: true }}
+          >
+            Explore our comprehensive suite of AI marketing services designed to accelerate your business growth.
+          </motion.p>
         </div>
 
         {/* Services Grid */}

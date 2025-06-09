@@ -11,22 +11,23 @@ test.describe('Homepage', () => {
     
     // Check hero section
     await expect(page.locator('h1')).toBeVisible();
-    await expect(page.getByText('AI Marketing Specialist')).toBeVisible();
+    await expect(page.getByText('AI Marketing')).toBeVisible();
+    await expect(page.getByText('Specialist')).toBeVisible();
     
     // Check navigation
     await expect(page.locator('nav')).toBeVisible();
-    await expect(page.getByRole('link', { name: 'Projects' })).toBeVisible();
+    await expect(page.getByRole('link', { name: 'Projects', exact: true })).toBeVisible();
     await expect(page.getByRole('link', { name: 'Blog' })).toBeVisible();
     await expect(page.getByRole('link', { name: 'About' })).toBeVisible();
     await expect(page.getByRole('link', { name: 'Contact' })).toBeVisible();
     
     // Check CTA buttons
-    await expect(page.getByRole('link', { name: /View Projects/i })).toBeVisible();
-    await expect(page.getByRole('link', { name: /Get in Touch/i })).toBeVisible();
+    await expect(page.getByRole('link', { name: /Explore My Work/i })).toBeVisible();
+    await expect(page.getByRole('link', { name: /Start a Project/i })).toBeVisible();
   });
 
   test('should display services section', async ({ page }) => {
-    const servicesSection = page.locator('section').filter({ hasText: 'Transform Your Business' });
+    const servicesSection = page.locator('section').filter({ hasText: 'AI-Powered Solutions' });
     await expect(servicesSection).toBeVisible();
     
     // Check service cards
@@ -46,7 +47,7 @@ test.describe('Homepage', () => {
 
   test('should have working navigation links', async ({ page }) => {
     // Test Projects link
-    await page.getByRole('link', { name: 'Projects' }).click();
+    await page.getByRole('link', { name: 'Projects', exact: true }).click();
     await expect(page).toHaveURL(/\/projects/);
     
     // Go back and test Blog link
