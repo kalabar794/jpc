@@ -17,7 +17,7 @@ const featuredProjects: Project[] = [
     excerpt: "Beautiful, instant SEO insights that anyone can understand. Stop guessing about your website's performance and start ranking higher. AI-powered analysis with zero tracking.",
     content: "",
     techStack: ["AI Analytics", "Core Web Vitals", "Technical SEO", "Privacy-Focused"],
-    metrics: { custom1Label: "Analysis Speed", custom1Value: "<10s", custom2Label: "Traffic Increase", custom2Value: "340%", efficiency: "Free Forever" },
+    metrics: { custom1Label: "Price", custom1Value: "Free", custom2Label: "Setup", custom2Value: "Instant", efficiency: "No Signup" },
     category: "ai-tools",
     color: "from-blue-500 to-cyan-600",
     projectUrl: "https://www.seopowerpack.pro"
