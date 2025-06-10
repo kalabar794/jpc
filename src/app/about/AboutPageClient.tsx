@@ -102,6 +102,28 @@ export default function AboutPageClient({ aboutData }: AboutPageClientProps) {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
+            {/* Hero Tagline with improved readability */}
+            <motion.h1
+              className="text-5xl md:text-7xl font-bold mb-8"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+            >
+              <span className="relative inline-block">
+                <span className="absolute inset-0 bg-gradient-to-r from-purple-600 via-pink-600 to-orange-600 blur-2xl opacity-40" />
+                <span className="relative bg-gradient-to-r from-purple-600 via-pink-600 to-orange-600 bg-clip-text text-transparent font-extrabold drop-shadow-2xl">
+                  Transforming Ideas
+                </span>
+              </span>
+              <br />
+              <span className="relative inline-block">
+                <span className="absolute inset-0 bg-gradient-to-r from-blue-600 via-cyan-600 to-teal-600 blur-2xl opacity-40" />
+                <span className="relative bg-gradient-to-r from-blue-600 via-cyan-600 to-teal-600 bg-clip-text text-transparent font-extrabold drop-shadow-2xl">
+                  into Reality
+                </span>
+              </span>
+            </motion.h1>
+
             <motion.div
               className="inline-flex items-center px-4 py-2 rounded-full bg-gradient-to-r from-purple-500/20 to-pink-500/20 backdrop-blur-sm border border-purple-500/30 mb-6"
               initial={{ scale: 0, opacity: 0 }}
@@ -115,13 +137,13 @@ export default function AboutPageClient({ aboutData }: AboutPageClientProps) {
               </span>
             </motion.div>
 
-            <h1 className="text-5xl md:text-6xl font-bold mb-6">
+            <h2 className="text-4xl md:text-5xl font-bold mb-6">
               <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent animate-gradient bg-300%">
                 {data.heroTitle || data.title}
               </span>
-            </h1>
+            </h2>
             
-            <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-300 max-w-4xl mx-auto leading-relaxed">
+            <p className="text-xl md:text-2xl text-gray-700 dark:text-gray-200 max-w-4xl mx-auto leading-relaxed font-medium">
               {data.heroSubtitle}
             </p>
           </motion.div>
