@@ -169,20 +169,6 @@ export default function HeroSection() {
         className="relative z-10 text-center text-white px-6 max-w-6xl mx-auto"
         style={{ opacity }}
       >
-        {/* Hero Badge */}
-        <motion.div
-          className="inline-flex items-center px-4 py-2 rounded-full border border-white/30 bg-white/10 backdrop-blur-sm mb-8"
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-        >
-          <motion.div
-            className="w-2 h-2 bg-green-400 rounded-full mr-2"
-            animate={{ scale: [1, 1.2, 1] }}
-            transition={{ duration: 2, repeat: Infinity }}
-          />
-          <span className="text-sm font-medium">Available for Projects</span>
-        </motion.div>
 
         {/* Main Title */}
         <motion.h1

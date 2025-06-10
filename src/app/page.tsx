@@ -2,7 +2,6 @@
 
 import { motion } from 'framer-motion'
 import { HeroSection, FeaturedProjects, ServicesSection } from '@/components/sections'
-import { JonathonLogoStandalone } from '@/components/ui/JonathonLogo'
 
 export default function HomePage() {
   return (
@@ -97,21 +96,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Logo Showcase Section */}
-      <section className="py-20 px-6 bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950">
-        <div className="max-w-6xl mx-auto text-center">
-          <h2 className="text-4xl font-bold mb-6 text-white">
-            Brand Identity
-          </h2>
-          <p className="text-slate-300 text-lg mb-12">
-            Crafted with AI-powered design and interactive technology
-          </p>
-          
-          <div className="flex justify-center">
-            <JonathonLogoStandalone className="w-full" />
-          </div>
-        </div>
-      </section>
     </main>
   )
 }
