@@ -15,7 +15,7 @@ export default function HomePage() {
       {/* Services & Expertise */}
       <ServicesSection />
 
-      {/* Component Library Showcase */}
+      {/* Development Approach */}
       <section className="py-20 px-6 bg-gray-50 dark:bg-gray-900/50">
         <div className="max-w-6xl mx-auto text-center">
           <motion.h2
@@ -25,7 +25,7 @@ export default function HomePage() {
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
           >
-            Component Library Preview
+            Development Approach
           </motion.h2>
           <motion.p
             className="text-gray-600 dark:text-gray-300 text-lg mb-12"
@@ -34,14 +34,14 @@ export default function HomePage() {
             transition={{ duration: 0.6, delay: 0.1 }}
             viewport={{ once: true }}
           >
-            Beautiful, animated components built with Framer Motion
+            How I build AI-powered tools using modern technology and AI-assisted development
           </motion.p>
           
           <div className="grid md:grid-cols-3 gap-8 mb-12">
             {[
-              { title: "Smooth Animations", icon: "⚡", desc: "60fps spring-based transitions" },
-              { title: "3D Hover Effects", icon: "🎭", desc: "Realistic depth and perspective" },
-              { title: "Responsive Design", icon: "📱", desc: "Perfect on all screen sizes" }
+              { title: "Modern Tech Stack", icon: "🚀", desc: "Next.js, TypeScript, AI APIs for scalable solutions" },
+              { title: "AI-Assisted Development", icon: "🤖", desc: "Claude Code for rapid prototyping and iteration" },
+              { title: "Performance First", icon: "⚡", desc: "Fast loading, optimized, user-centered design" }
             ].map((feature, i) => (
               <motion.div
                 key={i}
@@ -78,7 +78,7 @@ export default function HomePage() {
             viewport={{ once: true }}
           >
             <motion.a
-              href="/demo"
+              href="/projects"
               className="inline-flex items-center gap-2 bg-gradient-to-r from-primary-500 to-secondary-500 text-white font-semibold px-8 py-4 rounded-lg shadow-lg"
               whileHover={{ 
                 scale: 1.05,
@@ -87,7 +87,7 @@ export default function HomePage() {
               whileTap={{ scale: 0.98 }}
               transition={{ type: "spring", stiffness: 400, damping: 17 }}
             >
-              View Component Demo
+              See Projects Built This Way
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
               </svg>
