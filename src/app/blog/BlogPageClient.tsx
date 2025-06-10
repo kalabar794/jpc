@@ -388,41 +388,6 @@ export default function BlogPageClient({ posts }: BlogPageClientProps) {
         </div>
       </section>
 
-      {/* Newsletter CTA */}
-      <section className="relative py-20 px-6 bg-gradient-to-br from-blue-500 to-purple-600">
-        <div className="max-w-4xl mx-auto text-center text-white">
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-          >
-            <h2 className="text-4xl font-bold mb-6">
-              Stay Updated with AI Marketing Trends
-            </h2>
-            <p className="text-xl mb-8 opacity-90">
-              Get the latest insights, strategies, and case studies delivered to your inbox.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center max-w-md mx-auto">
-              <input
-                type="email"
-                placeholder="Enter your email"
-                className="flex-1 px-6 py-3 rounded-lg text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-white/50"
-              />
-              <motion.button
-                className="bg-white text-blue-600 font-bold px-6 py-3 rounded-lg whitespace-nowrap"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                Subscribe
-              </motion.button>
-            </div>
-            <p className="text-sm opacity-75 mt-4">
-              No spam, unsubscribe anytime.
-            </p>
-          </motion.div>
-        </div>
-      </section>
       </main>
     </AnimatedBackground>
   )
