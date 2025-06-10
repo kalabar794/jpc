@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion'
 import { HeroSection, FeaturedProjects, ServicesSection } from '@/components/sections'
-import { JonathonLogo } from '@/components/ui/JonathonLogo'
+import { JonathonLogoStandalone } from '@/components/ui/JonathonLogo'
 
 export default function HomePage() {
   return (
@@ -100,34 +100,16 @@ export default function HomePage() {
       {/* Logo Showcase Section */}
       <section className="py-20 px-6 bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950">
         <div className="max-w-6xl mx-auto text-center">
-          <motion.h2
-            className="text-4xl font-bold mb-6 text-white"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-          >
+          <h2 className="text-4xl font-bold mb-6 text-white">
             Brand Identity
-          </motion.h2>
-          <motion.p
-            className="text-slate-300 text-lg mb-12"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            viewport={{ once: true }}
-          >
+          </h2>
+          <p className="text-slate-300 text-lg mb-12">
             Crafted with AI-powered design and interactive technology
-          </motion.p>
+          </p>
           
-          <motion.div
-            className="flex justify-center"
-            initial={{ opacity: 0, scale: 0.8 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            viewport={{ once: true }}
-          >
-            <JonathonLogo variant="hero" className="max-w-md" />
-          </motion.div>
+          <div className="flex justify-center">
+            <JonathonLogoStandalone className="w-full" />
+          </div>
         </div>
       </section>
     </main>

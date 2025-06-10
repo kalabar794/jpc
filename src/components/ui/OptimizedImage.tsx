@@ -58,7 +58,7 @@ export default function OptimizedImage({
       <div className={`relative overflow-hidden ${className}`}>
         <Image
           {...imageProps}
-          fill={fill}
+          {...(fill ? { fill: true } : {})}
           sizes={sizes}
           loading={priority ? 'eager' : 'lazy'}
           className={`transition-opacity duration-300 ${
@@ -94,9 +94,7 @@ export default function OptimizedImage({
       <Image
         src={imageSrc}
         alt={alt}
-        width={width}
-        height={height || Math.round(width * 0.6)}
-        fill={fill}
+        {...(fill ? { fill: true } : { width, height: height || Math.round(width * 0.6) })}
         sizes={sizes}
         priority={priority}
         loading={priority ? 'eager' : 'lazy'}

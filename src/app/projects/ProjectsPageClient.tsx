@@ -10,25 +10,10 @@ interface ProjectsPageClientProps {
   projects: Project[]
 }
 
-const categories = [
-  { value: 'all', label: 'All Projects' },
-  { value: 'ai-marketing', label: 'AI Marketing' },
-  { value: 'automation', label: 'Marketing Automation' },
-  { value: 'analytics', label: 'Analytics & Data' },
-  { value: 'creative', label: 'Creative & Design' },
-  { value: 'web-development', label: 'Web Development' }
-]
-
 export default function ProjectsPageClient({ projects }: ProjectsPageClientProps) {
-  const [activeCategory, setActiveCategory] = useState('all')
   const [hoveredProject, setHoveredProject] = useState<string | null>(null)
   const containerRef = useRef<HTMLDivElement>(null)
   const { scrollY } = useScroll()
-
-  // Filter projects based on active category
-  const filteredProjects = activeCategory === 'all' 
-    ? projects 
-    : projects.filter(project => project.category === activeCategory)
 
   // Parallax background
   const backgroundY = useTransform(scrollY, [0, 1000], [0, -300])
@@ -85,54 +70,24 @@ export default function ProjectsPageClient({ projects }: ProjectsPageClientProps
             transition={{ duration: 0.8, delay: 0.6 }}
           >
             <span className="text-4xl font-bold text-primary-600 dark:text-primary-400">
-              {filteredProjects.length}
+              {projects.length}
             </span>
             <span className="text-gray-600 dark:text-gray-400 ml-2">
-              {filteredProjects.length === 1 ? 'Project' : 'Projects'}
+              {projects.length === 1 ? 'Project' : 'Projects'}
             </span>
           </motion.div>
         </div>
       </section>
 
-      {/* Filter Navigation */}
-      <section className="relative px-6 mb-16">
-        <div className="max-w-6xl mx-auto">
-          <motion.div
-            className="flex flex-wrap justify-center gap-4"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.8 }}
-          >
-            {categories.map((category, index) => (
-              <motion.button
-                key={category.value}
-                onClick={() => setActiveCategory(category.value)}
-                className={`px-6 py-3 rounded-full font-medium transition-all duration-300 ${
-                  activeCategory === category.value
-                    ? 'bg-primary-500 text-white shadow-lg'
-                    : 'bg-white dark:bg-dark-surface text-gray-600 dark:text-gray-300 hover:bg-primary-50 dark:hover:bg-primary-900/20 border border-gray-200 dark:border-gray-700'
-                }`}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.4, delay: 1 + index * 0.1 }}
-              >
-                {category.label}
-              </motion.button>
-            ))}
-          </motion.div>
-        </div>
-      </section>
 
-      {/* Projects Grid */}
+      {/* Projects - Vertically Stacked Cards with Gradient Overlays */}
       <section className="relative px-6 pb-20">
-        <div className="max-w-7xl mx-auto">
+        <div className="max-w-5xl mx-auto">
           <motion.div
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+            className="flex flex-col gap-12"
             layout
           >
-            {filteredProjects.map((project, index) => (
+            {projects.map((project, index) => (
               <motion.div
                 key={project.slug}
                 layout
@@ -150,27 +105,27 @@ export default function ProjectsPageClient({ projects }: ProjectsPageClientProps
               >
                 <Link href={`/projects/${project.slug}`}>
                   <motion.div
-                    className="relative h-full bg-white dark:bg-dark-surface rounded-2xl overflow-hidden shadow-lg border border-gray-200 dark:border-gray-700"
+                    className="relative h-[500px] rounded-3xl overflow-hidden cursor-pointer"
                     whileHover={{ 
-                      y: -12,
+                      scale: 1.02,
                       rotateX: 5,
                       rotateY: 5,
-                      scale: 1.02
+                      z: 50
                     }}
                     transition={{ 
                       type: "spring", 
                       stiffness: 300, 
                       damping: 20 
                     }}
-                    style={{
+                    style={{ 
                       transformStyle: 'preserve-3d',
                       perspective: 1000
                     }}
                   >
-                    {/* Project Image */}
-                    <div className="relative h-64 overflow-hidden">
+                    {/* Background Image */}
+                    <div className="absolute inset-0">
                       <motion.img
-                        src={project.heroImage || "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=600&h=400&fit=crop"}
+                        src={project.heroImage || "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=1200&h=600&fit=crop"}
                         alt={project.title}
                         className="w-full h-full object-cover"
                         whileHover={{ scale: 1.1 }}
@@ -179,82 +134,145 @@ export default function ProjectsPageClient({ projects }: ProjectsPageClientProps
                       
                       {/* Gradient Overlay */}
                       <motion.div
-                        className={`absolute inset-0 bg-gradient-to-br ${project.color || 'from-primary-500 to-secondary-500'} opacity-0`}
-                        whileHover={{ opacity: 0.8 }}
+                        className={`absolute inset-0 bg-gradient-to-br ${project.color || 'from-primary-500 to-secondary-500'} opacity-80`}
+                        whileHover={{ opacity: 0.9 }}
                         transition={{ duration: 0.3 }}
                       />
-
-                      {/* Project Category */}
-                      <div className="absolute top-4 left-4">
-                        <span className="px-3 py-1 text-xs font-medium bg-white/90 backdrop-blur-sm rounded-full text-gray-700 capitalize">
-                          {project.category.replace('-', ' ')}
-                        </span>
-                      </div>
-
-                      {/* Hover Icon */}
-                      <motion.div
-                        className="absolute top-4 right-4 w-10 h-10 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center opacity-0"
-                        whileHover={{ opacity: 1 }}
-                        transition={{ duration: 0.3 }}
-                      >
-                        <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                        </svg>
-                      </motion.div>
+                      
+                      {/* Dark overlay for text readability */}
+                      <div className="absolute inset-0 bg-black/40" />
                     </div>
 
-                    {/* Project Content */}
-                    <div className="p-6">
+                    {/* Floating Elements */}
+                    <motion.div
+                      className="absolute top-8 right-8 w-16 h-16 bg-white/20 rounded-full backdrop-blur-sm flex items-center justify-center"
+                      animate={hoveredProject === project.slug ? {
+                        scale: [1, 1.2, 1],
+                        rotate: [0, 180, 360]
+                      } : {}}
+                      transition={{ duration: 1 }}
+                    >
+                      <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                      </svg>
+                    </motion.div>
+
+                    {/* Project Category Badge */}
+                    <div className="absolute top-8 left-8">
+                      <span className="px-4 py-2 text-sm font-medium bg-white/20 backdrop-blur-sm rounded-full text-white capitalize">
+                        {project.category.replace('-', ' ')}
+                      </span>
+                    </div>
+
+                    {/* Content */}
+                    <div className="absolute inset-0 p-12 flex flex-col justify-end text-white">
                       {/* Tech Stack */}
-                      <div className="flex flex-wrap gap-2 mb-4">
-                        {project.techStack.slice(0, 3).map((tech, techIndex) => (
-                          <span
+                      <motion.div
+                        className="flex flex-wrap gap-3 mb-6"
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.6, delay: index * 0.2 + 0.3 }}
+                      >
+                        {project.techStack.slice(0, 4).map((tech, techIndex) => (
+                          <motion.span
                             key={tech}
-                            className="px-2 py-1 text-xs font-medium bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 rounded"
+                            className="px-4 py-2 text-sm font-medium bg-white/20 rounded-full backdrop-blur-sm"
+                            whileHover={{ scale: 1.05, backgroundColor: "rgba(255,255,255,0.3)" }}
+                            transition={{ duration: 0.2 }}
                           >
                             {tech}
-                          </span>
+                          </motion.span>
                         ))}
-                        {project.techStack.length > 3 && (
-                          <span className="px-2 py-1 text-xs font-medium bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 rounded">
-                            +{project.techStack.length - 3}
+                        {project.techStack.length > 4 && (
+                          <span className="px-4 py-2 text-sm font-medium bg-white/20 rounded-full backdrop-blur-sm">
+                            +{project.techStack.length - 4} more
                           </span>
                         )}
-                      </div>
+                      </motion.div>
 
                       {/* Project Title */}
-                      <h3 className="text-xl font-bold mb-3 text-gray-900 dark:text-white leading-tight">
+                      <motion.h3
+                        className="text-4xl lg:text-5xl font-bold mb-4 leading-tight"
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.6, delay: index * 0.2 + 0.4 }}
+                      >
                         {project.title}
-                      </h3>
+                      </motion.h3>
 
                       {/* Project Description */}
-                      <p className="text-gray-600 dark:text-gray-300 mb-4 leading-relaxed line-clamp-3">
+                      <motion.p
+                        className="text-xl text-gray-200 mb-8 leading-relaxed max-w-3xl"
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.6, delay: index * 0.2 + 0.5 }}
+                      >
                         {project.excerpt}
-                      </p>
+                      </motion.p>
 
                       {/* Project Metrics */}
                       {project.metrics && (
-                        <div className="grid grid-cols-3 gap-2 pt-4 border-t border-gray-200 dark:border-gray-700">
+                        <motion.div
+                          className="grid grid-cols-3 gap-8 mb-8 max-w-2xl"
+                          initial={{ opacity: 0, y: 20 }}
+                          whileInView={{ opacity: 1, y: 0 }}
+                          transition={{ duration: 0.6, delay: index * 0.2 + 0.6 }}
+                        >
                           {Object.entries(project.metrics)
                             .filter(([key, value]) => value)
                             .slice(0, 3)
-                            .map(([key, value]) => (
-                              <div key={key} className="text-center">
-                                <div className="text-lg font-bold text-primary-600 dark:text-primary-400">
+                            .map(([key, value], metricIndex) => (
+                              <motion.div
+                                key={key}
+                                className="text-center"
+                                whileHover={{ scale: 1.05 }}
+                              >
+                                <motion.div
+                                  className="text-3xl font-bold mb-1"
+                                  initial={{ scale: 0 }}
+                                  whileInView={{ scale: 1 }}
+                                  transition={{ 
+                                    duration: 0.5, 
+                                    delay: index * 0.2 + 0.7 + metricIndex * 0.1,
+                                    type: "spring",
+                                    stiffness: 200
+                                  }}
+                                >
                                   {value}
+                                </motion.div>
+                                <div className="text-sm text-gray-300 capitalize">
+                                  {key.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase())}
                                 </div>
-                                <div className="text-xs text-gray-500 dark:text-gray-400 capitalize">
-                                  {key}
-                                </div>
-                              </div>
+                              </motion.div>
                             ))}
-                        </div>
+                        </motion.div>
                       )}
+
+                      {/* CTA Button */}
+                      <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.6, delay: index * 0.2 + 0.8 }}
+                      >
+                        <span className="inline-flex items-center text-white font-medium text-lg group-hover:gap-4 transition-all">
+                          View Project Details
+                          <motion.svg 
+                            className="w-5 h-5 ml-2" 
+                            fill="none" 
+                            stroke="currentColor" 
+                            viewBox="0 0 24 24"
+                            whileHover={{ x: 5 }}
+                            transition={{ type: "spring", stiffness: 400, damping: 17 }}
+                          >
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                          </motion.svg>
+                        </span>
+                      </motion.div>
                     </div>
 
                     {/* Hover Border Effect */}
                     <motion.div
-                      className="absolute inset-0 border-2 border-primary-500/50 rounded-2xl opacity-0"
+                      className="absolute inset-0 border-2 border-white/50 rounded-3xl opacity-0"
                       whileHover={{ opacity: 1 }}
                       transition={{ duration: 0.3 }}
                     />
@@ -265,7 +283,7 @@ export default function ProjectsPageClient({ projects }: ProjectsPageClientProps
           </motion.div>
 
           {/* Empty State */}
-          {filteredProjects.length === 0 && (
+          {projects.length === 0 && (
             <motion.div
               className="text-center py-20"
               initial={{ opacity: 0, y: 50 }}
@@ -277,14 +295,8 @@ export default function ProjectsPageClient({ projects }: ProjectsPageClientProps
                 No Projects Found
               </h3>
               <p className="text-gray-600 dark:text-gray-300 mb-8">
-                Try selecting a different category to see more projects.
+                Check back soon for new projects.
               </p>
-              <button
-                onClick={() => setActiveCategory('all')}
-                className="bg-primary-500 hover:bg-primary-600 text-white font-medium px-6 py-3 rounded-lg transition-colors"
-              >
-                Show All Projects
-              </button>
             </motion.div>
           )}
         </div>

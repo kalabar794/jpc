@@ -5,7 +5,6 @@ import { motion, AnimatePresence } from 'framer-motion'
 import Link from 'next/link'
 import { cn } from '@/lib/utils'
 import { useTheme } from '@/components/providers/ThemeProvider'
-import { JonathonLogo } from '@/components/ui/JonathonLogo'
 
 interface NavigationProps {
   className?: string
@@ -66,7 +65,73 @@ export default function Navigation({ className = '' }: NavigationProps) {
           <div className="flex items-center justify-between">
             {/* Logo/Brand */}
             <Link href="/">
-              <JonathonLogo variant="navigation" />
+              <motion.div
+                className="relative group cursor-pointer"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                {/* Logo Container with Glass Effect */}
+                <div className="relative">
+                  {/* Main Logo Container */}
+                  <motion.div
+                    className="relative px-8 py-4 backdrop-blur-xl bg-white/90 dark:bg-slate-900/90 border-2 border-blue-400/50 dark:border-blue-500/50 rounded-3xl shadow-2xl overflow-hidden"
+                    style={{
+                      backdropFilter: 'blur(20px)',
+                      boxShadow: '0 10px 30px rgba(59, 130, 246, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2)',
+                    }}
+                    whileHover={{ 
+                      boxShadow: "0 20px 40px rgba(59, 130, 246, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2)",
+                    }}
+                    transition={{ type: "spring", stiffness: 400, damping: 17 }}
+                  >
+                    {/* Inner gradient overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-tr from-blue-500/5 to-purple-500/5" />
+                    
+                    {/* Content */}
+                    <div className="relative z-10 flex items-center space-x-3">
+                      {/* Logo Icon */}
+                      <div className="relative">
+                        <svg width="40" height="40" viewBox="0 0 200 200">
+                          <defs>
+                            <linearGradient id="navLogoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                              <stop offset="0%" stopColor="#60a5fa"/>
+                              <stop offset="50%" stopColor="#a78bfa"/>
+                              <stop offset="100%" stopColor="#67e8f9"/>
+                            </linearGradient>
+                          </defs>
+                          <path
+                            d="M 120 40 L 120 120 Q 120 160 80 160 Q 40 160 40 120 L 40 100 L 60 100 L 60 120 Q 60 140 80 140 Q 100 140 100 120 L 100 40 Z"
+                            fill="url(#navLogoGradient)"
+                          />
+                        </svg>
+                      </div>
+                      
+                      {/* Text */}
+                      <div className="flex flex-col">
+                        <span className="font-bold text-2xl leading-tight bg-gradient-to-r from-blue-500 via-purple-500 to-cyan-500 bg-clip-text text-transparent">
+                          JONATHON
+                        </span>
+                        <span className="text-sm text-slate-600 dark:text-slate-300 leading-tight">
+                          AI Marketing Specialist
+                        </span>
+                      </div>
+                    </div>
+                    
+                    {/* Small animated dots */}
+                    <div className="absolute -right-2 top-1/2 transform -translate-y-1/2">
+                      <div className="w-1.5 h-1.5 bg-blue-400 rounded-full animate-pulse" />
+                    </div>
+                    <div className="absolute -left-2 bottom-2">
+                      <div className="w-1 h-1 bg-cyan-400 rounded-full animate-pulse" style={{ animationDelay: '0.5s' }} />
+                    </div>
+                    
+                    {/* Animated gradient border effect */}
+                    <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                      <div className="absolute inset-[1px] rounded-2xl bg-gradient-to-r from-blue-400/20 via-purple-400/20 to-cyan-400/20" />
+                    </div>
+                  </motion.div>
+                </div>
+              </motion.div>
             </Link>
 
             {/* Desktop Navigation */}
@@ -195,10 +260,31 @@ export default function Navigation({ className = '' }: NavigationProps) {
                   transition={{ duration: 0.4, delay: 0.6 }}
                 >
                   <div className="flex items-center space-x-4">
-                    <JonathonLogo variant="icon" />
+                    <motion.div
+                      className="relative w-14 h-14 backdrop-blur-sm bg-white/90 dark:bg-slate-900/90 border border-blue-400/50 dark:border-blue-500/50 rounded-xl flex items-center justify-center shadow-lg overflow-hidden"
+                      whileHover={{ scale: 1.1, rotate: 5 }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      {/* Glass effect overlay */}
+                      <div className="absolute inset-0 bg-gradient-to-tr from-blue-500/10 to-purple-500/10" />
+                      
+                      <svg width="32" height="32" viewBox="0 0 200 200" className="relative z-10">
+                        <defs>
+                          <linearGradient id="mobileLogoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stopColor="#60a5fa"/>
+                            <stop offset="50%" stopColor="#a78bfa"/>
+                            <stop offset="100%" stopColor="#34d399"/>
+                          </linearGradient>
+                        </defs>
+                        <path
+                          d="M 120 40 L 120 120 Q 120 160 80 160 Q 40 160 40 120 L 40 100 L 60 100 L 60 120 Q 60 140 80 140 Q 100 140 100 120 L 100 40 Z"
+                          fill="url(#mobileLogoGradient)"
+                        />
+                      </svg>
+                    </motion.div>
                     <div>
-                      <div className="font-semibold text-gray-900 dark:text-white">Jonathon</div>
-                      <div className="text-sm text-gray-500 dark:text-gray-400">AI & Marketing Expert</div>
+                      <div className="font-bold text-lg bg-gradient-to-r from-blue-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent">JONATHON</div>
+                      <div className="text-sm text-gray-500 dark:text-gray-400">AI Marketing Specialist</div>
                     </div>
                   </div>
                 </motion.div>
