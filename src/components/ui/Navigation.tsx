@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import Link from 'next/link'
 import { cn } from '@/lib/utils'
 import { useTheme } from '@/components/providers/ThemeProvider'
+import { JonathonLogo } from '@/components/ui/JonathonLogo'
 
 interface NavigationProps {
   className?: string
@@ -65,22 +66,7 @@ export default function Navigation({ className = '' }: NavigationProps) {
           <div className="flex items-center justify-between">
             {/* Logo/Brand */}
             <Link href="/">
-              <motion.div
-                className="flex items-center space-x-2 group cursor-pointer"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-              <motion.div
-                className="w-10 h-10 bg-gradient-to-br from-primary-500 to-secondary-500 rounded-lg flex items-center justify-center"
-                whileHover={{ rotate: 5 }}
-                transition={{ type: "spring", stiffness: 400, damping: 17 }}
-              >
-                <span className="text-white font-bold text-lg">J</span>
-              </motion.div>
-              <span className="font-bold text-xl text-gray-900 dark:text-white group-hover:text-primary-500 transition-colors">
-                Jonathon
-              </span>
-              </motion.div>
+              <JonathonLogo variant="navigation" />
             </Link>
 
             {/* Desktop Navigation */}
@@ -209,9 +195,7 @@ export default function Navigation({ className = '' }: NavigationProps) {
                   transition={{ duration: 0.4, delay: 0.6 }}
                 >
                   <div className="flex items-center space-x-4">
-                    <div className="w-12 h-12 bg-gradient-to-br from-primary-500 to-secondary-500 rounded-full flex items-center justify-center">
-                      <span className="text-white font-bold text-lg">J</span>
-                    </div>
+                    <JonathonLogo variant="icon" />
                     <div>
                       <div className="font-semibold text-gray-900 dark:text-white">Jonathon</div>
                       <div className="text-sm text-gray-500 dark:text-gray-400">AI & Marketing Expert</div>
