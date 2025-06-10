@@ -5,52 +5,49 @@ import { motion, useScroll, useTransform, useMotionValue, useSpring } from 'fram
 import { Button } from '@/components/ui'
 import { Project } from '@/lib/content'
 
-// Real project data
+// Sample project data - matches our Project interface
 const featuredProjects: Project[] = [
   {
-    title: "SEO Powerpack Pro",
-    slug: "seo-powerpack-pro",
+    title: "AI Marketing Campaign Generator",
+    slug: "ai-marketing-generator",
     date: "2024-03-15",
     featured: true,
     status: "published",
-    heroImage: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop&crop=center",
-    excerpt: "Beautiful, instant SEO insights that anyone can understand. Stop guessing about your website's performance and start ranking higher. AI-powered analysis with zero tracking.",
+    heroImage: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&h=600&fit=crop&crop=center",
+    excerpt: "Revolutionary platform that creates complete marketing campaigns using GPT-4 and custom algorithms. Increased client ROI by 400% through personalized content generation.",
     content: "",
-    techStack: ["AI Analytics", "Core Web Vitals", "Technical SEO", "Privacy-Focused"],
-    metrics: { custom1Label: "Analysis Speed", custom1Value: "<10s", custom2Label: "Traffic Increase", custom2Value: "340%", efficiency: "Free Forever" },
-    category: "ai-tools",
-    color: "from-blue-500 to-cyan-600",
-    projectUrl: "https://www.seopowerpack.pro"
+    techStack: ["AI", "Marketing Automation", "GPT-4", "Analytics"],
+    metrics: { roi: "400%", custom1Label: "Campaigns", custom1Value: "50+", custom2Label: "Time Saved", custom2Value: "80%" },
+    category: "ai-marketing",
+    color: "from-blue-500 to-purple-600"
   },
   {
-    title: "CompetitorScope",
-    slug: "competitorscope",
+    title: "Smart Social Media Analyzer",
+    slug: "social-media-analyzer",
     date: "2024-02-20",
     featured: true,
     status: "published",
-    heroImage: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop&crop=center",
-    excerpt: "AI-powered competitor analysis tool that provides comprehensive SEO analysis, performance metrics, and actionable intelligence to help businesses outperform their competition.",
+    heroImage: "https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=800&h=600&fit=crop&crop=center",
+    excerpt: "AI-powered social media analytics tool that predicts viral content and optimizes posting schedules. Boosted engagement rates by 350% across all platforms.",
     content: "",
-    techStack: ["AI Analysis", "SEO Intelligence", "Performance Metrics", "Strategic Insights"],
-    metrics: { custom1Label: "Starting Price", custom1Value: "Free", custom2Label: "Pro Plan", custom2Value: "$97", efficiency: "Real-time" },
-    category: "ai-analytics",
-    color: "from-purple-500 to-pink-600",
-    projectUrl: "https://www.competitorscope.com"
+    techStack: ["Social Media", "Predictive AI", "Analytics", "Automation"],
+    metrics: { engagement: "350%", custom1Label: "Reach", custom1Value: "2M+", custom2Label: "Clients", custom2Value: "25+" },
+    category: "ai-marketing",
+    color: "from-purple-500 to-pink-600"
   },
   {
-    title: "AI Landing Generator",
-    slug: "ai-landing-generator",
+    title: "Automated Content Pipeline",
+    slug: "content-pipeline",
     date: "2024-01-10",
     featured: true,
     status: "published",
-    heroImage: "https://images.unsplash.com/photo-1517292987719-0369a794ec0f?w=800&h=600&fit=crop&crop=center",
-    excerpt: "Create stunning, conversion-optimized landing pages with the power of AI. Generate beautiful pages in minutes, not hours - no design expertise required.",
+    heroImage: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop&crop=center",
+    excerpt: "End-to-end content creation system that generates, optimizes, and distributes content across multiple channels. Reduced content production time by 90%.",
     content: "",
-    techStack: ["AI Generation", "Glassmorphic UI", "8 Templates", "Analytics Ready"],
-    metrics: { custom1Label: "Build Time", custom1Value: "Minutes", custom2Label: "Unique Designs", custom2Value: "∞", efficiency: "Free" },
-    category: "ai-tools",
-    color: "from-green-500 to-blue-600",
-    projectUrl: "https://ai-landing-generator-xi.vercel.app"
+    techStack: ["Content Creation", "Automation", "Multi-channel", "Optimization"],
+    metrics: { efficiency: "90%", custom1Label: "Content", custom1Value: "1000+", custom2Label: "Channels", custom2Value: "15+" },
+    category: "automation",
+    color: "from-green-500 to-blue-600"
   }
 ]
 
@@ -308,15 +305,12 @@ export default function FeaturedProjects({ projects }: FeaturedProjectsProps) {
                       whileInView={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.6, delay: index * 0.2 + 0.8 }}
                     >
-                      <motion.a
-                        href={project.projectUrl || '#'}
-                        target="_blank"
-                        rel="noopener noreferrer"
+                      <motion.button
                         className="inline-flex items-center px-6 py-3 bg-white/20 backdrop-blur-sm rounded-lg text-white font-medium hover:bg-white/30 transition-colors"
                         whileHover={{ scale: 1.05, x: 10 }}
                         whileTap={{ scale: 0.95 }}
                       >
-                        Visit Live Site
+                        View Case Study
                         <motion.svg 
                           className="w-4 h-4 ml-2" 
                           fill="none" 
@@ -325,9 +319,9 @@ export default function FeaturedProjects({ projects }: FeaturedProjectsProps) {
                           whileHover={{ x: 5 }}
                           transition={{ type: "spring", stiffness: 400, damping: 17 }}
                         >
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
                         </motion.svg>
-                      </motion.a>
+                      </motion.button>
                     </motion.div>
                   </div>
 

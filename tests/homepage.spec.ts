@@ -40,9 +40,14 @@ test.describe('Homepage', () => {
     const projectsSection = page.locator('section').filter({ hasText: 'Featured Work' });
     await expect(projectsSection).toBeVisible();
     
-    // Check at least one project card is visible
-    const projectCards = page.locator('article').filter({ hasText: /AI Marketing|Social Media/i });
-    await expect(projectCards.first()).toBeVisible();
+    // Check real project cards are visible
+    await expect(page.getByText('SEO Powerpack Pro')).toBeVisible();
+    await expect(page.getByText('CompetitorScope')).toBeVisible();
+    await expect(page.getByText('AI Landing Generator')).toBeVisible();
+    
+    // Check Visit Live Site buttons exist
+    const liveButtons = page.getByText('Visit Live Site');
+    await expect(liveButtons).toHaveCount(3);
   });
 
   test('should have working navigation links', async ({ page }) => {
