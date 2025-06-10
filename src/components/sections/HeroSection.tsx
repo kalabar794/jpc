@@ -300,41 +300,6 @@ export default function HeroSection() {
             </Button>
           </motion.div>
         </motion.div>
-
-        {/* Stats Section */}
-        <motion.div
-          className="grid grid-cols-3 gap-8 mt-20 pt-12 border-t border-white/20"
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 1.2 }}
-        >
-          {[
-            { number: "50+", label: "Projects Delivered" },
-            { number: "300%", label: "Average ROI Increase" },
-            { number: "24/7", label: "AI Automation" }
-          ].map((stat, index) => (
-            <motion.div 
-              key={index}
-              className="text-center"
-              whileHover={{ scale: 1.05 }}
-            >
-              <motion.div
-                className="text-3xl md:text-4xl font-bold mb-2"
-                initial={{ scale: 0 }}
-                animate={{ scale: 1 }}
-                transition={{ 
-                  duration: 0.6, 
-                  delay: 1.4 + index * 0.1,
-                  type: "spring",
-                  stiffness: 200
-                }}
-              >
-                {stat.number}
-              </motion.div>
-              <div className="text-gray-300 text-sm md:text-base">{stat.label}</div>
-            </motion.div>
-          ))}
-        </motion.div>
       </motion.div>
 
       {/* Scroll Indicator */}
