@@ -177,14 +177,6 @@ export default function PhotographyClient({ images }: PhotographyClientProps) {
                       ))}
                     </div>
                     
-                    <div className="flex items-center justify-between text-sm text-gray-500 dark:text-gray-400">
-                      <span className="flex items-center gap-1">
-                        📷 {image.tool || 'Camera'}
-                      </span>
-                      <span>
-                        {new Date(image.date).toLocaleDateString()}
-                      </span>
-                    </div>
                     
                     {(image as any).settings && (
                       <details className="mt-4">

@@ -117,14 +117,6 @@ export default function AIGalleryClient({ images }: AIGalleryClientProps) {
                     ))}
                   </div>
                   
-                  <div className="flex items-center justify-between text-sm text-gray-500 dark:text-gray-400">
-                    <span className="flex items-center gap-1">
-                      🤖 {image.tool}
-                    </span>
-                    <span>
-                      {new Date(image.date).toLocaleDateString()}
-                    </span>
-                  </div>
                   
                   {(image as any).prompt && (
                     <details className="mt-4">
