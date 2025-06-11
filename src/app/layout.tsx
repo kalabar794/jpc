@@ -32,7 +32,7 @@ export default function RootLayout({
       <body className="min-h-screen bg-white dark:bg-dark-background text-gray-900 dark:text-dark-text antialiased">
         <ThemeProvider defaultTheme="dark" storageKey="portfolio-theme">
           <Navigation />
-          <div className="relative">
+          <div className="relative pt-20">
             {children}
           </div>
         </ThemeProvider>
