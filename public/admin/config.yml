@@ -67,48 +67,51 @@ collections:
       - {label: "GitHub URL", name: "githubUrl", widget: "string", required: false}
       - {label: "Body", name: "body", widget: "markdown"}
 
-  - name: ai_gallery
-    label: AI Gallery
-    folder: content/gallery/ai
-    create: true
-    slug: "{{slug}}"
-    media_folder: "/public/uploads/gallery/ai"
-    public_folder: "/uploads/gallery/ai"
-    editor:
-      preview: false
-    fields:
-      - {label: "Title", name: "title", widget: "string"}
-      - {label: "Slug", name: "slug", widget: "string"}
-      - {label: "Date", name: "date", widget: "datetime"}
-      - {label: "Image", name: "image", widget: "image"}
-      - {label: "Description", name: "description", widget: "text"}
-      - {label: "Prompt", name: "prompt", widget: "text", required: false}
-      - {label: "Model", name: "model", widget: "string", default: "DALL-E 3"}
-      - {label: "Style", name: "style", widget: "string"}
-      - {label: "Tags", name: "tags", widget: "list"}
-      - {label: "Featured", name: "featured", widget: "boolean", default: false}
-
-  - name: photo_gallery
-    label: Photography Gallery
-    folder: content/gallery/photography
-    create: true
-    slug: "{{slug}}"
-    media_folder: "/public/uploads/gallery/photography"
-    public_folder: "/uploads/gallery/photography"
-    editor:
-      preview: false
-    fields:
-      - {label: "Title", name: "title", widget: "string"}
-      - {label: "Slug", name: "slug", widget: "string"}
-      - {label: "Date", name: "date", widget: "datetime"}
-      - {label: "Image", name: "image", widget: "image"}
-      - {label: "Description", name: "description", widget: "text"}
-      - {label: "Location", name: "location", widget: "string", required: false}
-      - {label: "Camera", name: "camera", widget: "string", required: false}
-      - {label: "Settings", name: "settings", widget: "string", required: false}
-      - {label: "Category", name: "category", widget: "select", options: ["landscape", "portrait", "street", "nature", "architecture", "abstract"]}
-      - {label: "Tags", name: "tags", widget: "list"}
-      - {label: "Featured", name: "featured", widget: "boolean", default: false}
+  - name: galleries
+    label: Galleries
+    files:
+      - name: ai_gallery
+        label: AI Gallery Images
+        file: content/galleries/ai-gallery.md
+        media_folder: "/public/uploads/gallery/ai"
+        public_folder: "/uploads/gallery/ai"
+        fields:
+          - {label: "Title", name: "title", widget: "string", default: "AI Gallery"}
+          - label: "Images"
+            name: "images"
+            widget: "list"
+            fields:
+              - {label: "Title", name: "title", widget: "string"}
+              - {label: "Image", name: "image", widget: "image"}
+              - {label: "Description", name: "description", widget: "text"}
+              - {label: "Prompt", name: "prompt", widget: "text", required: false}
+              - {label: "Model", name: "model", widget: "string", default: "DALL-E 3"}
+              - {label: "Style", name: "style", widget: "string"}
+              - {label: "Tags", name: "tags", widget: "list"}
+              - {label: "Featured", name: "featured", widget: "boolean", default: false}
+              - {label: "Date", name: "date", widget: "datetime"}
+      
+      - name: photography_gallery
+        label: Photography Gallery Images
+        file: content/galleries/photography-gallery.md
+        media_folder: "/public/uploads/gallery/photography"
+        public_folder: "/uploads/gallery/photography"
+        fields:
+          - {label: "Title", name: "title", widget: "string", default: "Photography Gallery"}
+          - label: "Images"
+            name: "images"
+            widget: "list"
+            fields:
+              - {label: "Title", name: "title", widget: "string"}
+              - {label: "Image", name: "image", widget: "image"}
+              - {label: "Description", name: "description", widget: "text"}
+              - {label: "Location", name: "location", widget: "string", required: false}
+              - {label: "Camera", name: "camera", widget: "string", required: false}
+              - {label: "Settings", name: "settings", widget: "string", required: false}
+              - {label: "Category", name: "category", widget: "select", options: ["landscape", "portrait", "street", "nature", "architecture", "abstract"]}
+              - {label: "Tags", name: "tags", widget: "list"}
+              - {label: "Featured", name: "featured", widget: "boolean", default: false}
+              - {label: "Date", name: "date", widget: "datetime"}
 
   - name: about_page
     label: About Page

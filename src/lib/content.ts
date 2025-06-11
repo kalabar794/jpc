@@ -251,82 +251,69 @@ export function getPostBySlug(slug: string): Post | null {
 }
 
 export function getAllGalleryImages(category?: string): GalleryImage[] {
-  const galleryDirectory = path.join(contentDirectory, 'gallery')
-  
-  if (!fs.existsSync(galleryDirectory)) {
-    return []
-  }
-
-  // Read from AI and Photography subdirectories
-  const aiDir = path.join(galleryDirectory, 'ai')
-  const photoDir = path.join(galleryDirectory, 'photography')
+  const galleriesDirectory = path.join(contentDirectory, 'galleries')
   
   let images: GalleryImage[] = []
   
-  // Read AI gallery
-  if (fs.existsSync(aiDir)) {
-    const aiFiles = fs.readdirSync(aiDir).filter(name => name.endsWith('.md'))
-    const aiImages = aiFiles.map(name => {
-      const filePath = path.join(aiDir, name)
-      const { frontmatter } = readMarkdownFile(filePath)
-      
-      return {
-        id: frontmatter.slug || name.replace(/\.md$/, ''),
-        title: frontmatter.title,
-        imageUrl: frontmatter.image,
-        alt: frontmatter.title,
-        description: frontmatter.description,
+  // Read AI Gallery
+  const aiGalleryPath = path.join(galleriesDirectory, 'ai-gallery.md')
+  if (fs.existsSync(aiGalleryPath)) {
+    const { frontmatter } = readMarkdownFile(aiGalleryPath)
+    if (frontmatter.images && Array.isArray(frontmatter.images)) {
+      const aiImages = frontmatter.images.map((img: any, index: number) => ({
+        id: `ai-${index}-${img.title.toLowerCase().replace(/\s+/g, '-')}`,
+        title: img.title,
+        imageUrl: img.image,
+        alt: img.title,
+        description: img.description,
         category: 'AI Art',
-        tool: frontmatter.model || 'AI Generated',
-        date: frontmatter.date,
-        tags: frontmatter.tags || [],
-        featured: frontmatter.featured || false,
-        prompt: frontmatter.prompt,
-        style: frontmatter.style,
-        order: frontmatter.order || 0
-      } as GalleryImage & { prompt?: string; style?: string; order: number }
-    })
-    images = [...images, ...aiImages]
+        tool: img.model || 'AI Generated',
+        date: img.date,
+        tags: img.tags || [],
+        featured: img.featured || false,
+        prompt: img.prompt,
+        style: img.style
+      } as GalleryImage & { prompt?: string; style?: string }))
+      images = [...images, ...aiImages]
+    }
   }
   
-  // Read Photography gallery
-  if (fs.existsSync(photoDir)) {
-    const photoFiles = fs.readdirSync(photoDir).filter(name => name.endsWith('.md'))
-    const photoImages = photoFiles.map(name => {
-      const filePath = path.join(photoDir, name)
-      const { frontmatter } = readMarkdownFile(filePath)
-      
-      return {
-        id: frontmatter.slug || name.replace(/\.md$/, ''),
-        title: frontmatter.title,
-        imageUrl: frontmatter.image,
-        alt: frontmatter.title,
-        description: frontmatter.description,
-        category: frontmatter.category || 'Photography',
-        tool: frontmatter.camera || 'Camera',
-        date: frontmatter.date,
-        tags: frontmatter.tags || [],
-        featured: frontmatter.featured || false,
-        location: frontmatter.location,
-        camera: frontmatter.camera,
-        settings: frontmatter.settings,
-        order: frontmatter.order || 0
-      } as GalleryImage & { location?: string; camera?: string; settings?: string; order: number }
-    })
-    images = [...images, ...photoImages]
+  // Read Photography Gallery
+  const photoGalleryPath = path.join(galleriesDirectory, 'photography-gallery.md')
+  if (fs.existsSync(photoGalleryPath)) {
+    const { frontmatter } = readMarkdownFile(photoGalleryPath)
+    if (frontmatter.images && Array.isArray(frontmatter.images)) {
+      const photoImages = frontmatter.images.map((img: any, index: number) => ({
+        id: `photo-${index}-${img.title.toLowerCase().replace(/\s+/g, '-')}`,
+        title: img.title,
+        imageUrl: img.image,
+        alt: img.title,
+        description: img.description,
+        category: img.category || 'Photography',
+        tool: img.camera || 'Camera',
+        date: img.date,
+        tags: img.tags || [],
+        featured: img.featured || false,
+        location: img.location,
+        camera: img.camera,
+        settings: img.settings
+      } as GalleryImage & { location?: string; camera?: string; settings?: string }))
+      images = [...images, ...photoImages]
+    }
   }
   
-  // Sort images by order then date
+  // Sort images by featured first, then by date
   images = images.sort((a, b) => {
-    const aOrder = (a as any).order || 0
-    const bOrder = (b as any).order || 0
-    if (aOrder !== bOrder) return aOrder - bOrder
+    if (a.featured && !b.featured) return -1
+    if (!a.featured && b.featured) return 1
     return new Date(b.date).getTime() - new Date(a.date).getTime()
   })
   
   // Filter by category if specified
   if (category) {
-    images = images.filter(image => image.category === category)
+    images = images.filter(image => 
+      category === 'AI Art' ? image.category === 'AI Art' : image.category !== 'AI Art'
+    )
   }
   
   return images
