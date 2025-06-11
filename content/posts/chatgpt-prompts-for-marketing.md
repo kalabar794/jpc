@@ -2,7 +2,7 @@
 title: "ChatGPT Prompts for Marketing: 50+ Templates That Actually Work"
 slug: "chatgpt-prompts-for-marketing"
 date: "2025-01-29"
-heroImage: ""
+heroImage: "https://images.unsplash.com/photo-1655720828018-edd2daec9349?w=1200&h=630&fit=crop"
 excerpt: "Master AI marketing with these 50+ proven ChatGPT prompts. Copy-paste templates for content creation, strategy, analytics, and automation that deliver real results."
 category: "ai-marketing"
 tags: ["ChatGPT", "AI Marketing", "Prompts", "Content Creation", "Marketing Automation"]
