@@ -14,6 +14,7 @@ tags:
 author: "Jonathon"
 image: "/uploads/blog/google-ai-mode-search.jpg"
 featured: true
+status: "published"
 readTime: 12
 seo:
   title: "Google AI Mode Search Transformation 2025 | AI Marketing Expert Analysis"
