@@ -73,7 +73,7 @@ collections:
       - name: ai_gallery
         label: AI Gallery Images
         file: content/galleries/ai-gallery.md
-        media_folder: "/public/uploads/gallery/ai"
+        media_folder: "public/uploads/gallery/ai"
         public_folder: "/uploads/gallery/ai"
         fields:
           - {label: "Title", name: "title", widget: "string", default: "AI Gallery"}
@@ -85,16 +85,16 @@ collections:
               - {label: "Image", name: "image", widget: "image"}
               - {label: "Description", name: "description", widget: "text"}
               - {label: "Prompt", name: "prompt", widget: "text", required: false}
-              - {label: "Model", name: "model", widget: "string", default: "DALL-E 3"}
-              - {label: "Style", name: "style", widget: "string"}
-              - {label: "Tags", name: "tags", widget: "list"}
+              - {label: "Model", name: "model", widget: "string", default: "DALL-E 3", required: false}
+              - {label: "Style", name: "style", widget: "string", required: false}
+              - {label: "Tags", name: "tags", widget: "list", required: false}
               - {label: "Featured", name: "featured", widget: "boolean", default: false}
               - {label: "Date", name: "date", widget: "datetime"}
       
       - name: photography_gallery
         label: Photography Gallery Images
         file: content/galleries/photography-gallery.md
-        media_folder: "/public/uploads/gallery/photography"
+        media_folder: "public/uploads/gallery/photography"
         public_folder: "/uploads/gallery/photography"
         fields:
           - {label: "Title", name: "title", widget: "string", default: "Photography Gallery"}
@@ -109,7 +109,7 @@ collections:
               - {label: "Camera", name: "camera", widget: "string", required: false}
               - {label: "Settings", name: "settings", widget: "string", required: false}
               - {label: "Category", name: "category", widget: "select", options: ["landscape", "portrait", "street", "nature", "architecture", "abstract"]}
-              - {label: "Tags", name: "tags", widget: "list"}
+              - {label: "Tags", name: "tags", widget: "list", required: false}
               - {label: "Featured", name: "featured", widget: "boolean", default: false}
               - {label: "Date", name: "date", widget: "datetime"}
 
