@@ -23,9 +23,14 @@ export default function SanitizedContent({
     setSanitizedContent(sanitized)
   }, [content, replaceNewlines])
 
-  // Server-side render without sanitization (safe default)
+  // Server-side render with HTML (content is already sanitized from marked)
   if (typeof window === 'undefined') {
-    return <div className={className}>{content}</div>
+    return (
+      <div 
+        className={className}
+        dangerouslySetInnerHTML={{ __html: content }}
+      />
+    )
   }
 
   return (
