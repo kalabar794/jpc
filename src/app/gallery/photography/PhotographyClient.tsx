@@ -177,17 +177,6 @@ export default function PhotographyClient({ images }: PhotographyClientProps) {
                       ))}
                     </div>
                     
-                    
-                    {(image as any).settings && (
-                      <details className="mt-4">
-                        <summary className="cursor-pointer text-blue-600 dark:text-blue-400 font-medium hover:text-blue-700 dark:hover:text-blue-300">
-                          Camera Settings
-                        </summary>
-                        <p className="mt-2 text-sm text-gray-600 dark:text-gray-300 bg-gray-50 dark:bg-gray-700/50 p-3 rounded-lg">
-                          {(image as any).settings}
-                        </p>
-                      </details>
-                    )}
                   </div>
                 </motion.div>
               ))}
