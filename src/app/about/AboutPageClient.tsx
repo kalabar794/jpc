@@ -109,18 +109,11 @@ export default function AboutPageClient({ aboutData }: AboutPageClientProps) {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
             >
-              <span className="relative inline-block">
-                <span className="absolute inset-0 bg-gradient-to-r from-purple-600 via-pink-600 to-orange-600 blur-2xl opacity-40" />
-                <span className="relative bg-gradient-to-r from-purple-600 via-pink-600 to-orange-600 bg-clip-text text-transparent font-extrabold drop-shadow-2xl">
-                  Transforming Ideas
-                </span>
+              <span className="block text-white font-extrabold mb-2">
+                Transforming Ideas
               </span>
-              <br />
-              <span className="relative inline-block">
-                <span className="absolute inset-0 bg-gradient-to-r from-blue-600 via-cyan-600 to-teal-600 blur-2xl opacity-40" />
-                <span className="relative bg-gradient-to-r from-blue-600 via-cyan-600 to-teal-600 bg-clip-text text-transparent font-extrabold drop-shadow-2xl">
-                  into Reality
-                </span>
+              <span className="block text-white font-extrabold">
+                into Reality
               </span>
             </motion.h1>
 
@@ -137,13 +130,11 @@ export default function AboutPageClient({ aboutData }: AboutPageClientProps) {
               </span>
             </motion.div>
 
-            <h2 className="text-4xl md:text-5xl font-bold mb-6">
-              <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent animate-gradient bg-300%">
-                {data.heroTitle || data.title}
-              </span>
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white">
+              {data.heroTitle || data.title}
             </h2>
             
-            <p className="text-xl md:text-2xl text-gray-700 dark:text-gray-200 max-w-4xl mx-auto leading-relaxed font-medium">
+            <p className="text-xl md:text-2xl text-white/90 max-w-4xl mx-auto leading-relaxed font-medium backdrop-blur-sm bg-white/5 rounded-2xl px-8 py-4">
               {data.heroSubtitle}
             </p>
           </motion.div>
