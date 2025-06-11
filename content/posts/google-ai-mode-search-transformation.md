@@ -10,7 +10,7 @@ tags:
   - AI Marketing
   - Digital Marketing
 author: "Jonathon"
-heroImage: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=1200&h=630&fit=crop"
+heroImage: "https://images.unsplash.com/photo-1573804633927-bfcbcd909acd?w=1200&h=630&fit=crop"
 featured: true
 status: "published"
 readTime: 10
