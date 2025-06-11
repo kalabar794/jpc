@@ -103,7 +103,7 @@ export function IconButton({
   return (
     <Button
       {...props}
-      className={cn('p-3 rounded-full', className)}
+      className={cn('p-4 rounded-full min-w-[44px] min-h-[44px] flex items-center justify-center', className)}
     >
       {children}
     </Button>

@@ -139,7 +139,7 @@ export default function Navigation({ className = '' }: NavigationProps) {
               {navigationItems.map((item, index) => (
                 <Link key={item.name} href={item.href}>
                   <motion.div
-                    className="relative text-gray-700 dark:text-gray-300 hover:text-primary-500 dark:hover:text-primary-400 font-medium transition-colors group cursor-pointer px-3 py-2 -m-2 rounded-lg"
+                    className="relative text-gray-700 dark:text-gray-300 hover:text-primary-500 dark:hover:text-primary-400 font-medium transition-colors group cursor-pointer px-4 py-3 -m-3 rounded-lg min-h-[44px] flex items-center"
                     initial={{ opacity: 0, y: -20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.4, delay: index * 0.1 }}
@@ -149,9 +149,9 @@ export default function Navigation({ className = '' }: NavigationProps) {
                   
                   {/* Hover underline */}
                   <motion.div
-                    className="absolute bottom-1 left-3 right-3 h-0.5 bg-gradient-to-r from-primary-500 to-secondary-500"
+                    className="absolute bottom-2 left-4 right-4 h-0.5 bg-gradient-to-r from-primary-500 to-secondary-500"
                     initial={{ width: 0 }}
-                    whileHover={{ width: "calc(100% - 24px)" }}
+                    whileHover={{ width: "calc(100% - 32px)" }}
                     transition={{ duration: 0.3, ease: "easeInOut" }}
                   />
                   </motion.div>
@@ -164,7 +164,7 @@ export default function Navigation({ className = '' }: NavigationProps) {
               {/* Dark Mode Toggle */}
               <motion.button
                 onClick={toggleDarkMode}
-                className="p-3 rounded-full bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
+                className="p-4 rounded-full bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors min-w-[44px] min-h-[44px] flex items-center justify-center"
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
                 aria-label="Toggle dark mode"
@@ -188,7 +188,7 @@ export default function Navigation({ className = '' }: NavigationProps) {
               {/* Mobile Menu Button */}
               <motion.button
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                className="md:hidden p-3 rounded-full bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
+                className="md:hidden p-4 rounded-full bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors min-w-[44px] min-h-[44px] flex items-center justify-center"
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
                 aria-label="Toggle mobile menu"
@@ -240,7 +240,7 @@ export default function Navigation({ className = '' }: NavigationProps) {
                   {navigationItems.map((item, index) => (
                     <Link key={item.name} href={item.href} onClick={closeMobileMenu}>
                       <motion.div
-                        className="block text-2xl font-semibold text-gray-900 dark:text-white hover:text-primary-500 dark:hover:text-primary-400 transition-colors cursor-pointer px-4 py-3 -mx-4 rounded-lg"
+                        className="block text-2xl font-semibold text-gray-900 dark:text-white hover:text-primary-500 dark:hover:text-primary-400 transition-colors cursor-pointer px-4 py-4 -mx-4 rounded-lg min-h-[56px] flex items-center"
                         initial={{ opacity: 0, x: 50 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.3, delay: index * 0.1 }}

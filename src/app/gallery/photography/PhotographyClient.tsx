@@ -87,7 +87,7 @@ export default function PhotographyClient({ images }: PhotographyClientProps) {
               >
                 <button
                   onClick={() => setSelectedCategory(null)}
-                  className={`px-4 py-2 rounded-full font-medium transition-all ${
+                  className={`px-4 py-3 rounded-full font-medium transition-all min-h-[44px] flex items-center justify-center ${
                     !selectedCategory
                       ? 'bg-blue-500 text-white shadow-lg'
                       : 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
@@ -99,7 +99,7 @@ export default function PhotographyClient({ images }: PhotographyClientProps) {
                   <button
                     key={category}
                     onClick={() => setSelectedCategory(category)}
-                    className={`px-4 py-2 rounded-full font-medium transition-all capitalize ${
+                    className={`px-4 py-3 rounded-full font-medium transition-all capitalize min-h-[44px] flex items-center justify-center ${
                       selectedCategory === category
                         ? 'bg-blue-500 text-white shadow-lg'
                         : 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'

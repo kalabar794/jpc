@@ -29,7 +29,10 @@ export async function generateMetadata({ params }: { params: { slug: string } })
     project.title,
     project.excerpt || `${project.title} - AI-powered marketing solution with proven ROI improvements.`,
     `/projects/${params.slug}`,
-    project.heroImage
+    {
+      image: project.heroImage,
+      type: 'article'
+    }
   )
 }
 

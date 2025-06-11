@@ -5,7 +5,7 @@ import { generateBlogPostMetadata, generateBlogPostStructuredData, generateBread
 import Link from 'next/link';
 import { ArrowLeft, Calendar, Clock, User } from 'lucide-react';
 import SanitizedContent from '@/components/ui/SanitizedContent';
-import { StructuredData, Breadcrumb, ReadingProgress } from '@/components/seo';
+import StructuredData, { Breadcrumb, ReadingProgress } from '@/components/seo/StructuredData';
 
 interface BlogPostPageProps {
   params: {

@@ -6,6 +6,7 @@ export { default as AnimatedCard, SampleAnimatedCard } from './AnimatedCard'
 export { default as Navigation } from './Navigation'
 export { default as OptimizedImage, HeroImage, GalleryThumbnail } from './OptimizedImage'
 export { default as AnimatedBackground } from './AnimatedBackground'
+export { default as NewsletterSignup, LeadMagnetSignup } from './NewsletterSignup'
 export { JonathonLogo, JonathonAILogo } from './JonathonLogo'
 
 // Animation Components

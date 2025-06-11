@@ -137,7 +137,7 @@ export default function BlogPageClient({ posts }: BlogPageClientProps) {
               <motion.button
                 key={category.value}
                 onClick={() => setActiveCategory(category.value)}
-                className={`px-4 py-2 rounded-full font-medium text-sm transition-all duration-300 ${
+                className={`px-4 py-3 rounded-full font-medium text-sm transition-all duration-300 min-h-[44px] flex items-center justify-center ${
                   activeCategory === category.value
                     ? 'bg-blue-500 text-white shadow-lg'
                     : 'bg-white dark:bg-dark-surface text-gray-600 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-blue-900/20 border border-gray-200 dark:border-gray-700'

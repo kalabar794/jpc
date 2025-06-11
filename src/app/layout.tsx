@@ -3,7 +3,8 @@ import { Inter } from 'next/font/google'
 import './globals.css'
 import { ThemeProvider } from '@/components/providers/ThemeProvider'
 import Navigation from '@/components/ui/Navigation'
-import { defaultMetadata } from '@/lib/metadata'
+import { defaultMetadata, generateEnhancedPersonStructuredData, generateEnhancedOrganizationStructuredData } from '@/lib/metadata'
+import StructuredData from '@/components/seo/StructuredData'
 import Script from 'next/script'
 
 const inter = Inter({ 
@@ -19,10 +20,14 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://jpc-kappa.vercel.app'
+  
   return (
     <html lang="en" className={inter.variable} suppressHydrationWarning>
       <head>
         <Script src="https://identity.netlify.com/v1/netlify-identity-widget.js" strategy="beforeInteractive" />
+        <StructuredData data={generateEnhancedPersonStructuredData(siteUrl)} />
+        <StructuredData data={generateEnhancedOrganizationStructuredData(siteUrl)} />
       </head>
       <body className="min-h-screen bg-white dark:bg-dark-background text-gray-900 dark:text-dark-text antialiased">
         <ThemeProvider defaultTheme="dark" storageKey="portfolio-theme">

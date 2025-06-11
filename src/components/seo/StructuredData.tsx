@@ -1,7 +1,8 @@
-// Structured Data component for SEO
+// Enhanced Structured Data component for SEO authority
 'use client'
 
 import { useState, useEffect } from 'react'
+import Script from 'next/script'
 
 interface StructuredDataProps {
   data: any
@@ -9,13 +10,133 @@ interface StructuredDataProps {
 
 export default function StructuredData({ data }: StructuredDataProps) {
   return (
-    <script
+    <Script
+      id="structured-data"
       type="application/ld+json"
+      strategy="beforeInteractive"
       dangerouslySetInnerHTML={{
         __html: JSON.stringify(data, null, 0)
       }}
     />
   )
+}
+
+/**
+ * Generate FAQ structured data for better search snippets
+ */
+export function generateFAQStructuredData(faqs: Array<{ question: string; answer: string }>) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map(faq => ({
+      '@type': 'Question',
+      name: faq.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: faq.answer
+      }
+    }))
+  }
+}
+
+/**
+ * Generate How-To structured data for tutorial content
+ */
+export function generateHowToStructuredData(
+  title: string,
+  description: string,
+  steps: Array<{ name: string; text: string; image?: string }>
+) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'HowTo',
+    name: title,
+    description: description,
+    step: steps.map((step, index) => ({
+      '@type': 'HowToStep',
+      position: index + 1,
+      name: step.name,
+      text: step.text,
+      ...(step.image && {
+        image: {
+          '@type': 'ImageObject',
+          url: step.image
+        }
+      })
+    }))
+  }
+}
+
+/**
+ * Generate Software Application structured data for AI tools
+ */
+export function generateSoftwareStructuredData(
+  appName: string,
+  description: string,
+  url: string,
+  category: string = 'BusinessApplication'
+) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'SoftwareApplication',
+    name: appName,
+    description: description,
+    url: url,
+    applicationCategory: category,
+    operatingSystem: 'Web Browser',
+    price: '0',
+    priceCurrency: 'USD',
+    creator: {
+      '@type': 'Person',
+      name: 'Jonathon Carter',
+      jobTitle: 'AI Marketing Specialist'
+    },
+    about: {
+      '@type': 'Thing',
+      name: 'AI Marketing Tools',
+      description: 'Tools for artificial intelligence marketing optimization'
+    },
+    offers: {
+      '@type': 'Offer',
+      price: '0',
+      priceCurrency: 'USD',
+      availability: 'https://schema.org/InStock'
+    }
+  }
+}
+
+/**
+ * Generate Course structured data for educational content
+ */
+export function generateCourseStructuredData(
+  title: string,
+  description: string,
+  provider: string,
+  url: string
+) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Course',
+    name: title,
+    description: description,
+    provider: {
+      '@type': 'Organization',
+      name: provider,
+      url: url
+    },
+    educationalLevel: 'Professional',
+    about: {
+      '@type': 'Thing',
+      name: 'AI Marketing',
+      description: 'Artificial Intelligence applications in marketing strategy and automation'
+    },
+    teaches: [
+      'AI Marketing Strategy',
+      'Marketing Automation',
+      'Campaign Optimization',
+      'Data-Driven Decision Making'
+    ]
+  }
 }
 
 // Breadcrumb component for visual navigation and SEO
