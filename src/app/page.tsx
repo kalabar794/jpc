@@ -1,101 +1,60 @@
-'use client'
+import { Metadata } from 'next'
+import { generateMetadata, generateEnhancedPersonStructuredData, generateFAQStructuredData } from '@/lib/metadata'
+import HomePageClient from './HomePageClient'
 
-import { motion } from 'framer-motion'
-import { HeroSection, FeaturedProjects, ServicesSection } from '@/components/sections'
+// SEO-optimized homepage metadata
+export const metadata: Metadata = generateMetadata(
+  'AI Marketing Consultant | Expert AI Marketing Strategy & Automation | Jonathon',
+  'Transform your business with proven AI marketing expertise. Leading consultant specializing in automation strategies, ChatGPT marketing, and ROI-driven campaigns. Get measurable results with cutting-edge AI solutions.',
+  '',
+  {
+    isHomepage: true,
+    keywords: [
+      'AI marketing consultant',
+      'AI marketing strategy',
+      'marketing automation expert',
+      'ChatGPT marketing consultant',
+      'AI-powered marketing campaigns',
+      'hire AI marketing consultant',
+      'AI marketing ROI optimization',
+      'marketing AI implementation'
+    ]
+  }
+)
 
-export default function HomePage() {
+// Homepage FAQ structured data for featured snippets
+const homepageFAQs = [
+  {
+    question: "What does an AI marketing consultant do?",
+    answer: "An AI marketing consultant helps businesses leverage artificial intelligence to optimize marketing strategies, automate campaigns, improve ROI, and implement data-driven decision making. They specialize in tools like ChatGPT, predictive analytics, and marketing automation platforms."
+  },
+  {
+    question: "How much does AI marketing consulting cost?",
+    answer: "AI marketing consulting typically ranges from $150-500 per hour or $5,000-25,000 per project, depending on scope and complexity. Most consultants offer initial assessments to determine specific needs and provide custom pricing."
+  },
+  {
+    question: "What results can I expect from AI marketing?",
+    answer: "Businesses typically see 20-40% improvement in marketing ROI, 50-70% reduction in manual tasks, 30-60% increase in lead quality, and 25-45% improvement in conversion rates within 3-6 months of implementing AI marketing strategies."
+  }
+]
+
+export default function Page() {
   return (
-    <main className="min-h-screen">
-      {/* Enhanced Hero Section */}
-      <HeroSection />
-      
-      {/* Featured Projects */}
-      <FeaturedProjects />
-      
-      {/* Services & Expertise */}
-      <ServicesSection />
-
-      {/* Development Approach */}
-      <section className="py-20 px-6 bg-gray-50 dark:bg-gray-900/50">
-        <div className="max-w-6xl mx-auto text-center">
-          <motion.h2
-            className="text-4xl font-bold mb-6 text-gray-900 dark:text-white"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-          >
-            Development Approach
-          </motion.h2>
-          <motion.p
-            className="text-gray-600 dark:text-gray-300 text-lg mb-12"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            viewport={{ once: true }}
-          >
-            How I build AI-powered tools using modern technology and AI-assisted development
-          </motion.p>
-          
-          <div className="grid md:grid-cols-3 gap-8 mb-12">
-            {[
-              { title: "Modern Tech Stack", icon: "🚀", desc: "Next.js, TypeScript, AI APIs for scalable solutions" },
-              { title: "AI-Assisted Development", icon: "🤖", desc: "Claude Code for rapid prototyping and iteration" },
-              { title: "Performance First", icon: "⚡", desc: "Fast loading, optimized, user-centered design" }
-            ].map((feature, i) => (
-              <motion.div
-                key={i}
-                className="bg-white dark:bg-dark-surface rounded-xl p-6 shadow-lg border border-gray-200 dark:border-gray-700 group"
-                initial={{ opacity: 0, y: 50, rotateX: 10 }}
-                whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
-                whileHover={{ 
-                  y: -8, 
-                  rotateX: 5,
-                  scale: 1.02,
-                  boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.1)" 
-                }}
-                transition={{ duration: 0.6, delay: i * 0.1 }}
-                viewport={{ once: true }}
-                style={{ transformStyle: 'preserve-3d' }}
-              >
-                <div className="text-4xl mb-4 group-hover:scale-110 transition-transform duration-300">
-                  {feature.icon}
-                </div>
-                <h3 className="text-xl font-semibold mb-2 text-gray-900 dark:text-white">
-                  {feature.title}
-                </h3>
-                <p className="text-gray-600 dark:text-gray-300">
-                  {feature.desc}
-                </p>
-              </motion.div>
-            ))}
-          </div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            viewport={{ once: true }}
-          >
-            <motion.a
-              href="/projects"
-              className="inline-flex items-center gap-2 bg-gradient-to-r from-primary-500 to-secondary-500 text-white font-semibold px-8 py-4 rounded-lg shadow-lg"
-              whileHover={{ 
-                scale: 1.05,
-                boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.2)" 
-              }}
-              whileTap={{ scale: 0.98 }}
-              transition={{ type: "spring", stiffness: 400, damping: 17 }}
-            >
-              See Projects Built This Way
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-              </svg>
-            </motion.a>
-          </motion.div>
-        </div>
-      </section>
-
-    </main>
+    <>
+      <HomePageClient />
+      {/* Structured Data Scripts */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(generateEnhancedPersonStructuredData('https://jpc-kappa.vercel.app'))
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(generateFAQStructuredData(homepageFAQs))
+        }}
+      />
+    </>
   )
 }
