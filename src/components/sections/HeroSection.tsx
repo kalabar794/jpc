@@ -169,6 +169,8 @@ export default function HeroSection() {
         className="relative z-10 text-center text-white px-6 max-w-6xl mx-auto"
         style={{ opacity }}
       >
+        {/* Dark overlay behind text for better readability */}
+        <div className="absolute inset-0 -z-10 bg-black/20 blur-3xl scale-150" />
 
         {/* Main Title */}
         <motion.h1
@@ -208,9 +210,9 @@ export default function HeroSection() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.6 }}
         >
-          <span className="text-gray-200">Through </span>
+          <span className="text-white font-medium">Through </span>
           <motion.span
-            className="ml-0 md:ml-2 bg-gradient-to-r from-blue-300 to-purple-300 bg-clip-text text-transparent font-semibold text-center md:text-left"
+            className="ml-0 md:ml-2 text-white font-bold text-center md:text-left"
             key={currentPhrase}
           >
             {text}
@@ -224,7 +226,7 @@ export default function HeroSection() {
 
         {/* Description */}
         <motion.p
-          className="text-lg md:text-xl lg:text-2xl mb-12 text-gray-200 max-w-4xl mx-auto leading-relaxed px-4 md:px-0"
+          className="text-lg md:text-xl lg:text-2xl mb-12 text-white/90 max-w-4xl mx-auto leading-relaxed px-4 md:px-0 font-medium"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.8 }}
