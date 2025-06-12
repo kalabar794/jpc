@@ -21,4 +21,9 @@ images:
     date: 2025-06-12T02:00:00.592Z
     image: https://res.cloudinary.com/dqltlwqi2/image/upload/v1749692488/JPC_A_dynamic_abstract_visualization_of_an_AI_chatbots_inner_wo_0968a989-da9c-4569-999d-89dd71f3b42f-up-standard-scale-3_00x_e0uc6u.jpg
     title: AI
+  - model: DALL-E 3
+    featured: false
+    date: 2025-06-12T02:04:16.027Z
+    title: AI
+    image: https://res.cloudinary.com/dqltlwqi2/image/upload/v1749692488/JPC_two_people_are_sitting_in_the_mountains_with_mountain_views_6d73b83d-e92a-4d52-9011-f98bbc8dd00c-up-art-scale-2_50x_ijojz2.jpg
 ---
