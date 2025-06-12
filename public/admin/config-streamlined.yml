@@ -1,0 +1,66 @@
+# Streamlined version with minimal required fields
+# To use this version, rename it to config.yml
+
+backend:
+  name: github
+  repo: kalabar794/jpc
+  branch: main
+  base_url: https://api.netlify.com
+  auth_endpoint: auth
+
+# Use Cloudinary for image optimization and CDN delivery
+media_library:
+  name: cloudinary
+  config:
+    cloud_name: dqltlwqi2
+    api_key: 194453126296877
+
+# Fallback local paths (Cloudinary will override these)
+media_folder: public/uploads
+public_folder: /uploads
+
+collections:
+  - name: galleries
+    label: Galleries
+    files:
+      - name: photography_gallery
+        label: Photography Gallery
+        file: content/galleries/photography-gallery.md
+        fields:
+          - {label: "Title", name: "title", widget: "hidden", default: "Photography Gallery"}
+          - label: "Images"
+            name: "images"
+            widget: "list"
+            summary: '{{fields.title}} - {{fields.category}}'
+            minimize_collapsed: true
+            fields:
+              - {label: "Title", name: "title", widget: "string", hint: "Quick title for the image"}
+              - {label: "Image", name: "image", widget: "image"}
+              - {label: "Category", name: "category", widget: "select", options: ["landscape", "portrait", "street", "nature", "architecture", "abstract"], default: "landscape"}
+              - {label: "Featured", name: "featured", widget: "boolean", default: false}
+              - {label: "Date", name: "date", widget: "datetime", default: ""}
+              # Optional fields collapsed by default
+              - {label: "Description", name: "description", widget: "text", required: false, hint: "Optional"}
+              - {label: "Location", name: "location", widget: "string", required: false, hint: "Optional"}
+              - {label: "Tags", name: "tags", widget: "list", required: false}
+
+      - name: ai_gallery
+        label: AI Gallery
+        file: content/galleries/ai-gallery.md
+        fields:
+          - {label: "Title", name: "title", widget: "hidden", default: "AI Gallery"}
+          - label: "Images"
+            name: "images"
+            widget: "list"
+            summary: '{{fields.title}}'
+            minimize_collapsed: true
+            fields:
+              - {label: "Title", name: "title", widget: "string"}
+              - {label: "Image", name: "image", widget: "image"}
+              - {label: "Model", name: "model", widget: "select", options: ["DALL-E 3", "Midjourney", "Stable Diffusion", "Other"], default: "DALL-E 3"}
+              - {label: "Featured", name: "featured", widget: "boolean", default: false}
+              - {label: "Date", name: "date", widget: "datetime", default: ""}
+              # Optional fields
+              - {label: "Description", name: "description", widget: "text", required: false}
+              - {label: "Prompt", name: "prompt", widget: "text", required: false}
+              - {label: "Style", name: "style", widget: "string", required: false}

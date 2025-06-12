@@ -80,7 +80,7 @@ collections:
             fields:
               - {label: "Title", name: "title", widget: "string"}
               - {label: "Image", name: "image", widget: "image"}
-              - {label: "Description", name: "description", widget: "text"}
+              - {label: "Description", name: "description", widget: "text", required: false}
               - {label: "Prompt", name: "prompt", widget: "text", required: false}
               - {label: "Model", name: "model", widget: "string", default: "DALL-E 3", required: false}
               - {label: "Style", name: "style", widget: "string", required: false}
@@ -99,11 +99,11 @@ collections:
             fields:
               - {label: "Title", name: "title", widget: "string"}
               - {label: "Image", name: "image", widget: "image"}
-              - {label: "Description", name: "description", widget: "text"}
+              - {label: "Description", name: "description", widget: "text", required: false}
               - {label: "Location", name: "location", widget: "string", required: false}
               - {label: "Camera", name: "camera", widget: "string", required: false}
               - {label: "Settings", name: "settings", widget: "string", required: false}
-              - {label: "Category", name: "category", widget: "select", options: ["landscape", "portrait", "street", "nature", "architecture", "abstract"]}
+              - {label: "Category", name: "category", widget: "select", options: ["landscape", "portrait", "street", "nature", "architecture", "abstract"], default: "landscape"}
               - {label: "Tags", name: "tags", widget: "list", required: false}
               - {label: "Featured", name: "featured", widget: "boolean", default: false}
               - {label: "Date", name: "date", widget: "datetime"}
