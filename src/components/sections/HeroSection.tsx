@@ -268,25 +268,6 @@ export default function HeroSection() {
               </motion.svg>
             </Button>
           </motion.div>
-
-          <motion.div
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            <Button
-              href="/contact"
-              variant="outline"
-              className="border-2 border-white text-white hover:bg-white hover:text-gray-900 font-bold px-10 py-4 text-lg backdrop-blur-sm"
-              motionProps={{
-                whileHover: {
-                  backgroundColor: "rgba(255, 255, 255, 0.9)",
-                  color: "#1f2937"
-                }
-              }}
-            >
-              Start a Project
-            </Button>
-          </motion.div>
         </motion.div>
       </motion.div>
 
