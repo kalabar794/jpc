@@ -56,4 +56,9 @@ images:
     date: 2025-06-12T02:47:42.870Z
     image: https://res.cloudinary.com/dqltlwqi2/image/upload/v1749692485/JPC_photo_of_a_beautiful_blond_women_in_a_versace_sheer_suit_in_e31572e7-a20c-4c91-994d-3f2d656c3796-up-art-scale-2_50x-Edit_cnnwpb.jpg
     title: AI
+  - model: DALL-E 3
+    featured: false
+    date: 2025-06-12T02:48:33.050Z
+    title: AI
+    image: https://res.cloudinary.com/dqltlwqi2/image/upload/v1749692484/JPC_Holographic_jellyfish_c39b15c7-2c6e-4e99-b5c3-b4670a862501_hhrrne.jpg
 ---
