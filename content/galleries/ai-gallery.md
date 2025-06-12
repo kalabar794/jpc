@@ -131,4 +131,9 @@ images:
     date: 2025-06-12T02:54:20.428Z
     title: AI
     image: https://res.cloudinary.com/dqltlwqi2/image/upload/v1749692476/jonathon794_An_AI_system_mid-process_analyzing_data_and_making__4c22033b-631d-470d-9b58-904a6151c8abA-gigapixel-standard-scale-2_00x_mukqab.jpg
+  - model: DALL-E 3
+    featured: false
+    date: 2025-06-12T02:54:51.109Z
+    title: AI
+    image: https://res.cloudinary.com/dqltlwqi2/image/upload/v1749692475/0DD039AB-926D-40A9-9077-3C40D0A897DF_l5znb8.jpg
 ---
