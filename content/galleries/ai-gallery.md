@@ -61,4 +61,9 @@ images:
     date: 2025-06-12T02:48:33.050Z
     title: AI
     image: https://res.cloudinary.com/dqltlwqi2/image/upload/v1749692484/JPC_Holographic_jellyfish_c39b15c7-2c6e-4e99-b5c3-b4670a862501_hhrrne.jpg
+  - model: DALL-E 3
+    featured: false
+    date: 2025-06-12T02:48:59.778Z
+    title: AI
+    image: https://res.cloudinary.com/dqltlwqi2/image/upload/v1749692483/JPC_futuristic_creative_AI_assistant_a_human-like_AI_entity_des_c525223e-2110-4aa0-ae55-49ef09683ff4-up-art-scale-3_00x_fxnc5d.jpg
 ---
