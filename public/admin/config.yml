@@ -5,13 +5,14 @@ backend:
   base_url: https://api.netlify.com
   auth_endpoint: auth
 
-# Switched back to simple file uploads to avoid Cloudinary session timeouts
-# media_library:
-#   name: cloudinary
-#   config:
-#     cloud_name: dqltlwqi2
-#     api_key: 194453126296877
+# Use Cloudinary for image optimization and CDN delivery
+media_library:
+  name: cloudinary
+  config:
+    cloud_name: dqltlwqi2
+    api_key: 194453126296877
 
+# Fallback local paths (Cloudinary will override these)
 media_folder: public/uploads
 public_folder: /uploads
 
@@ -21,8 +22,7 @@ collections:
     folder: content/posts
     create: true
     slug: "{{slug}}"
-    media_folder: "/public/uploads/blog"
-    public_folder: "/uploads/blog"
+    # Uses global Cloudinary configuration
     editor:
       preview: false
     fields:
@@ -49,8 +49,7 @@ collections:
     folder: content/projects
     create: true
     slug: "{{slug}}"
-    media_folder: "/public/uploads/projects"
-    public_folder: "/uploads/projects"
+    # Uses global Cloudinary configuration
     editor:
       preview: false
     fields:
@@ -73,8 +72,6 @@ collections:
       - name: ai_gallery
         label: AI Gallery Images
         file: content/galleries/ai-gallery.md
-        media_folder: "public/uploads/gallery/ai"
-        public_folder: "/uploads/gallery/ai"
         fields:
           - {label: "Title", name: "title", widget: "string", default: "AI Gallery"}
           - label: "Images"
@@ -94,8 +91,6 @@ collections:
       - name: photography_gallery
         label: Photography Gallery Images
         file: content/galleries/photography-gallery.md
-        media_folder: "public/uploads/gallery/photography"
-        public_folder: "/uploads/gallery/photography"
         fields:
           - {label: "Title", name: "title", widget: "string", default: "Photography Gallery"}
           - label: "Images"
