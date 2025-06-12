@@ -100,17 +100,6 @@ const PhotoGallery: React.FC<PhotoGalleryProps> = ({
           >
             {subtitle}
           </motion.p>
-          <motion.div
-            className="flex justify-center gap-4"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-          >
-            <Button onClick={toggleSlideshow} className="gap-2" variant="primary">
-              {isPlaying ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4" />}
-              {isPlaying ? 'Pause' : 'Start'} Slideshow
-            </Button>
-          </motion.div>
         </div>
       </motion.div>
 
