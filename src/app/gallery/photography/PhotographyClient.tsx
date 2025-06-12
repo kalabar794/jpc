@@ -22,29 +22,30 @@ export default function PhotographyClient({ images }: PhotographyClientProps) {
       <main className="relative z-10 pt-24 pb-12 px-6">
       <div className="max-w-7xl mx-auto">
         <motion.div
-          className="text-center mb-16"
+          className="text-center mb-16 relative"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
+          {/* Dark overlay for better text readability */}
+          <div className="absolute inset-0 -z-10 bg-black/30 blur-3xl scale-150" />
+          
           <motion.div
-            className="inline-flex items-center px-4 py-2 rounded-full bg-gradient-to-r from-blue-500/20 to-cyan-500/20 backdrop-blur-sm border border-blue-500/30 mb-6"
+            className="inline-flex items-center px-4 py-2 rounded-full bg-white/10 backdrop-blur-md border border-white/20 mb-6"
             initial={{ scale: 0, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             transition={{ duration: 0.5, type: "spring", stiffness: 200 }}
           >
-            <div className="w-2 h-2 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full mr-2 animate-pulse" />
-            <span className="bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent font-semibold">
+            <div className="w-2 h-2 bg-white rounded-full mr-2 animate-pulse" />
+            <span className="text-white font-semibold">
               {images.length > 0 ? `${images.length} Photos` : 'Photography'}
             </span>
           </motion.div>
 
-          <h1 className="text-5xl font-bold gradient-text mb-4">
-            <span className="bg-gradient-to-r from-blue-600 via-cyan-600 to-teal-600 bg-clip-text text-transparent">
-              Photography
-            </span>
+          <h1 className="text-5xl font-bold mb-4 text-white">
+            Photography
           </h1>
-          <p className="text-xl text-gray-600 dark:text-gray-300">
+          <p className="text-xl text-white/90 font-medium">
             Landscape, macro, travel, and architectural photography
           </p>
         </motion.div>
