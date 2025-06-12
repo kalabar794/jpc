@@ -19,4 +19,9 @@ images:
     date: 2025-06-12T19:00:40.144Z
     image: https://res.cloudinary.com/dqltlwqi2/image/upload/v1749754818/portfolio/fsrvaqv47xdhumahdfpr.jpg
     title: Joshua Tree
+  - category: landscape
+    featured: false
+    date: 2025-06-12T19:01:14.528Z
+    image: https://res.cloudinary.com/dqltlwqi2/image/upload/v1749754769/portfolio/mvv9rkoylfnt1roktqmc.jpg
+    title: The old LA Zoo
 ---
