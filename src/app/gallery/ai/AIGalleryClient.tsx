@@ -73,17 +73,17 @@ export default function AIGalleryClient({ images }: AIGalleryClientProps) {
             {images.map((image, index) => (
               <motion.div
                 key={image.id}
-                className="group relative bg-white dark:bg-gray-800 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300"
+                className="group relative rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300"
                 initial={{ opacity: 0, y: 50 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 whileHover={{ y: -5 }}
               >
-                <div className="relative overflow-hidden bg-gray-100 dark:bg-gray-900">
+                <div className="relative overflow-hidden">
                   <img
                     src={image.imageUrl}
                     alt={image.alt}
-                    className="w-full h-auto max-h-[400px] object-contain group-hover:scale-110 transition-transform duration-700"
+                    className="w-full h-auto max-h-[400px] object-cover group-hover:scale-110 transition-transform duration-700"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   
@@ -94,41 +94,15 @@ export default function AIGalleryClient({ images }: AIGalleryClientProps) {
                       </span>
                     </div>
                   )}
-                </div>
-                
-                <div className="p-6">
-                  <h3 className="text-xl font-bold mb-2 text-gray-900 dark:text-white">
-                    {image.title}
-                  </h3>
                   
-                  {image.description && (
-                    <p className="text-gray-600 dark:text-gray-300 mb-4">
-                      {image.description}
-                    </p>
-                  )}
-                  
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    {image.tags?.map((tag, tagIndex) => (
-                      <span
-                        key={tagIndex}
-                        className="bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 text-xs px-2 py-1 rounded-full"
-                      >
-                        {tag}
-                      </span>
-                    ))}
+                  {/* Hover overlay with title */}
+                  <div className="absolute inset-0 flex items-end p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <div className="text-white">
+                      <h3 className="text-xl font-bold mb-2">
+                        {image.title}
+                      </h3>
+                    </div>
                   </div>
-                  
-                  
-                  {(image as any).prompt && (
-                    <details className="mt-4">
-                      <summary className="cursor-pointer text-purple-600 dark:text-purple-400 font-medium hover:text-purple-700 dark:hover:text-purple-300">
-                        View Prompt
-                      </summary>
-                      <p className="mt-2 text-sm text-gray-600 dark:text-gray-300 bg-gray-50 dark:bg-gray-700/50 p-3 rounded-lg">
-                        {(image as any).prompt}
-                      </p>
-                    </details>
-                  )}
                 </div>
               </motion.div>
             ))}
