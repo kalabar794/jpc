@@ -76,4 +76,9 @@ images:
     date: 2025-06-12T02:49:50.039Z
     title: AI
     image: https://res.cloudinary.com/dqltlwqi2/image/upload/v1749692482/JPC_an_intriguing_photograph_of_an_AI_female_GPT_chatbot_8f4cf8d7-3f59-42e6-aa10-5f00a2946792-up-standard-scale-3_00x-Edit-Edit_kefvfk.jpg
+  - model: DALL-E 3
+    featured: false
+    date: 2025-06-12T02:50:13.403Z
+    title: AI
+    image: https://res.cloudinary.com/dqltlwqi2/image/upload/v1749692482/jonathon794_A_beautiful_elegant_model_walking_the_catwalk_14a63e58-4a29-40b0-9e89-3a625c018df3-Enhanced_kxnnz3.jpg
 ---
