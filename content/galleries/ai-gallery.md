@@ -106,4 +106,9 @@ images:
     date: 2025-06-12T02:52:13.646Z
     title: AI
     image: https://res.cloudinary.com/dqltlwqi2/image/upload/v1749692479/jonathon794_mechanical_tiger_digital_quilling_clear_and_defined_9f18b43e-9530-44a1-8c5c-196694bd9c0c_u8vkp2.jpg
+  - model: DALL-E 3
+    featured: false
+    date: 2025-06-12T02:52:43.820Z
+    title: AI
+    image: https://res.cloudinary.com/dqltlwqi2/image/upload/v1749692478/DD3A831D-61FF-494A-8CEC-FC0E7885FAC6_n0dna0.jpg
 ---
