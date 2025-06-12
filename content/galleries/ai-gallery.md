@@ -121,4 +121,9 @@ images:
     date: 2025-06-12T02:53:33.084Z
     title: AI
     image: https://res.cloudinary.com/dqltlwqi2/image/upload/v1749692477/jonathon794_dj_at_a_large_trance_music_festival_night_time_wide_728d7ead-ae67-4efb-a3db-fccb74274399_kjcpyg.jpg
+  - model: DALL-E 3
+    featured: false
+    date: 2025-06-12T02:53:59.587Z
+    title: AI
+    image: https://res.cloudinary.com/dqltlwqi2/image/upload/v1749692476/jonathon794_a_professional_stock_photo_e31250b1-3224-488b-a998-46d7571c7a90_after-Edit-Edit_lqlq3l.jpg
 ---
