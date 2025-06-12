@@ -21,19 +21,13 @@ const categories = [
 
 export default function BlogPageClient({ posts }: BlogPageClientProps) {
   const [activeCategory, setActiveCategory] = useState('all')
-  const [searchTerm, setSearchTerm] = useState('')
   const containerRef = useRef<HTMLDivElement>(null)
   const { scrollY } = useScroll()
 
   // Filter posts based on category and search
   const filteredPosts = posts.filter(post => {
     const matchesCategory = activeCategory === 'all' || post.category === activeCategory
-    const matchesSearch = searchTerm === '' || 
-      post.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      post.excerpt.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      post.tags?.some(tag => tag.toLowerCase().includes(searchTerm.toLowerCase()))
-    
-    return matchesCategory && matchesSearch
+    return matchesCategory
   })
 
   // Parallax background
@@ -83,28 +77,6 @@ export default function BlogPageClient({ posts }: BlogPageClientProps) {
             and the latest industry trends that drive business growth.
           </motion.p>
 
-          {/* Search Bar */}
-          <motion.div
-            className="max-w-md mx-auto mb-8"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.6 }}
-          >
-            <div className="relative">
-              <input
-                type="text"
-                placeholder="Search articles..."
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full px-6 py-4 bg-white dark:bg-dark-surface border border-gray-200 dark:border-gray-700 rounded-full text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-              />
-              <div className="absolute right-4 top-1/2 transform -translate-y-1/2">
-                <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                </svg>
-              </div>
-            </div>
-          </motion.div>
 
           {/* Post Count */}
           <motion.div
@@ -118,7 +90,6 @@ export default function BlogPageClient({ posts }: BlogPageClientProps) {
             </span>
             <span className="text-gray-600 dark:text-gray-400 ml-2">
               {filteredPosts.length === 1 ? 'Article' : 'Articles'}
-              {searchTerm && ` matching "${searchTerm}"`}
             </span>
           </motion.div>
         </div>
@@ -362,20 +333,9 @@ export default function BlogPageClient({ posts }: BlogPageClientProps) {
                 No Articles Found
               </h3>
               <p className="text-gray-600 dark:text-gray-300 mb-8">
-                {searchTerm 
-                  ? `No articles match "${searchTerm}". Try a different search term.`
-                  : "Try selecting a different category to see more articles."
-                }
+                Try selecting a different category to see more articles.
               </p>
               <div className="flex gap-4 justify-center">
-                {searchTerm && (
-                  <button
-                    onClick={() => setSearchTerm('')}
-                    className="bg-blue-500 hover:bg-blue-600 text-white font-medium px-6 py-3 rounded-lg transition-colors"
-                  >
-                    Clear Search
-                  </button>
-                )}
                 <button
                   onClick={() => setActiveCategory('all')}
                   className="bg-gray-500 hover:bg-gray-600 text-white font-medium px-6 py-3 rounded-lg transition-colors"
