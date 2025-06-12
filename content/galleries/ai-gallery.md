@@ -26,4 +26,9 @@ images:
     date: 2025-06-12T02:04:16.027Z
     title: AI
     image: https://res.cloudinary.com/dqltlwqi2/image/upload/v1749692488/JPC_two_people_are_sitting_in_the_mountains_with_mountain_views_6d73b83d-e92a-4d52-9011-f98bbc8dd00c-up-art-scale-2_50x_ijojz2.jpg
+  - model: DALL-E 3
+    featured: false
+    date: 2025-06-12T02:04:48.851Z
+    title: AI
+    image: https://res.cloudinary.com/dqltlwqi2/image/upload/v1749692487/JPC_photorealistic_Working_from_home_with_the_latest_technology_ee01f481-4b8a-43ac-85c5-45f2055c56a7-Enhanced_jsnas4.jpg
 ---
