@@ -36,4 +36,9 @@ images:
     date: 2025-06-12T02:05:52.240Z
     title: AI
     image: https://res.cloudinary.com/dqltlwqi2/image/upload/v1749692487/JPC_Photorealistic_highly_detailed_Cloud_computing_visualizatio_ef35a334-6343-4426-8eb5-7a2b513e5aaa-Enhanced_id4wkg.jpg
+  - model: DALL-E 3
+    featured: false
+    date: 2025-06-12T02:06:14.379Z
+    title: AI
+    image: https://res.cloudinary.com/dqltlwqi2/image/upload/v1749692487/JPC_scene_featuring_a_holographic_projection_of_an_advanced_AI__5e495999-97e7-4650-b4e9-7d4ea25a02c4-Enhanced-up-art-scale-2_00x_cjmzim.jpg
 ---
