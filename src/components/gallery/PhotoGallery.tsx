@@ -3,7 +3,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
 import { X, ArrowLeft, ArrowRight, Play, Pause } from 'lucide-react';
-import Button from '@/components/ui/button';
+import Button from '@/components/ui/Button';
 import Card from '@/components/ui/Card';
 import { GalleryImage } from '@/lib/content';
 
