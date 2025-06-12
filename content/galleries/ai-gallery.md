@@ -86,4 +86,9 @@ images:
     date: 2025-06-12T02:50:35.590Z
     title: AI
     image: https://res.cloudinary.com/dqltlwqi2/image/upload/v1749692482/JPC_An_artificial_intelligence_represented_as_a_vast_network_of_c9ed514a-da16-4183-80ec-731252694990-up-standard-scale-3_00x_jffgu2.jpg
+  - model: DALL-E 3
+    featured: false
+    date: 2025-06-12T02:50:55.731Z
+    image: https://res.cloudinary.com/dqltlwqi2/image/upload/v1749692481/JPC_An_extraordinarily_detailed_and_realistic_digital_illustrat_7fd3e1a2-c22e-47f3-8b91-adbbb07426e4-up-art-scale-3_00x_chtnn5.jpg
+    title: AI
 ---
