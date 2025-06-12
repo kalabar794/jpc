@@ -69,11 +69,11 @@ export default function AIGalleryClient({ images }: AIGalleryClientProps) {
             </motion.a>
           </motion.div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
             {images.map((image, index) => (
               <motion.div
                 key={image.id}
-                className="group relative rounded-2xl overflow-hidden transition-all duration-300"
+                className="group relative overflow-hidden transition-all duration-300"
                 initial={{ opacity: 0, y: 50 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
