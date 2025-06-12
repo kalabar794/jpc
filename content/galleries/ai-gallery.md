@@ -51,4 +51,9 @@ images:
     date: 2025-06-12T02:47:16.132Z
     image: https://res.cloudinary.com/dqltlwqi2/image/upload/v1749692485/JPC_love_is_blindness_I_cant_believe_how_beautiful_this_is_6274bac2-4c42-4db1-ac63-9fe48db0d680-up-art-scale-2_50x_s2iiur.jpg
     title: AI
+  - model: DALL-E 3
+    featured: false
+    date: 2025-06-12T02:47:42.870Z
+    image: https://res.cloudinary.com/dqltlwqi2/image/upload/v1749692485/JPC_photo_of_a_beautiful_blond_women_in_a_versace_sheer_suit_in_e31572e7-a20c-4c91-994d-3f2d656c3796-up-art-scale-2_50x-Edit_cnnwpb.jpg
+    title: AI
 ---
