@@ -66,4 +66,9 @@ images:
     date: 2025-06-12T02:48:59.778Z
     title: AI
     image: https://res.cloudinary.com/dqltlwqi2/image/upload/v1749692483/JPC_futuristic_creative_AI_assistant_a_human-like_AI_entity_des_c525223e-2110-4aa0-ae55-49ef09683ff4-up-art-scale-3_00x_fxnc5d.jpg
+  - model: DALL-E 3
+    featured: false
+    date: 2025-06-12T02:49:23.829Z
+    title: AI
+    image: https://res.cloudinary.com/dqltlwqi2/image/upload/v1749692482/JPC_full_body_beautiful_persian_belly_dancer_in_the_desert_3b05f6f1-367c-4968-83ca-bc69ffbea0ef_x0ayy1.jpg
 ---
