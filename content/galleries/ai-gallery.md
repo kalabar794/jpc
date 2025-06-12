@@ -71,4 +71,9 @@ images:
     date: 2025-06-12T02:49:23.829Z
     title: AI
     image: https://res.cloudinary.com/dqltlwqi2/image/upload/v1749692482/JPC_full_body_beautiful_persian_belly_dancer_in_the_desert_3b05f6f1-367c-4968-83ca-bc69ffbea0ef_x0ayy1.jpg
+  - model: DALL-E 3
+    featured: false
+    date: 2025-06-12T02:49:50.039Z
+    title: AI
+    image: https://res.cloudinary.com/dqltlwqi2/image/upload/v1749692482/JPC_an_intriguing_photograph_of_an_AI_female_GPT_chatbot_8f4cf8d7-3f59-42e6-aa10-5f00a2946792-up-standard-scale-3_00x-Edit-Edit_kefvfk.jpg
 ---
