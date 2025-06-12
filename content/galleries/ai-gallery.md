@@ -101,4 +101,9 @@ images:
     date: 2025-06-12T02:51:51.487Z
     title: AI
     image: https://res.cloudinary.com/dqltlwqi2/image/upload/v1749692480/JPC_A_hyperrealistic_digital_art_of_an_alluring_female_AI_chatb_f217b010-eeb2-42f3-937a-efba4342c23d-up-art-scale-3_00x_aytsdn.jpg
+  - model: DALL-E 3
+    featured: false
+    date: 2025-06-12T02:52:13.646Z
+    title: AI
+    image: https://res.cloudinary.com/dqltlwqi2/image/upload/v1749692479/jonathon794_mechanical_tiger_digital_quilling_clear_and_defined_9f18b43e-9530-44a1-8c5c-196694bd9c0c_u8vkp2.jpg
 ---
