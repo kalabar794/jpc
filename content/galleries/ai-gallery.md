@@ -96,4 +96,9 @@ images:
     date: 2025-06-12T02:51:33.465Z
     title: AI
     image: https://res.cloudinary.com/dqltlwqi2/image/upload/v1749692480/jonathon794_Professional_app_icon_Design_sleek_music_modern_col_5940687f-f3e9-4fa5-bb75-53252fe4de24_htt2pl.jpg
+  - model: DALL-E 3
+    featured: false
+    date: 2025-06-12T02:51:51.487Z
+    title: AI
+    image: https://res.cloudinary.com/dqltlwqi2/image/upload/v1749692480/JPC_A_hyperrealistic_digital_art_of_an_alluring_female_AI_chatb_f217b010-eeb2-42f3-937a-efba4342c23d-up-art-scale-3_00x_aytsdn.jpg
 ---
