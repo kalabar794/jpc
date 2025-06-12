@@ -14,4 +14,9 @@ images:
     image: https://res.cloudinary.com/dqltlwqi2/image/upload/v1749681074/portfolio/ycpdgbqdh8d7xoccnoy2.jpg
     category: landscape
     description: Chollo Cactus Garden - Joshua Tree
+  - category: landscape
+    featured: false
+    date: 2025-06-12T19:00:40.144Z
+    image: https://res.cloudinary.com/dqltlwqi2/image/upload/v1749754818/portfolio/fsrvaqv47xdhumahdfpr.jpg
+    title: Joshua Tree
 ---
