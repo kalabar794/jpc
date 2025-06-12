@@ -81,4 +81,9 @@ images:
     date: 2025-06-12T02:50:13.403Z
     title: AI
     image: https://res.cloudinary.com/dqltlwqi2/image/upload/v1749692482/jonathon794_A_beautiful_elegant_model_walking_the_catwalk_14a63e58-4a29-40b0-9e89-3a625c018df3-Enhanced_kxnnz3.jpg
+  - model: DALL-E 3
+    featured: false
+    date: 2025-06-12T02:50:35.590Z
+    title: AI
+    image: https://res.cloudinary.com/dqltlwqi2/image/upload/v1749692482/JPC_An_artificial_intelligence_represented_as_a_vast_network_of_c9ed514a-da16-4183-80ec-731252694990-up-standard-scale-3_00x_jffgu2.jpg
 ---
