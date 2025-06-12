@@ -31,4 +31,9 @@ images:
     date: 2025-06-12T02:04:48.851Z
     title: AI
     image: https://res.cloudinary.com/dqltlwqi2/image/upload/v1749692487/JPC_photorealistic_Working_from_home_with_the_latest_technology_ee01f481-4b8a-43ac-85c5-45f2055c56a7-Enhanced_jsnas4.jpg
+  - model: DALL-E 3
+    featured: false
+    date: 2025-06-12T02:05:52.240Z
+    title: AI
+    image: https://res.cloudinary.com/dqltlwqi2/image/upload/v1749692487/JPC_Photorealistic_highly_detailed_Cloud_computing_visualizatio_ef35a334-6343-4426-8eb5-7a2b513e5aaa-Enhanced_id4wkg.jpg
 ---
