@@ -123,11 +123,11 @@ export default function PhotographyClient({ images }: PhotographyClientProps) {
                   transition={{ duration: 0.6, delay: index * 0.1 }}
                   whileHover={{ y: -5 }}
                 >
-                  <div className="relative aspect-[4/3] overflow-hidden">
+                  <div className="relative overflow-hidden bg-gray-100 dark:bg-gray-900">
                     <img
                       src={image.imageUrl}
                       alt={image.alt}
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                      className="w-full h-auto max-h-[400px] object-contain group-hover:scale-110 transition-transform duration-700"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                     
