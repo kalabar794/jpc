@@ -139,4 +139,9 @@ images:
     date: 2025-06-13T01:07:40.041Z
     image: https://res.cloudinary.com/dqltlwqi2/image/upload/v1749776412/portfolio/hzpocf84lnqg2rbgpik7.jpg
     title: Thailand
+  - category: landscape
+    featured: false
+    date: 2025-06-13T01:08:01.594Z
+    image: https://res.cloudinary.com/dqltlwqi2/image/upload/v1749776389/portfolio/g7mbqg1ie18l6hbo2hwj.jpg
+    title: Burbank
 ---
