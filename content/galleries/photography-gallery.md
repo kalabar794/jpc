@@ -29,4 +29,9 @@ images:
     date: 2025-06-12T19:01:43.440Z
     image: https://res.cloudinary.com/dqltlwqi2/image/upload/v1749754742/portfolio/ztwjlmdidg4if0ckja9j.jpg
     title: Alabama Hills National Park
+  - category: landscape
+    featured: false
+    date: 2025-06-13T00:19:20.394Z
+    image: https://res.cloudinary.com/dqltlwqi2/image/upload/v1749774096/IMG_8085_tzud3e.jpg
+    title: Disney Concert Happ
 ---
