@@ -104,4 +104,14 @@ images:
     date: 2025-06-13T01:04:25.450Z
     image: https://res.cloudinary.com/dqltlwqi2/image/upload/v1749776544/portfolio/cexkuwrbhatm0jwg8bs6.jpg
     title: DTLA
+  - category: landscape
+    featured: false
+    date: 2025-06-13T01:05:15.010Z
+    image: https://res.cloudinary.com/dqltlwqi2/image/upload/v1749776527/portfolio/tz70zekprjxxbakvw0gt.jpg
+    title: Burbank
+  - category: landscape
+    featured: false
+    date: 2025-06-13T01:05:15.272Z
+    image: https://res.cloudinary.com/dqltlwqi2/image/upload/v1749776518/portfolio/zc60kg3weqiheq5qdylr.jpg
+    title: DTLA
 ---
