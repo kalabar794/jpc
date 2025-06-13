@@ -108,6 +108,3 @@ With endorsements from industry peers across multiple competencies:
 - Management: 12 endorsements
 - Content Management: 11 endorsements
 
-## Let's Connect
-
-I'm passionate about helping businesses thrive through innovative marketing strategies. Whether you're looking to enhance your digital presence, implement AI-driven solutions, or develop comprehensive marketing campaigns, I bring two decades of proven expertise to drive your success.

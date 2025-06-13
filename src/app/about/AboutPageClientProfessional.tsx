@@ -205,30 +205,6 @@ export default function AboutPageClient({ aboutData }: AboutPageClientProps) {
           </div>
         </section>
 
-        {/* Call to Action */}
-        <section className="relative z-10 px-6 py-20">
-          <div className="max-w-4xl mx-auto text-center">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              viewport={{ once: true }}
-            >
-              <h2 className="text-3xl font-bold mb-4 text-white">
-                Let's Work Together
-              </h2>
-              <p className="text-xl text-white/80 mb-8">
-                Ready to elevate your marketing strategy?
-              </p>
-              <a
-                href="/contact"
-                className="inline-block px-8 py-4 bg-white text-gray-900 font-semibold rounded-lg hover:bg-gray-100 transition-colors"
-              >
-                Get in Touch
-              </a>
-            </motion.div>
-          </div>
-        </section>
       </main>
     </AnimatedBackground>
   )
