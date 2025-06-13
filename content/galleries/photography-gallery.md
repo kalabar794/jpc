@@ -149,4 +149,9 @@ images:
     date: 2025-06-13T01:08:21.687Z
     image: https://res.cloudinary.com/dqltlwqi2/image/upload/v1749776362/portfolio/u3ct3hnuav9axfgymbja.jpg
     title: Big Bear Lake
+  - category: landscape
+    featured: false
+    date: 2025-06-13T01:08:46.580Z
+    image: https://res.cloudinary.com/dqltlwqi2/image/upload/v1749776348/portfolio/gr3msafdtfuc8gsrf1ac.jpg
+    title: Koh Samui
 ---
