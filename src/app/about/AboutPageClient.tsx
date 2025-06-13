@@ -117,18 +117,6 @@ export default function AboutPageClient({ aboutData }: AboutPageClientProps) {
               </span>
             </motion.h1>
 
-            <motion.div
-              className="inline-flex items-center px-4 py-2 rounded-full bg-gradient-to-r from-purple-500/20 to-pink-500/20 backdrop-blur-sm border border-purple-500/30 mb-6"
-              initial={{ scale: 0, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              transition={{ duration: 0.5, type: "spring", stiffness: 200 }}
-              whileHover={{ scale: 1.05 }}
-            >
-              <div className="w-2 h-2 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full mr-2 animate-pulse" />
-              <span className="bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent font-semibold">
-                {aboutData ? 'CMS Content Loaded' : 'Fallback Content'}
-              </span>
-            </motion.div>
 
             <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white">
               {data.heroTitle || data.title}
