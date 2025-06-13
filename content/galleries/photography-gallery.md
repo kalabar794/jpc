@@ -59,4 +59,9 @@ images:
     date: 2025-06-13T00:33:34.021Z
     image: https://res.cloudinary.com/dqltlwqi2/image/upload/v1749774643/portfolio/xbee5dyt63tlo9y8hxax.jpg
     title: Yosemite
+  - category: landscape
+    featured: false
+    date: 2025-06-13T00:34:08.272Z
+    image: https://res.cloudinary.com/dqltlwqi2/image/upload/v1749774611/portfolio/kfpl9dlvzojvftokoenh.jpg
+    title: Joshua Tree
 ---
