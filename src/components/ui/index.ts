@@ -5,7 +5,6 @@ export { default as Modal, ModalHeader, ModalBody, ModalFooter, ImageModal } fro
 export { default as AnimatedCard, SampleAnimatedCard } from './AnimatedCard'
 export { default as Navigation } from './Navigation'
 export { default as OptimizedImage, HeroImage, GalleryThumbnail } from './OptimizedImage'
-export { default as EnhancedImage, EnhancedGalleryImage, EnhancedHeroImage } from './EnhancedImage'
 export { default as AnimatedBackground } from './AnimatedBackground'
 export { default as NewsletterSignup, LeadMagnetSignup } from './NewsletterSignup'
 export { JonathonLogo, JonathonAILogo } from './JonathonLogo'
