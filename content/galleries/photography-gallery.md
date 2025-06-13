@@ -114,4 +114,9 @@ images:
     date: 2025-06-13T01:05:15.272Z
     image: https://res.cloudinary.com/dqltlwqi2/image/upload/v1749776518/portfolio/zc60kg3weqiheq5qdylr.jpg
     title: DTLA
+  - category: landscape
+    featured: false
+    date: 2025-06-13T01:05:54.728Z
+    image: https://res.cloudinary.com/dqltlwqi2/image/upload/v1749776470/portfolio/euubugsjdnsttzfnh1zt.jpg
+    title: The Broad
 ---
