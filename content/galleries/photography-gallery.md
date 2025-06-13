@@ -54,4 +54,9 @@ images:
     date: 2025-06-13T00:33:09.091Z
     image: https://res.cloudinary.com/dqltlwqi2/image/upload/v1749774654/portfolio/dfwbqzer1jt8c9koj6p0.jpg
     title: Yosemite
+  - category: landscape
+    featured: false
+    date: 2025-06-13T00:33:34.021Z
+    image: https://res.cloudinary.com/dqltlwqi2/image/upload/v1749774643/portfolio/xbee5dyt63tlo9y8hxax.jpg
+    title: Yosemite
 ---
