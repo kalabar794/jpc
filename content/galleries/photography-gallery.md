@@ -134,4 +134,9 @@ images:
     date: 2025-06-13T01:07:13.180Z
     image: https://res.cloudinary.com/dqltlwqi2/image/upload/v1749776439/portfolio/grlq6wybfhyogqertbvb.jpg
     title: The Broad
+  - category: landscape
+    featured: false
+    date: 2025-06-13T01:07:40.041Z
+    image: https://res.cloudinary.com/dqltlwqi2/image/upload/v1749776412/portfolio/hzpocf84lnqg2rbgpik7.jpg
+    title: Thailand
 ---
