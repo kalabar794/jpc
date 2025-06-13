@@ -144,4 +144,9 @@ images:
     date: 2025-06-13T01:08:01.594Z
     image: https://res.cloudinary.com/dqltlwqi2/image/upload/v1749776389/portfolio/g7mbqg1ie18l6hbo2hwj.jpg
     title: Burbank
+  - category: landscape
+    featured: false
+    date: 2025-06-13T01:08:21.687Z
+    image: https://res.cloudinary.com/dqltlwqi2/image/upload/v1749776362/portfolio/u3ct3hnuav9axfgymbja.jpg
+    title: Big Bear Lake
 ---
