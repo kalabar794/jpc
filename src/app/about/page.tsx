@@ -1,6 +1,6 @@
 import { Metadata } from 'next'
 import { getAboutContentSync } from '@/lib/content'
-import AboutPageClient from './AboutPageClient'
+import AboutPageClient from './AboutPageClientProfessional'
 import { generateMetadata, generateEnhancedPersonStructuredData } from '@/lib/metadata'
 
 export const metadata: Metadata = generateMetadata(
