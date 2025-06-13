@@ -102,20 +102,6 @@ export default function AboutPageClient({ aboutData }: AboutPageClientProps) {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            {/* Hero Tagline with improved readability */}
-            <motion.h1
-              className="text-5xl md:text-7xl font-bold mb-8"
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-            >
-              <span className="block text-white font-extrabold mb-2">
-                Transforming Ideas
-              </span>
-              <span className="block text-white font-extrabold">
-                into Reality
-              </span>
-            </motion.h1>
 
 
             <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white">

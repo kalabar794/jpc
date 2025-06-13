@@ -1,82 +1,113 @@
 ---
 title: "About Jonathon"
-heroTitle: "Transforming Ideas into Reality"
-heroSubtitle: "AI Marketing Expert & Creative Technologist"
-bio: "With over a decade of experience at the intersection of technology and marketing, I specialize in leveraging cutting-edge AI to create transformative business solutions. My approach combines data-driven insights with creative innovation to deliver measurable results."
+heroTitle: "Marketing Director"
+heroSubtitle: "20+ Years of Marketing Excellence Across Diverse Industries"
+bio: "Marketing Director with over 20 years of experience across diverse industries and markets, leveraging comprehensive marketing expertise to drive business growth and achieve exceptional results. I excel in developing data-driven strategies, executing marketing campaigns, and optimizing user experiences. Master's in Marketing Management and a Bachelor's in Business Studies."
 expertise:
-  - name: "AI & Machine Learning"
+  - name: "Marketing Management & Strategy"
     gradient: "from-blue-500 to-purple-500"
-  - name: "Marketing Automation"
+  - name: "SEO & SEM"
     gradient: "from-purple-500 to-pink-500"
-  - name: "Data Analytics"
+  - name: "Content Marketing"
     gradient: "from-pink-500 to-red-500"
-  - name: "Creative Strategy"
+  - name: "Emerging AI Technologies"
     gradient: "from-red-500 to-orange-500"
+  - name: "Email Marketing"
+    gradient: "from-orange-500 to-yellow-500"
+  - name: "Social Media Management"
+    gradient: "from-yellow-500 to-green-500"
 industries:
-  - name: "Technology"
+  - name: "Financial Services"
     gradient: "from-blue-600 to-cyan-600"
-  - name: "E-commerce"
+  - name: "FinTech"
     gradient: "from-cyan-600 to-teal-600"
-  - name: "Healthcare"
+  - name: "E-Commerce"
     gradient: "from-teal-600 to-green-600"
-  - name: "Finance"
+  - name: "Computer Software"
     gradient: "from-green-600 to-lime-600"
+  - name: "Consumer Packaged Goods"
+    gradient: "from-lime-600 to-yellow-600"
+  - name: "Wellness & Supplements"
+    gradient: "from-yellow-600 to-orange-600"
 experience:
-  - company: "AI Marketing Solutions"
-    role: "Founder & CEO"
-    description: "Built and scaled an AI-powered marketing platform serving 500+ clients globally"
+  - company: "WEO Media - Dental Marketing"
+    role: "Senior Marketing Manager"
+    description: "Aug 2023 - Present • Leading marketing initiatives for dental practices, leveraging Generative AI, HubSpot, and multi-channel strategies"
     gradient: "from-blue-500 to-purple-500"
-    icon: "🚀"
-  - company: "TechCorp Innovation Lab"
-    role: "Head of AI Strategy"
-    description: "Led AI initiatives resulting in 300% ROI improvement across client campaigns"
+    icon: "🦷"
+  - company: "SoundSplore Inc."
+    role: "Marketing Director"
+    description: "Jun 2021 - Aug 2023 • Directed marketing strategy for early-stage startup, implementing AI-driven customer acquisition and remote team management"
     gradient: "from-purple-500 to-pink-500"
-    icon: "🤖"
-  - company: "Digital Dynamics"
-    role: "Senior Marketing Technologist"
-    description: "Pioneered automated marketing workflows processing 10M+ data points daily"
+    icon: "🎵"
+  - company: "LA Photo Party"
+    role: "Marketing Manager"
+    description: "Jan 2019 - Mar 2021 • Managed integrated marketing campaigns, influencer partnerships, and product strategy"
     gradient: "from-pink-500 to-red-500"
-    icon: "⚡"
+    icon: "📸"
+  - company: "OldSchoolLabs.com"
+    role: "Senior Marketing Manager"
+    description: "Jul 2016 - Apr 2018 • Led marketing initiatives for fitness supplement brand with focus on influencer marketing"
+    gradient: "from-red-500 to-orange-500"
+    icon: "💪"
+  - company: "ApexPeak"
+    role: "Senior Online Marketing & eCommerce Consultant"
+    description: "Jul 2011 - Jul 2016 • 5 years consulting for FinTech startup across Los Angeles & Singapore markets"
+    gradient: "from-orange-500 to-yellow-500"
+    icon: "📈"
+  - company: "Bank of America"
+    role: "Vice President, eCommerce Marketing (Mortgage)"
+    description: "Apr 2007 - Jul 2011 • Led digital marketing strategy for mortgage division, managing mobile and web initiatives"
+    gradient: "from-yellow-500 to-green-500"
+    icon: "🏦"
 education:
-  - degree: "MS Computer Science"
-    institution: "Stanford University"
+  - degree: "M.Sc Marketing Management"
+    institution: "University of Leicester"
     icon: "🎓"
     gradient: "from-red-500 to-orange-500"
-  - degree: "MBA Marketing"
-    institution: "Wharton School"
-    icon: "📊"
+  - degree: "BA (Hons) Business Studies"
+    institution: "De Montfort University"
+    icon: "📚"
     gradient: "from-orange-500 to-yellow-500"
 seo:
-  title: "About Jonathon | AI Marketing Expert"
-  description: "Learn about Jonathon's journey in AI marketing, creative technology, and transformative business solutions."
-  keywords: "AI marketing expert, creative technologist, marketing automation specialist"
+  title: "About Jonathon Carter | Marketing Director | 20+ Years Experience"
+  description: "Marketing Director with 20+ years experience across FinTech, E-commerce, CPG, and Software. Expert in digital marketing, SEO/SEM, and emerging AI technologies."
+  keywords: "marketing director, digital marketing expert, SEO specialist, e-commerce marketing, fintech marketing, AI marketing"
 ---
 
-# Pioneering the Future of AI-Driven Marketing
+# Professional Overview
 
-My journey began with a simple belief: that technology should amplify human creativity, not replace it. Today, I help businesses harness the power of AI to create marketing strategies that are not just effective, but transformative.
+An experienced leader and mentor with over 20 years of comprehensive marketing expertise across diverse industries. I specialize in developing data-driven strategies that drive business growth and achieve exceptional results. My approach combines traditional marketing fundamentals with cutting-edge technologies, including emerging AI tools, to create innovative solutions for modern business challenges.
 
-## What Drives Me
+## Core Competencies
 
-I'm passionate about solving complex problems at scale. Whether it's developing AI algorithms that predict consumer behavior or creating automated systems that generate personalized content for millions, I thrive on challenges that push the boundaries of what's possible.
+### Digital Marketing & Technology
+- **SEO & SEM**: 23+ endorsements • Expert in search engine optimization and marketing
+- **E-commerce**: 49+ endorsements • Extensive experience in online retail strategies
+- **Digital Marketing**: 30+ endorsements • Comprehensive digital campaign management
+- **Social Media Marketing**: 18+ endorsements • Multi-platform strategy and execution
+- **Web Analytics**: 21+ endorsements • Data-driven decision making and optimization
 
-## My Approach
+### Strategic Leadership
+- **Marketing Strategy**: 14+ endorsements • End-to-end marketing planning and execution
+- **Team Leadership**: Building and managing high-performing marketing teams
+- **Product Management**: 15+ endorsements • Product lifecycle and go-to-market strategies
+- **Strategic Planning**: 9+ endorsements • Long-term vision and business alignment
 
-Every project starts with understanding the unique DNA of your business. I combine:
+### Emerging Technologies
+- **Generative AI**: Early adopter leveraging AI for content creation and automation
+- **Marketing Automation**: HubSpot certified, implementing efficient workflows
+- **Mobile Marketing**: 14+ endorsements • Mobile-first strategies and app marketing
+- **Video Production & Podcasting**: Creating engaging multimedia content
 
-- **Data Science**: Leveraging advanced analytics to uncover hidden insights
-- **Creative Innovation**: Designing solutions that capture attention and drive engagement
-- **Strategic Thinking**: Aligning technology with business goals for maximum impact
-- **Continuous Optimization**: Using AI to constantly improve and adapt strategies
+## Industry Recognition
 
-## Beyond Work
-
-When I'm not immersed in code or crafting marketing strategies, you'll find me:
-- Contributing to open-source AI projects
-- Speaking at tech conferences worldwide
-- Mentoring the next generation of AI entrepreneurs
-- Exploring the intersection of art and technology through generative AI
+With endorsements from industry peers across multiple competencies:
+- Strategy: 37 endorsements
+- Online Marketing: 31 endorsements
+- Management: 12 endorsements
+- Content Management: 11 endorsements
 
 ## Let's Connect
 
-I'm always excited to discuss new projects, innovative ideas, or potential collaborations. Whether you're looking to transform your marketing with AI or simply want to chat about the future of technology, I'd love to hear from you.
+I'm passionate about helping businesses thrive through innovative marketing strategies. Whether you're looking to enhance your digital presence, implement AI-driven solutions, or develop comprehensive marketing campaigns, I bring two decades of proven expertise to drive your success.
