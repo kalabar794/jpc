@@ -94,4 +94,14 @@ images:
     date: 2025-06-13T00:37:07.333Z
     image: https://res.cloudinary.com/dqltlwqi2/image/upload/v1749774525/portfolio/zzrlqboe4xsgix6rmkwn.jpg
     title: Joshua Tree
+  - category: landscape
+    featured: false
+    date: 2025-06-13T01:04:23.245Z
+    image: https://res.cloudinary.com/dqltlwqi2/image/upload/v1749776603/portfolio/dtjcjbxuea9wz0nkz7q4.jpg
+    title: Yosemite
+  - category: landscape
+    featured: false
+    date: 2025-06-13T01:04:25.450Z
+    image: https://res.cloudinary.com/dqltlwqi2/image/upload/v1749776544/portfolio/cexkuwrbhatm0jwg8bs6.jpg
+    title: DTLA
 ---
