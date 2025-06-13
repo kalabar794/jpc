@@ -34,4 +34,9 @@ images:
     date: 2025-06-13T00:19:20.394Z
     image: https://res.cloudinary.com/dqltlwqi2/image/upload/v1749774096/IMG_8085_tzud3e.jpg
     title: Disney Concert Happ
+  - category: landscape
+    featured: false
+    date: 2025-06-13T00:23:22.885Z
+    image: https://res.cloudinary.com/dqltlwqi2/image/upload/v1749774060/IMG_6346_vsnzkw.jpg
+    title: Thailand
 ---
