@@ -79,4 +79,9 @@ images:
     date: 2025-06-13T00:35:49.487Z
     image: https://res.cloudinary.com/dqltlwqi2/image/upload/v1749774568/portfolio/jnkp1qpytyx4t8q7qhv7.jpg
     title: Mt Whitney
+  - category: landscape
+    featured: false
+    date: 2025-06-13T00:36:19.248Z
+    image: https://res.cloudinary.com/dqltlwqi2/image/upload/v1749774547/portfolio/fzzgigyd7gzppgjgtjqa.jpg
+    title: Thailand
 ---
