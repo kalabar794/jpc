@@ -69,4 +69,9 @@ images:
     date: 2025-06-13T00:34:37.232Z
     image: https://res.cloudinary.com/dqltlwqi2/image/upload/v1749774595/portfolio/avz6bukj1zr5fpzogiqu.jpg
     title: DTLA
+  - category: landscape
+    featured: false
+    date: 2025-06-13T00:35:12.429Z
+    image: https://res.cloudinary.com/dqltlwqi2/image/upload/v1749774580/portfolio/ls2jwqlryvomtwx2p9gw.jpg
+    title: Santa Anita Park
 ---
