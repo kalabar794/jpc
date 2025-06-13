@@ -84,4 +84,14 @@ images:
     date: 2025-06-13T00:36:19.248Z
     image: https://res.cloudinary.com/dqltlwqi2/image/upload/v1749774547/portfolio/fzzgigyd7gzppgjgtjqa.jpg
     title: Thailand
+  - category: landscape
+    featured: false
+    date: 2025-06-13T00:37:05.078Z
+    image: https://res.cloudinary.com/dqltlwqi2/image/upload/v1749774537/portfolio/fmuhcqwgmthumuepi4ml.jpg
+    title: Muscle Beach
+  - category: landscape
+    featured: false
+    date: 2025-06-13T00:37:07.333Z
+    image: https://res.cloudinary.com/dqltlwqi2/image/upload/v1749774525/portfolio/zzrlqboe4xsgix6rmkwn.jpg
+    title: Joshua Tree
 ---
