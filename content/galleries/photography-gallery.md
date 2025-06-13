@@ -49,4 +49,9 @@ images:
     date: 2025-06-13T00:32:19.731Z
     image: https://res.cloudinary.com/dqltlwqi2/image/upload/v1749774667/portfolio/xx04zyvv4r4ro4zyqveh.jpg
     title: Koh Samui
+  - category: landscape
+    featured: false
+    date: 2025-06-13T00:33:09.091Z
+    image: https://res.cloudinary.com/dqltlwqi2/image/upload/v1749774654/portfolio/dfwbqzer1jt8c9koj6p0.jpg
+    title: Yosemite
 ---
