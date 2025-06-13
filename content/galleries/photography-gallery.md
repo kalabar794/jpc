@@ -44,4 +44,9 @@ images:
     date: 2025-06-13T00:31:46.313Z
     image: https://res.cloudinary.com/dqltlwqi2/image/upload/v1749774678/portfolio/mjo0y67p65ubanprvtoh.jpg
     title: Thailand
+  - category: landscape
+    featured: false
+    date: 2025-06-13T00:32:19.731Z
+    image: https://res.cloudinary.com/dqltlwqi2/image/upload/v1749774667/portfolio/xx04zyvv4r4ro4zyqveh.jpg
+    title: Koh Samui
 ---
