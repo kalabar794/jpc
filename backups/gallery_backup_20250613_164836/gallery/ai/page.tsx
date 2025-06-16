@@ -1,6 +1,6 @@
 import { Metadata } from 'next'
-import { getGalleryImages } from '@/lib/content'
-import PhotoGallery from '@/components/gallery/PhotoGallery'
+import { getAllGalleryImages } from '@/lib/content'
+import AIGalleryClient from './AIGalleryClient'
 import { generateMetadata } from '@/lib/metadata'
 
 export const metadata: Metadata = generateMetadata(
@@ -21,14 +21,15 @@ export const metadata: Metadata = generateMetadata(
   }
 )
 
-export default async function AIGalleryPage() {
-  const images = await getGalleryImages('AI Art')
+export default function AIGalleryPage() {
+  // Load gallery images on server side
+  let images: any[] = []
+  try {
+    const galleryImages = getAllGalleryImages()
+    images = galleryImages.filter(img => img.category === 'AI Art')
+  } catch (error) {
+    console.error('Failed to load AI gallery:', error)
+  }
 
-  return (
-    <PhotoGallery 
-      images={images}
-      title="AI Gallery"
-      subtitle="Creative AI-generated artwork and visual experiments"
-    />
-  )
+  return <AIGalleryClient images={images} />
 }

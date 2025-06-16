@@ -1,6 +1,6 @@
 import { Metadata } from 'next'
-import { getGalleryImages } from '@/lib/content'
-import PhotoGallery from '@/components/gallery/PhotoGallery'
+import { getAllGalleryImages } from '@/lib/content'
+import PhotographyClient from './PhotographyClient'
 import { generateMetadata } from '@/lib/metadata'
 
 export const metadata: Metadata = generateMetadata(
@@ -21,14 +21,15 @@ export const metadata: Metadata = generateMetadata(
   }
 )
 
-export default async function PhotographyPage() {
-  const images = await getGalleryImages('Photography')
+export default function PhotographyPage() {
+  // Load gallery images on server side
+  let images: any[] = []
+  try {
+    const galleryImages = getAllGalleryImages()
+    images = galleryImages.filter(img => img.category !== 'AI Art')
+  } catch (error) {
+    console.error('Failed to load photography gallery:', error)
+  }
 
-  return (
-    <PhotoGallery 
-      images={images}
-      title="Photography Gallery"
-      subtitle="Discover stunning moments captured through the lens"
-    />
-  )
+  return <PhotographyClient images={images} />
 }
