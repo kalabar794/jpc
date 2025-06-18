@@ -34,8 +34,17 @@ const PhotoGallery: React.FC<PhotoGalleryProps> = ({
 
   useEffect(() => {
     if (isPlaying && images.length > 0) {
+      // Open modal with first image if not already open
+      if (!selectedPhoto) {
+        setSelectedPhoto(images[currentIndex]);
+      }
+      
       intervalRef.current = setInterval(() => {
-        setCurrentIndex((prev) => (prev + 1) % images.length);
+        setCurrentIndex((prev) => {
+          const nextIndex = (prev + 1) % images.length;
+          setSelectedPhoto(images[nextIndex]);
+          return nextIndex;
+        });
       }, 3000);
     } else {
       if (intervalRef.current) {
@@ -48,7 +57,7 @@ const PhotoGallery: React.FC<PhotoGalleryProps> = ({
         clearInterval(intervalRef.current);
       }
     };
-  }, [isPlaying, images.length]);
+  }, [isPlaying, images.length, currentIndex, selectedPhoto]);
 
   const openModal = (photo: GalleryImage, index: number) => {
     setSelectedPhoto(photo);
@@ -57,6 +66,7 @@ const PhotoGallery: React.FC<PhotoGalleryProps> = ({
 
   const closeModal = () => {
     setSelectedPhoto(null);
+    setIsPlaying(false);
   };
 
   const nextPhoto = () => {
@@ -106,6 +116,31 @@ const PhotoGallery: React.FC<PhotoGalleryProps> = ({
       {/* Gallery Grid */}
       <div className="px-4 pb-20">
         <div className="max-w-7xl mx-auto">
+          {/* Slideshow Button */}
+          <div className="flex justify-center mb-8">
+            <Button
+              variant="outline"
+              size="lg"
+              onClick={toggleSlideshow}
+              className="group relative overflow-hidden border-2 hover:border-primary transition-all duration-300"
+            >
+              <span className="relative z-10 flex items-center gap-2">
+                {isPlaying ? (
+                  <>
+                    <Pause className="w-5 h-5" />
+                    Pause Slideshow
+                  </>
+                ) : (
+                  <>
+                    <Play className="w-5 h-5" />
+                    Start Slideshow
+                  </>
+                )}
+              </span>
+              <span className="absolute inset-0 bg-primary/10 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
+            </Button>
+          </div>
+          
           <motion.div 
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-0"
             initial="hidden"
@@ -214,15 +249,25 @@ const PhotoGallery: React.FC<PhotoGalleryProps> = ({
                   <ArrowRight className="w-4 h-4" />
                 </Button>
 
-                {/* Close Button */}
-                <Button
-                  variant="outline"
-                  size="sm"
-                  className="absolute top-4 right-4 bg-background/80 backdrop-blur-sm"
-                  onClick={closeModal}
-                >
-                  <X className="w-4 h-4" />
-                </Button>
+                {/* Control Buttons */}
+                <div className="absolute top-4 right-4 flex gap-2">
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="bg-background/80 backdrop-blur-sm"
+                    onClick={toggleSlideshow}
+                  >
+                    {isPlaying ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4" />}
+                  </Button>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="bg-background/80 backdrop-blur-sm"
+                    onClick={closeModal}
+                  >
+                    <X className="w-4 h-4" />
+                  </Button>
+                </div>
 
                 {/* Photo Info */}
                 <motion.div 
