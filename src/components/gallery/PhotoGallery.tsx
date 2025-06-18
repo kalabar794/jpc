@@ -2,7 +2,7 @@
 
 import React, { useEffect, useRef, useState } from 'react';
 import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
-import { X, ArrowLeft, ArrowRight, Play, Pause } from 'lucide-react';
+import { X, ArrowLeft, ArrowRight } from 'lucide-react';
 import Button from '@/components/ui/Button';
 import { GalleryImage } from '@/lib/content';
 
@@ -19,9 +19,7 @@ const PhotoGallery: React.FC<PhotoGalleryProps> = ({
 }) => {
   const [selectedPhoto, setSelectedPhoto] = useState<GalleryImage | null>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [isPlaying, setIsPlaying] = useState(false);
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
-  const intervalRef = useRef<NodeJS.Timeout | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
   const { scrollYProgress } = useScroll({
@@ -32,32 +30,6 @@ const PhotoGallery: React.FC<PhotoGalleryProps> = ({
   const y = useTransform(scrollYProgress, [0, 1], [100, -100]);
   const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0]);
 
-  useEffect(() => {
-    if (isPlaying && images.length > 0) {
-      // Open modal with first image if not already open
-      if (!selectedPhoto) {
-        setSelectedPhoto(images[currentIndex]);
-      }
-      
-      intervalRef.current = setInterval(() => {
-        setCurrentIndex((prev) => {
-          const nextIndex = (prev + 1) % images.length;
-          setSelectedPhoto(images[nextIndex]);
-          return nextIndex;
-        });
-      }, 3000);
-    } else {
-      if (intervalRef.current) {
-        clearInterval(intervalRef.current);
-      }
-    }
-
-    return () => {
-      if (intervalRef.current) {
-        clearInterval(intervalRef.current);
-      }
-    };
-  }, [isPlaying, images.length, currentIndex, selectedPhoto]);
 
   const openModal = (photo: GalleryImage, index: number) => {
     setSelectedPhoto(photo);
@@ -66,7 +38,6 @@ const PhotoGallery: React.FC<PhotoGalleryProps> = ({
 
   const closeModal = () => {
     setSelectedPhoto(null);
-    setIsPlaying(false);
   };
 
   const nextPhoto = () => {
@@ -81,9 +52,6 @@ const PhotoGallery: React.FC<PhotoGalleryProps> = ({
     setSelectedPhoto(images[prevIndex]);
   };
 
-  const toggleSlideshow = () => {
-    setIsPlaying(!isPlaying);
-  };
 
   return (
     <div className="min-h-screen bg-background">
@@ -116,31 +84,6 @@ const PhotoGallery: React.FC<PhotoGalleryProps> = ({
       {/* Gallery Grid */}
       <div className="px-4 pb-20">
         <div className="max-w-7xl mx-auto">
-          {/* Slideshow Button */}
-          <div className="flex justify-center mb-8">
-            <Button
-              variant="outline"
-              size="lg"
-              onClick={toggleSlideshow}
-              className="group relative overflow-hidden border-2 hover:border-primary transition-all duration-300"
-            >
-              <span className="relative z-10 flex items-center gap-2">
-                {isPlaying ? (
-                  <>
-                    <Pause className="w-5 h-5" />
-                    Pause Slideshow
-                  </>
-                ) : (
-                  <>
-                    <Play className="w-5 h-5" />
-                    Start Slideshow
-                  </>
-                )}
-              </span>
-              <span className="absolute inset-0 bg-primary/10 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
-            </Button>
-          </div>
-          
           <motion.div 
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-0"
             initial="hidden"
@@ -249,16 +192,8 @@ const PhotoGallery: React.FC<PhotoGalleryProps> = ({
                   <ArrowRight className="w-4 h-4" />
                 </Button>
 
-                {/* Control Buttons */}
-                <div className="absolute top-4 right-4 flex gap-2">
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    className="bg-background/80 backdrop-blur-sm"
-                    onClick={toggleSlideshow}
-                  >
-                    {isPlaying ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4" />}
-                  </Button>
+                {/* Close Button */}
+                <div className="absolute top-4 right-4">
                   <Button
                     variant="outline"
                     size="sm"
