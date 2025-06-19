@@ -68,7 +68,7 @@ export default function ContactPage() {
           </h1>
           <p className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
             Ready to transform your business with AI-powered marketing? 
-            Let's discuss how I can help you achieve exceptional results.
+            Let&apos;s discuss how I can help you achieve exceptional results.
           </p>
         </motion.div>
 
@@ -91,7 +91,7 @@ export default function ContactPage() {
               <input type="hidden" name="form-name" value="contact" />
               <div className="hidden">
                 <label>
-                  Don't fill this out if you're human: <input name="bot-field" />
+                  Don&apos;t fill this out if you&apos;re human: <input name="bot-field" />
                 </label>
               </div>
               <div>
@@ -170,7 +170,7 @@ export default function ContactPage() {
                   animate={{ opacity: 1, y: 0 }}
                   className="bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 p-4 rounded-lg"
                 >
-                  Message sent successfully! I'll get back to you within 24 hours.
+                  Message sent successfully! I&apos;ll get back to you within 24 hours.
                 </motion.div>
               )}
 

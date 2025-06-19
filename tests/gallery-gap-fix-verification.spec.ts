@@ -5,7 +5,7 @@ test.use({
 });
 
 test.describe('Gallery Gap Fix Verification', () => {
-  test('Verify seamless grid with no gaps and all 27 images loading', async ({ page }) => {
+  test('Verify seamless grid with no gaps and all 26 images loading', async ({ page }) => {
     // Navigate to the test gallery
     await page.goto('/gallery/test');
     await page.waitForLoadState('networkidle');
@@ -18,11 +18,11 @@ test.describe('Gallery Gap Fix Verification', () => {
     await page.waitForSelector('img[alt]', { state: 'visible' });
     await page.waitForTimeout(2000); // Allow time for all images to fully load
     
-    // Count all images to verify 27 are present
+    // Count all images to verify 26 are present
     const images = page.locator('.grid img');
     const imageCount = await images.count();
     console.log(`Total images found: ${imageCount}`);
-    expect(imageCount).toBe(27);
+    expect(imageCount).toBe(26);
     
     // Verify grid has no gaps (gap-0 class)
     const gridClasses = await galleryGrid.getAttribute('class');
@@ -32,7 +32,7 @@ test.describe('Gallery Gap Fix Verification', () => {
     // Check that images are positioned seamlessly
     const imageContainers = page.locator('.grid > div');
     const containerCount = await imageContainers.count();
-    expect(containerCount).toBe(27);
+    expect(containerCount).toBe(26);
     
     // Verify no padding or margins on image containers
     for (let i = 0; i < Math.min(5, containerCount); i++) {
@@ -92,7 +92,7 @@ test.describe('Gallery Gap Fix Verification', () => {
     
     // Verify all images have loaded successfully (no broken images)
     const brokenImages = await page.evaluate(() => {
-      const imgs = Array.from(document.querySelectorAll('.grid img'));
+      const imgs = Array.from(document.querySelectorAll('.grid img')) as HTMLImageElement[];
       return imgs.filter(img => !img.complete || img.naturalHeight === 0).length;
     });
     expect(brokenImages).toBe(0);

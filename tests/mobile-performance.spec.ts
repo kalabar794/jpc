@@ -23,7 +23,13 @@ test.describe('Mobile Performance & Excellence Tests', () => {
 
         // Core Web Vitals measurement
         const vitals = await page.evaluate(() => {
-          return new Promise((resolve) => {
+          return new Promise<{
+            lcp: number
+            fid: number
+            cls: number
+            fcp: number
+            ttfb: number
+          }>((resolve) => {
             const vitals = {
               lcp: 0,
               fid: 0,
@@ -48,7 +54,7 @@ test.describe('Mobile Performance & Excellence Tests', () => {
             // Cumulative Layout Shift
             new PerformanceObserver((list) => {
               const entries = list.getEntries()
-              vitals.cls = entries.reduce((cls, entry) => cls + entry.value, 0)
+              vitals.cls = entries.reduce((cls, entry: any) => cls + entry.value, 0)
             }).observe({ entryTypes: ['layout-shift'] })
 
             // Time to First Byte
@@ -175,7 +181,11 @@ test.describe('Mobile Performance & Excellence Tests', () => {
       test('page loading and resource optimization', async ({ page }) => {
         await page.setViewportSize(device.viewport)
         // Monitor network requests
-        const requests = []
+        const requests: Array<{
+          url: string
+          resourceType: string
+          size: number
+        }> = []
         page.on('request', request => {
           requests.push({
             url: request.url(),

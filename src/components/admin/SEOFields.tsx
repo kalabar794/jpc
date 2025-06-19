@@ -142,7 +142,7 @@ export default function SEOFields({ data, onChange, type }: SEOFieldsProps) {
             <li>• Keep titles between 30-60 characters for optimal display</li>
             <li>• Write descriptions between 120-160 characters</li>
             <li>• Use action words in descriptions to encourage clicks</li>
-            <li>• Make each page's title and description unique</li>
+            <li>• Make each page&apos;s title and description unique</li>
           </ul>
         </div>
       </div>

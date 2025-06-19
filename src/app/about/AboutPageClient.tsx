@@ -14,7 +14,7 @@ export default function AboutPageClient({ aboutData }: AboutPageClientProps) {
     title: "About Jonathon",
     heroTitle: "Jonathon Carter",
     heroSubtitle: "Marketing Director • 20+ Years of Experience • Digital Marketing Strategist",
-    bio: "Jonathon is a Los Angeles-based Marketing Director with over 20 years of experience in digital marketing strategy. With a Master's in Marketing Management, he specializes in driving business growth and optimizing user engagement across multiple platforms and industries.",
+    bio: "Jonathon is a Los Angeles-based Marketing Director with over 20 years of experience in digital marketing strategy. With a Master&apos;s in Marketing Management, he specializes in driving business growth and optimizing user engagement across multiple platforms and industries.",
     expertise: [
       { name: 'Marketing Management & Strategy', gradient: 'from-blue-500 to-purple-500' },
       { name: 'Team Leadership', gradient: 'from-green-500 to-teal-500' },
@@ -69,13 +69,13 @@ export default function AboutPageClient({ aboutData }: AboutPageClientProps) {
     ],
     education: [
       {
-        degree: 'Master\'s in Marketing Management',
+        degree: 'Master&apos;s in Marketing Management',
         institution: 'University of Leicester, UK',
         icon: '🎓',
         gradient: 'from-purple-600 to-blue-600'
       },
       {
-        degree: 'Bachelor\'s (Hons.) Business Studies',
+        degree: 'Bachelor&apos;s (Hons.) Business Studies',
         institution: 'De Montfort University, Leicester, UK',
         icon: '📚',
         gradient: 'from-pink-600 to-orange-600'
@@ -297,7 +297,7 @@ export default function AboutPageClient({ aboutData }: AboutPageClientProps) {
           >
             <h2 className="text-3xl font-bold mb-6">
               <span className="bg-gradient-to-r from-purple-600 via-pink-600 to-orange-600 bg-clip-text text-transparent animate-gradient bg-300%">
-                Let's Work Together
+                Let&apos;s Work Together
               </span>
             </h2>
             <p className="text-xl text-gray-600 dark:text-gray-300 mb-8 max-w-2xl mx-auto">
