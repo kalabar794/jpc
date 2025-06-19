@@ -62,9 +62,7 @@ export default function ContactPage() {
           transition={{ duration: 0.6 }}
         >
           <h1 className="text-5xl md:text-6xl font-bold mb-6">
-            <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
-              Get In Touch
-            </span>
+            <span className="text-white">Get In Touch</span>
           </h1>
           <p className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
             Ready to transform your business with AI-powered marketing? 
