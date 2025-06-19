@@ -202,7 +202,7 @@ export default function GlassmorphicContactForm({
       {/* Animated Background */}
       <div className="absolute inset-0">
         <motion.div 
-          className="absolute inset-0 bg-gradient-to-br from-blue-600/20 via-purple-600/15 to-indigo-600/20"
+          className="absolute inset-0 bg-gradient-to-br from-blue-800/30 via-purple-800/25 to-indigo-900/30"
           animate={{
             backgroundPosition: ['0% 0%', '100% 100%', '0% 0%'],
           }}
@@ -218,7 +218,7 @@ export default function GlassmorphicContactForm({
         
         {/* Floating orbs */}
         <motion.div
-          className="absolute top-1/4 left-1/6 w-64 h-64 bg-blue-400/10 rounded-full blur-3xl"
+          className="absolute top-1/4 left-1/6 w-64 h-64 bg-blue-400/5 rounded-full blur-3xl"
           animate={{
             x: [0, 100, 0],
             y: [0, 50, 0],
@@ -231,7 +231,7 @@ export default function GlassmorphicContactForm({
           }}
         />
         <motion.div
-          className="absolute bottom-1/4 right-1/6 w-48 h-48 bg-purple-400/10 rounded-full blur-3xl"
+          className="absolute bottom-1/4 right-1/6 w-48 h-48 bg-purple-400/5 rounded-full blur-3xl"
           animate={{
             x: [0, -80, 0],
             y: [0, -60, 0],
@@ -256,12 +256,12 @@ export default function GlassmorphicContactForm({
       >
         {/* Glassmorphic Container */}
         <motion.div 
-          className="relative backdrop-blur-xl bg-white/10 border border-white/20 rounded-3xl p-8 shadow-2xl"
+          className="relative backdrop-blur-xl bg-black/20 border border-white/10 rounded-3xl p-8 shadow-2xl"
           whileHover={{ scale: 1.02 }}
           transition={{ duration: 0.3 }}
         >
           {/* Glow Effect */}
-          <div className="absolute inset-0 rounded-3xl bg-gradient-to-r from-blue-500/20 to-purple-500/20 blur-xl -z-10" />
+          <div className="absolute inset-0 rounded-3xl bg-gradient-to-r from-blue-600/10 to-purple-600/10 blur-xl -z-10" />
           
           {/* Header */}
           <motion.div 

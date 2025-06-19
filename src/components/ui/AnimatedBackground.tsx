@@ -37,8 +37,8 @@ export default function AnimatedBackground({
         }
       case 'page':
         return {
-          gradient: 'bg-gradient-to-br from-blue-500/80 via-purple-600/80 to-indigo-700/80',
-          overlay: 'bg-gradient-to-tr from-transparent via-purple-400/20 to-pink-400/30',
+          gradient: 'bg-gradient-to-br from-slate-900 via-purple-900/90 to-slate-950',
+          overlay: 'bg-gradient-to-tr from-transparent via-purple-800/15 to-indigo-900/20',
           showFloatingElements: true,
           showParticles: false,
           opacity: 0.6
@@ -93,7 +93,7 @@ export default function AnimatedBackground({
           <motion.div
             className="absolute top-20 left-20 w-64 h-64 md:w-96 md:h-96 rounded-full"
             style={{
-              background: 'linear-gradient(45deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05))',
+              background: 'linear-gradient(45deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02))',
               backdropFilter: 'blur(2px)',
               y: springY1
             }}
@@ -120,14 +120,14 @@ export default function AnimatedBackground({
               y: { duration: 6, repeat: Infinity, ease: "easeInOut" }
             }}
           >
-            <div className="w-full h-full bg-gradient-to-br from-white/20 to-white/5 rounded-3xl backdrop-blur-sm" />
+            <div className="w-full h-full bg-gradient-to-br from-white/10 to-white/02 rounded-3xl backdrop-blur-sm" />
           </motion.div>
 
           {/* Small floating elements */}
           {[...Array(6)].map((_, i) => (
             <motion.div
               key={i}
-              className="absolute w-4 h-4 md:w-6 md:h-6 bg-white/30 rounded-full"
+              className="absolute w-4 h-4 md:w-6 md:h-6 bg-white/15 rounded-full"
               style={{
                 left: `${20 + i * 15}%`,
                 top: `${30 + (i % 3) * 20}%`,
@@ -135,7 +135,7 @@ export default function AnimatedBackground({
               }}
               animate={{
                 y: [0, -20, 0],
-                opacity: [0.3, 1, 0.3],
+                opacity: [0.15, 0.5, 0.15],
                 scale: [1, 1.2, 1]
               }}
               transition={{
