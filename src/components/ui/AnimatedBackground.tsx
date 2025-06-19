@@ -29,8 +29,8 @@ export default function AnimatedBackground({
     switch (variant) {
       case 'hero':
         return {
-          gradient: 'bg-gradient-to-br from-blue-600 via-purple-700 to-indigo-800',
-          overlay: 'bg-gradient-to-tr from-transparent via-purple-500/30 to-pink-500/40',
+          gradient: 'bg-gradient-to-br from-slate-900 via-purple-900 to-slate-950',
+          overlay: 'bg-gradient-to-tr from-transparent via-purple-800/20 to-indigo-900/25',
           showFloatingElements: true,
           showParticles: true,
           opacity: 0.8
@@ -45,8 +45,8 @@ export default function AnimatedBackground({
         }
       case 'minimal':
         return {
-          gradient: 'bg-gradient-to-br from-blue-400/60 via-purple-500/60 to-indigo-600/60',
-          overlay: 'bg-gradient-to-tr from-transparent via-purple-300/15 to-pink-300/20',
+          gradient: 'bg-gradient-to-br from-slate-800/60 via-purple-800/50 to-slate-900/60',
+          overlay: 'bg-gradient-to-tr from-transparent via-purple-700/10 to-indigo-800/15',
           showFloatingElements: false,
           showParticles: false,
           opacity: 0.4
