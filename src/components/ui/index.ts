@@ -8,6 +8,9 @@ export { default as OptimizedImage, HeroImage, GalleryThumbnail } from './Optimi
 export { default as AnimatedBackground } from './AnimatedBackground'
 export { default as NewsletterSignup, LeadMagnetSignup } from './NewsletterSignup'
 export { JonathonLogo, JonathonAILogo } from './JonathonLogo'
+export { Input } from './Input'
+export { Label } from './Label'
+export { Textarea } from './Textarea'
 
 // Animation Components
 export { default as AnimatedWrapper, StaggeredWrapper, StaggeredItem } from '../animations/AnimatedWrapper'
