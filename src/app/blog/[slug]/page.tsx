@@ -4,6 +4,7 @@ import { getPost, getAllPosts } from '@/lib/content';
 import { generateBlogPostMetadata, generateBlogPostStructuredData, generateBreadcrumbStructuredData } from '@/lib/seo';
 import Link from 'next/link';
 import { ArrowLeft, Calendar, Clock, User } from 'lucide-react';
+import Image from 'next/image';
 import SanitizedContent from '@/components/ui/SanitizedContent';
 import StructuredData, { Breadcrumb, ReadingProgress } from '@/components/seo/StructuredData';
 
@@ -69,10 +70,13 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         <article className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl overflow-hidden">
           {post.heroImage && (
             <div className="aspect-video relative overflow-hidden">
-              <img
+              <Image
                 src={post.heroImage}
                 alt={post.title}
-                className="w-full h-full object-cover"
+                fill
+                className="object-cover"
+                priority
+                sizes="(max-width: 1280px) 100vw, 1280px"
               />
             </div>
           )}

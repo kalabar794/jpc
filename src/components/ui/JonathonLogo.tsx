@@ -68,13 +68,14 @@ const JonathonLogo: React.FC<LogoProps> = ({ size = 400, className = '' }) => {
       }
     };
 
-    if (logoRef.current) {
-      logoRef.current.addEventListener('mousemove', handleMouseMove);
+    const currentRef = logoRef.current;
+    if (currentRef) {
+      currentRef.addEventListener('mousemove', handleMouseMove);
     }
 
     return () => {
-      if (logoRef.current) {
-        logoRef.current.removeEventListener('mousemove', handleMouseMove);
+      if (currentRef) {
+        currentRef.removeEventListener('mousemove', handleMouseMove);
       }
     };
   }, []);
@@ -296,13 +297,14 @@ const JonathonLogoStandalone: React.FC<LogoProps> = ({ size = 400, className = '
       }
     };
 
-    if (logoRef.current) {
-      logoRef.current.addEventListener('mousemove', handleMouseMove);
+    const currentRef = logoRef.current;
+    if (currentRef) {
+      currentRef.addEventListener('mousemove', handleMouseMove);
     }
 
     return () => {
-      if (logoRef.current) {
-        logoRef.current.removeEventListener('mousemove', handleMouseMove);
+      if (currentRef) {
+        currentRef.removeEventListener('mousemove', handleMouseMove);
       }
     };
   }, [mounted]);

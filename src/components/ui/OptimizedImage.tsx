@@ -66,6 +66,7 @@ export default function OptimizedImage({
           }`}
           onLoad={handleLoad}
           onError={handleError}
+          alt={alt}
         />
         
         {!imageLoaded && !imageError && (

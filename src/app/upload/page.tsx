@@ -43,6 +43,7 @@ export default function UploadPage() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {uploadedUrls.map((url, index) => (
                   <div key={index} className="border rounded-lg p-4">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img 
                       src={url} 
                       alt={`Upload ${index + 1}`}

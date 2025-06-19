@@ -309,6 +309,7 @@ export default function ProjectDetailClient({ project }: ProjectDetailClientProp
                   whileHover={{ scale: 1.03 }}
                   onClick={() => setActiveImageIndex(index)}
                 >
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={item.image}
                     alt={item.alt}

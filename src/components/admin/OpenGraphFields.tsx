@@ -37,11 +37,11 @@ export default function OpenGraphFields({ data, onChange, type }: OpenGraphField
     if (!ogData.image && data.heroImage) {
       setOgData(prev => ({ ...prev, image: data.heroImage || '' }))
     }
-  }, [data.title, data.excerpt, data.heroImage])
+  }, [data.title, data.excerpt, data.heroImage, ogData.title, ogData.description, ogData.image])
 
   useEffect(() => {
     onChange(ogData)
-  }, [ogData])
+  }, [ogData, onChange])
 
   return (
     <div className="border-t pt-6 mt-6">
@@ -109,6 +109,7 @@ export default function OpenGraphFields({ data, onChange, type }: OpenGraphField
             <div className="bg-white border rounded-lg overflow-hidden">
               {ogData.image && (
                 <div className="aspect-[1200/630] bg-gray-200 relative">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img 
                     src={ogData.image} 
                     alt="Preview" 
@@ -137,6 +138,7 @@ export default function OpenGraphFields({ data, onChange, type }: OpenGraphField
               <div className="flex">
                 {ogData.image && (
                   <div className="w-1/3 aspect-square bg-gray-200 flex-shrink-0">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img 
                       src={ogData.image} 
                       alt="Preview" 

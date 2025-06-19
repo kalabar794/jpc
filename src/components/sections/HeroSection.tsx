@@ -25,14 +25,14 @@ export default function HeroSection() {
   const springY2 = useSpring(y2, { stiffness: 200, damping: 40 })
   
   // Typewriter effect
-  const phrases = [
-    'AI-Powered Marketing Excellence',
-    'Data-Driven Creative Solutions', 
-    'Automated Campaign Generation',
-    'Intelligent Content Strategy'
-  ]
-  
   useEffect(() => {
+    const phrases = [
+      'AI-Powered Marketing Excellence',
+      'Data-Driven Creative Solutions', 
+      'Automated Campaign Generation',
+      'Intelligent Content Strategy'
+    ]
+    
     let timeout: NodeJS.Timeout
     const currentText = phrases[currentPhrase]
     
@@ -48,7 +48,7 @@ export default function HeroSection() {
     }
     
     return () => clearTimeout(timeout)
-  }, [text, currentPhrase, phrases])
+  }, [text, currentPhrase])
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">

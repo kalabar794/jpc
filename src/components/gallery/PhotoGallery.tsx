@@ -120,6 +120,7 @@ const PhotoGallery: React.FC<PhotoGalleryProps> = ({
                 onClick={() => openModal(image, index)}
               >
                 <div className="relative overflow-hidden">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={image.imageUrl}
                     alt={image.alt}
@@ -167,6 +168,7 @@ const PhotoGallery: React.FC<PhotoGalleryProps> = ({
               onClick={(e) => e.stopPropagation()}
             >
               <div className="relative">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={selectedPhoto.imageUrl}
                   alt={selectedPhoto.alt}

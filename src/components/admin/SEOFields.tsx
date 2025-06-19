@@ -38,11 +38,11 @@ export default function SEOFields({ data, onChange, type }: SEOFieldsProps) {
         description: (data.excerpt || '').slice(0, 160)
       }))
     }
-  }, [data.title, data.excerpt])
+  }, [data.title, data.excerpt, seoData.title, seoData.description])
 
   useEffect(() => {
     onChange(seoData)
-  }, [seoData])
+  }, [seoData, onChange])
 
   const titleLength = seoData.title.length
   const descriptionLength = seoData.description.length

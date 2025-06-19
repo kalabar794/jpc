@@ -94,6 +94,7 @@ export default function CloudinaryUpload({
           `}>
             {preview ? (
               <div className="space-y-4">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img 
                   src={preview} 
                   alt="Preview" 
@@ -144,6 +145,7 @@ export default function CloudinaryUpload({
                     className="w-full px-3 py-2 text-sm border rounded"
                     onClick={(e) => e.currentTarget.select()}
                   />
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img 
                     src={uploadResult.url} 
                     alt="Uploaded" 
