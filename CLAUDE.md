@@ -34,3 +34,41 @@
 - Always verify deployments actually happened
 - Use existing logged-in sessions for auth-required testing
 - Take screenshots when debugging UI issues
+
+## Security Features & Common Commands
+- Use Accept Edits Mode for batch changes across multiple gallery components
+- Network requests (Cloudinary, APIs, Netlify) require approval
+
+### Common Safe Commands (for Prompt Fatigue Mitigation)
+```bash
+# Build and test commands
+pnpm build
+pnpm test
+pnpm dev
+pnpm lint
+pnpm typecheck
+
+# Playwright testing
+playwright test
+npx playwright test
+npx playwright test --ui
+
+# Netlify deployment
+netlify deploy
+netlify deploy --prod
+netlify status
+netlify env:list
+
+# Git commands
+git status
+git diff
+git log
+git add .
+git commit
+
+# File operations
+ls
+cat
+grep
+find
+```
