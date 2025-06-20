@@ -82,6 +82,17 @@ export default function FeaturedProjects({ projects }: FeaturedProjectsProps) {
       ref={containerRef}
       className="relative py-32 px-6 bg-gray-50 dark:bg-gray-900/50 overflow-hidden"
     >
+      {/* Background Elements */}
+      <div className="absolute inset-0 pointer-events-none">
+        <motion.div
+          className="absolute top-20 right-20 w-96 h-96 bg-gradient-to-br from-primary-500/20 to-secondary-500/20 rounded-full blur-3xl"
+          style={{ y: y1 }}
+        />
+        <motion.div
+          className="absolute bottom-20 left-20 w-64 h-64 bg-gradient-to-tr from-accent-500/20 to-primary-500/20 rounded-full blur-2xl"
+          style={{ y: y2 }}
+        />
+      </div>
 
       <motion.div 
         className="max-w-7xl mx-auto relative z-10"

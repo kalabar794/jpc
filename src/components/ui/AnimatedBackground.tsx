@@ -86,6 +86,95 @@ export default function AnimatedBackground({
         />
       </motion.div>
 
+      {/* Floating Geometric Elements */}
+      {config.showFloatingElements && (
+        <div className="absolute inset-0 pointer-events-none">
+          {/* Large floating circle */}
+          <motion.div
+            className="absolute top-20 left-20 w-64 h-64 md:w-96 md:h-96 rounded-full"
+            style={{
+              background: 'linear-gradient(45deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02))',
+              backdropFilter: 'blur(2px)',
+              y: springY1
+            }}
+            animate={{
+              rotate: [0, 360],
+              scale: [1, 1.1, 1]
+            }}
+            transition={{
+              rotate: { duration: 30, repeat: Infinity, ease: "linear" },
+              scale: { duration: 8, repeat: Infinity, ease: "easeInOut" }
+            }}
+          />
+
+          {/* Medium floating shapes */}
+          <motion.div
+            className="absolute top-40 right-32 w-48 h-48 md:w-64 md:h-64"
+            style={{ y: springY2 }}
+            animate={{
+              rotate: [0, -180, -360],
+              y: [0, -30, 0]
+            }}
+            transition={{
+              rotate: { duration: 25, repeat: Infinity, ease: "linear" },
+              y: { duration: 6, repeat: Infinity, ease: "easeInOut" }
+            }}
+          >
+            <div className="w-full h-full bg-gradient-to-br from-white/10 to-white/02 rounded-3xl backdrop-blur-sm" />
+          </motion.div>
+
+          {/* Small floating elements */}
+          {[...Array(6)].map((_, i) => (
+            <motion.div
+              key={i}
+              className="absolute w-4 h-4 md:w-6 md:h-6 bg-white/15 rounded-full"
+              style={{
+                left: `${20 + i * 15}%`,
+                top: `${30 + (i % 3) * 20}%`,
+                y: y3
+              }}
+              animate={{
+                y: [0, -20, 0],
+                opacity: [0.15, 0.5, 0.15],
+                scale: [1, 1.2, 1]
+              }}
+              transition={{
+                duration: 3 + i * 0.5,
+                repeat: Infinity,
+                ease: "easeInOut",
+                delay: i * 0.2
+              }}
+            />
+          ))}
+        </div>
+      )}
+
+      {/* Particle system */}
+      {config.showParticles && (
+        <div className="absolute inset-0 pointer-events-none">
+          {[...Array(10)].map((_, i) => (
+            <motion.div
+              key={`particle-${i}`}
+              className="absolute w-1 h-1 bg-white/60 rounded-full"
+              style={{
+                left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 100}%`
+              }}
+              animate={{
+                y: [0, -100],
+                opacity: [0, 1, 0],
+                scale: [0, 1, 0]
+              }}
+              transition={{
+                duration: 4 + Math.random() * 2,
+                repeat: Infinity,
+                ease: "easeOut",
+                delay: Math.random() * 3
+              }}
+            />
+          ))}
+        </div>
+      )}
 
       {/* Content */}
       {children && (
