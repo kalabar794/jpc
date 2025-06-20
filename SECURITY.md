@@ -29,8 +29,8 @@ The following security headers are configured:
 - **X-Frame-Options**: DENY (prevents clickjacking)
 - **X-Content-Type-Options**: nosniff (prevents MIME type sniffing)
 - **Referrer-Policy**: strict-origin-when-cross-origin
-- **Content-Security-Policy**: Strict CSP with:
-  - **No inline JavaScript allowed** (moved to external files)
+- **Content-Security-Policy**: Balanced CSP with:
+  - **Inline JavaScript allowed** (required for Next.js framework)
   - **No eval() allowed** (blocks dynamic code execution)
   - **Inline CSS allowed** (required for Framer Motion animations)
   - **Trusted sources only** for scripts, images, and connections
@@ -41,10 +41,15 @@ Headers are configured in both:
 - `netlify.toml` - CDN/deployment level
 
 ### CSP Details
-- Scripts: Only from 'self' and specific CDNs (Netlify Identity, Cloudinary)
+- Scripts: 'self', 'unsafe-inline' (Next.js requirement), and specific CDNs
 - Styles: 'self' and Google Fonts, with 'unsafe-inline' for animations
 - Images: 'self', data URLs, and trusted image CDNs
 - No object embeds, no frame ancestors, upgraded insecure requests
+
+### Security Trade-offs
+- **'unsafe-inline' for scripts**: Required by Next.js for framework functionality. While security scanners flag this, it's a necessary trade-off for using Next.js.
+- **'unsafe-inline' for styles**: Required by Framer Motion for animations. Lower security risk than script inline.
+- **No 'unsafe-eval'**: Successfully removed - not needed by the application.
 
 ## File Upload Security
 
