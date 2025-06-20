@@ -5,6 +5,7 @@ import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion'
 import { X, ArrowLeft, ArrowRight } from 'lucide-react';
 import Button from '@/components/ui/Button';
 import { GalleryImage } from '@/lib/content';
+import AnimatedBackground from '@/components/ui/AnimatedBackground';
 
 interface PhotoGalleryProps {
   images: GalleryImage[];
@@ -54,7 +55,7 @@ const PhotoGallery: React.FC<PhotoGalleryProps> = ({
 
 
   return (
-    <div className="min-h-screen bg-background">
+    <AnimatedBackground variant="page" className="min-h-screen">
       {/* Hero Section */}
       <motion.div 
         ref={containerRef}
@@ -228,7 +229,7 @@ const PhotoGallery: React.FC<PhotoGalleryProps> = ({
           </motion.div>
         )}
       </AnimatePresence>
-    </div>
+    </AnimatedBackground>
   );
 };
 
