@@ -107,21 +107,6 @@ export default function AnimatedBackground({
             }}
           />
 
-          {/* Medium floating shapes */}
-          <motion.div
-            className="absolute top-40 right-32 w-48 h-48 md:w-64 md:h-64"
-            style={{ y: springY2 }}
-            animate={{
-              rotate: [0, -180, -360],
-              y: [0, -30, 0]
-            }}
-            transition={{
-              rotate: { duration: 25, repeat: Infinity, ease: "linear" },
-              y: { duration: 6, repeat: Infinity, ease: "easeInOut" }
-            }}
-          >
-            <div className="w-full h-full bg-gradient-to-br from-white/10 to-white/02 rounded-3xl backdrop-blur-sm" />
-          </motion.div>
 
           {/* Small floating elements */}
           {[...Array(6)].map((_, i) => (
