@@ -29,12 +29,22 @@ The following security headers are configured:
 - **X-Frame-Options**: DENY (prevents clickjacking)
 - **X-Content-Type-Options**: nosniff (prevents MIME type sniffing)
 - **Referrer-Policy**: strict-origin-when-cross-origin
-- **Content-Security-Policy**: Comprehensive CSP configured
+- **Content-Security-Policy**: Strict CSP with:
+  - **No inline JavaScript allowed** (moved to external files)
+  - **No eval() allowed** (blocks dynamic code execution)
+  - **Inline CSS allowed** (required for Framer Motion animations)
+  - **Trusted sources only** for scripts, images, and connections
 - **Permissions-Policy**: Restricts access to browser features
 
 Headers are configured in both:
 - `next.config.mjs` - Next.js application level
 - `netlify.toml` - CDN/deployment level
+
+### CSP Details
+- Scripts: Only from 'self' and specific CDNs (Netlify Identity, Cloudinary)
+- Styles: 'self' and Google Fonts, with 'unsafe-inline' for animations
+- Images: 'self', data URLs, and trusted image CDNs
+- No object embeds, no frame ancestors, upgraded insecure requests
 
 ## File Upload Security
 
