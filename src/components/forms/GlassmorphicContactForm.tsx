@@ -216,33 +216,6 @@ export default function GlassmorphicContactForm({
           }}
         />
         
-        {/* Floating orbs */}
-        <motion.div
-          className="absolute top-1/4 left-1/6 w-64 h-64 bg-blue-400/5 rounded-full blur-3xl"
-          animate={{
-            x: [0, 100, 0],
-            y: [0, 50, 0],
-            scale: [1, 1.2, 1],
-          }}
-          transition={{
-            duration: 15,
-            repeat: Infinity,
-            ease: "easeInOut"
-          }}
-        />
-        <motion.div
-          className="absolute bottom-1/4 right-1/6 w-48 h-48 bg-purple-400/5 rounded-full blur-3xl"
-          animate={{
-            x: [0, -80, 0],
-            y: [0, -60, 0],
-            scale: [1, 1.3, 1],
-          }}
-          transition={{
-            duration: 18,
-            repeat: Infinity,
-            ease: "easeInOut"
-          }}
-        />
       </div>
 
       <BackgroundBeams />

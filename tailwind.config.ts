@@ -73,7 +73,6 @@ const config: Config = {
         'slide-in': 'slideIn 0.4s ease-out',
         'bounce-slow': 'bounce 3s infinite',
         'pulse-slow': 'pulse 4s infinite',
-        'float': 'float 6s ease-in-out infinite',
       },
       keyframes: {
         fadeIn: {
@@ -91,10 +90,6 @@ const config: Config = {
         slideIn: {
           '0%': { opacity: '0', transform: 'translateX(-100px)' },
           '100%': { opacity: '1', transform: 'translateX(0)' },
-        },
-        float: {
-          '0%, 100%': { transform: 'translateY(0px)' },
-          '50%': { transform: 'translateY(-20px)' },
         },
       },
       backdropBlur: {
