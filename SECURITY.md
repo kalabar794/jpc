@@ -19,6 +19,22 @@ All sensitive data must be stored in environment variables:
 3. **Validate all inputs** - Especially in contact forms and file uploads
 4. **Regular dependency updates** - Run `npm audit` regularly
 5. **Content Security Policy** - Configured in `next.config.mjs`
+6. **Hide server information** - X-Powered-By header is disabled in `next.config.mjs`
+
+## Security Headers
+
+The following security headers are configured:
+
+- **X-Powered-By**: Removed (prevents server technology disclosure)
+- **X-Frame-Options**: DENY (prevents clickjacking)
+- **X-Content-Type-Options**: nosniff (prevents MIME type sniffing)
+- **Referrer-Policy**: strict-origin-when-cross-origin
+- **Content-Security-Policy**: Comprehensive CSP configured
+- **Permissions-Policy**: Restricts access to browser features
+
+Headers are configured in both:
+- `next.config.mjs` - Next.js application level
+- `netlify.toml` - CDN/deployment level
 
 ## File Upload Security
 
