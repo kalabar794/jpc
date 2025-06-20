@@ -37,8 +37,21 @@ export default function RootLayout({
           </div>
         </ThemeProvider>
         <Script
-          src="/netlify-identity-init.js"
+          id="netlify-identity-redirect"
           strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+              if (window.netlifyIdentity) {
+                window.netlifyIdentity.on("init", user => {
+                  if (!user) {
+                    window.netlifyIdentity.on("login", () => {
+                      document.location.href = "/admin/";
+                    });
+                  }
+                });
+              }
+            `
+          }}
         />
       </body>
     </html>
