@@ -1,0 +1,180 @@
+# Project Patterns and Context Overrides
+
+## Component Patterns
+
+### File Structure
+- All components use `.tsx` extension with TypeScript
+- Components are client-side by default (`'use client'` directive)
+- Interface definitions precede component implementation
+- Named exports for variants, default export for main component
+
+### Component Template
+```typescript
+'use client'
+
+import { motion } from 'framer-motion'
+import { ReactNode } from 'react'
+import { cn } from '@/lib/utils'
+
+interface ComponentNameProps {
+  children: ReactNode
+  className?: string
+  // other props with explicit types
+}
+
+export default function ComponentName({ 
+  children,
+  className = '',
+  // destructured props
+}: ComponentNameProps) {
+  return (
+    <motion.div
+      className={cn('base-classes', className)}
+      // motion props
+    >
+      {children}
+    </motion.div>
+  )
+}
+```
+
+### Animation Patterns
+- Use Framer Motion for all animations
+- Define motion props as constants
+- Common animation properties:
+```typescript
+const defaultMotionProps = {
+  whileHover: { scale: 1.02, y: -2 },
+  whileTap: { scale: 0.98 },
+  transition: { type: "spring", stiffness: 400, damping: 17 }
+}
+```
+
+### Styling Patterns
+- Use Tailwind CSS exclusively
+- Use `cn()` utility for conditional classes
+- Define variant maps as constants:
+```typescript
+const variants = {
+  primary: 'bg-primary-500 hover:bg-primary-600',
+  secondary: 'bg-secondary-500 hover:bg-secondary-600'
+}
+```
+
+### Security Patterns
+- All user content must be sanitized
+- Use `sanitizeHTML` or `sanitizeContentHTML` from `@/lib/sanitize`
+- Server-side rendering requires separate sanitization:
+```typescript
+if (typeof window === 'undefined') {
+  // Server-side sanitization
+}
+```
+
+## UI Component Conventions
+
+### Button Components
+- Support multiple variants (primary, secondary, outline, ghost)
+- Include size options (sm, md, lg, xl)
+- Handle both button and link behaviors
+- Always include disabled state styling
+- Focus states with ring utilities
+
+### Form Components
+- Controlled components pattern
+- Client-side validation
+- Loading states during submission
+- Error message display
+- Accessibility labels
+
+### Image Components
+- Use Cloudinary for all images
+- Implement lazy loading
+- Provide meaningful alt text
+- Use Next.js Image optimization
+
+## Import Patterns
+```typescript
+// React/Next.js imports first
+import { useState, useEffect } from 'react'
+import { motion } from 'framer-motion'
+
+// Local imports
+import { cn } from '@/lib/utils'
+import { ComponentName } from '@/components/ui'
+
+// Type imports
+import type { ComponentProps } from '@/types'
+```
+
+## Testing Patterns
+- Test file naming: `component-name.spec.ts`
+- Use Playwright for E2E tests
+- Test user interactions and visual states
+- Verify accessibility
+
+## Performance Patterns
+- Dynamic imports for heavy components
+- Lazy load images and non-critical content
+- Memoize expensive computations
+- Use React.memo for pure components
+
+## State Management
+- useState for local component state
+- Context API for global theme/auth state
+- No external state management libraries
+
+## Error Handling
+- Try-catch blocks for async operations
+- User-friendly error messages
+- Console errors in development only
+- Fallback UI for error states
+
+## Accessibility
+- Semantic HTML elements
+- ARIA labels where needed
+- Keyboard navigation support
+- Focus management
+- Color contrast compliance
+
+## File Naming
+- Components: PascalCase (Button.tsx)
+- Utilities: camelCase (utils.ts)
+- Constants: UPPER_SNAKE_CASE
+- CSS modules: kebab-case
+
+## Git Commit Patterns
+- Prefix: feat:, fix:, docs:, style:, refactor:, test:
+- Present tense: "Add feature" not "Added feature"
+- Concise but descriptive
+
+## Environment Variables
+- NEXT_PUBLIC_ prefix for client-side vars
+- Document in .env.example
+- Never commit actual .env files
+- Store secrets in Netlify dashboard
+
+<ProviderContextOverrides>
+## Project-Specific Overrides
+
+### DO NOT:
+- Use inline styles
+- Import CSS files directly
+- Use any state management library
+- Create mock data unless explicitly requested
+- Simplify existing complex components
+
+### ALWAYS:
+- Test with Playwright before claiming completion
+- Run type checking with `npm run type-check`
+- Sanitize user inputs
+- Follow existing patterns in codebase
+- Maintain dark mode support
+
+### PREFER:
+- Framer Motion over CSS animations
+- Tailwind classes over custom CSS
+- TypeScript strict mode compliance
+- Composition over inheritance
+- Named exports for utilities
+</ProviderContextOverrides>

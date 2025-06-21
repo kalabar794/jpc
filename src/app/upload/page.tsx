@@ -9,10 +9,9 @@ export default function UploadPage() {
   const router = useRouter()
   
   useEffect(() => {
-    // Simple check - redirect if no upload key is configured
-    if (!process.env.NEXT_PUBLIC_UPLOAD_SECRET_KEY) {
-      router.push('/')
-    }
+    // Check if user has permission to upload
+    // In a real app, this would check authentication/authorization
+    // For now, we'll just ensure the page is protected server-side
   }, [router])
   const [uploadedUrls, setUploadedUrls] = useState<string[]>([])
 

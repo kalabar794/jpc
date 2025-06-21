@@ -120,4 +120,97 @@ body {
   .card-hover {
     @apply card transition-all duration-300 hover:shadow-xl hover:-translate-y-2;
   }
+  
+  /* Animations for experimental about page */
+  .animate-float {
+    animation: float 20s ease-in-out infinite;
+  }
+  
+  .animate-float-delayed {
+    animation: float-delayed 25s ease-in-out infinite;
+  }
+  
+  .animate-float-slow {
+    animation: float-slow 30s ease-in-out infinite;
+  }
+  
+  .animate-gradient-shift {
+    animation: gradient-shift 15s ease-in-out infinite;
+  }
+  
+  .animate-gradient-shift-reverse {
+    animation: gradient-shift-reverse 20s ease-in-out infinite;
+  }
+  
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0) translateX(0);
+    }
+    25% {
+      transform: translateY(-20px) translateX(10px);
+    }
+    50% {
+      transform: translateY(10px) translateX(-10px);
+    }
+    75% {
+      transform: translateY(-10px) translateX(20px);
+    }
+  }
+
+  @keyframes float-delayed {
+    0%, 100% {
+      transform: translateY(0) translateX(0);
+    }
+    25% {
+      transform: translateY(20px) translateX(-20px);
+    }
+    50% {
+      transform: translateY(-15px) translateX(15px);
+    }
+    75% {
+      transform: translateY(15px) translateX(-10px);
+    }
+  }
+
+  @keyframes float-slow {
+    0%, 100% {
+      transform: translateY(0) translateX(0) scale(1);
+    }
+    33% {
+      transform: translateY(-30px) translateX(20px) scale(1.1);
+    }
+    66% {
+      transform: translateY(20px) translateX(-30px) scale(0.9);
+    }
+  }
+
+  @keyframes gradient-shift {
+    0%, 100% {
+      transform: translateX(0%) translateY(0%);
+    }
+    25% {
+      transform: translateX(-5%) translateY(5%);
+    }
+    50% {
+      transform: translateX(5%) translateY(-5%);
+    }
+    75% {
+      transform: translateX(-3%) translateY(-3%);
+    }
+  }
+
+  @keyframes gradient-shift-reverse {
+    0%, 100% {
+      transform: translateX(0%) translateY(0%);
+    }
+    25% {
+      transform: translateX(5%) translateY(-5%);
+    }
+    50% {
+      transform: translateX(-5%) translateY(5%);
+    }
+    75% {
+      transform: translateX(3%) translateY(3%);
+    }
+  }
 }

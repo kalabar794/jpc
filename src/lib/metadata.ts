@@ -38,8 +38,8 @@ const ENHANCED_SCHEMA_DATA = {
     '@type': 'Organization',
     name: 'Jonathon AI Marketing Consulting',
     description: 'Leading AI marketing consultant specializing in automation strategies, ChatGPT marketing, and ROI-driven campaigns',
-    url: 'https://jpc-kappa.vercel.app',
-    logo: 'https://jpc-kappa.vercel.app/logo.png',
+    url: 'https://jonathoncarter.com',
+    logo: 'https://jonathoncarter.com/logo.png',
     sameAs: [
       'https://linkedin.com/in/jonathon',
       'https://twitter.com/jonathon'
@@ -82,7 +82,7 @@ const ENHANCED_SCHEMA_DATA = {
     name: 'Jonathon',
     jobTitle: 'AI Marketing Consultant & Automation Expert',
     description: 'Expert AI marketing consultant with proven track record in automation strategies, ChatGPT marketing, and ROI optimization',
-    url: 'https://jpc-kappa.vercel.app',
+    url: 'https://jonathoncarter.com',
     sameAs: [
       'https://linkedin.com/in/jonathon',
       'https://twitter.com/jonathon'
@@ -254,7 +254,7 @@ export function generateOrganizationStructuredData(siteUrl: string) {
   }
 }
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://jpc-kappa.vercel.app'
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://jonathoncarter.com'
 
 // Get site settings for metadata
 function getSiteMetadata() {

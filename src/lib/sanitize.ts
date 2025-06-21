@@ -1,11 +1,6 @@
-import DOMPurify from 'dompurify'
+import DOMPurify from 'isomorphic-dompurify'
 
 export function sanitizeHTML(html: string): string {
-  // Only run on client side
-  if (typeof window === 'undefined') {
-    return html
-  }
-  
   // Configure DOMPurify to allow certain tags and attributes
   const config = {
     ALLOWED_TAGS: [

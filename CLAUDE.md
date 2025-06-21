@@ -39,6 +39,58 @@
 - Use Accept Edits Mode for batch changes across multiple gallery components
 - Network requests (Cloudinary, APIs, Netlify) require approval
 
+## Netlify MCP Server Integration
+- The project now includes Netlify MCP server configuration in `mcp.json`
+- This enables AI agents to interact directly with Netlify's platform
+
+## AI Context Files
+- Project includes AI context files for better code generation
+- Files are located in:
+  - `.windsurf/rules/` - For Windsurf editor
+  - `.cursor/rules/` - For Cursor editor
+  - Root directory: `jonathon-portfolio.mdc`
+
+### Context Files Included
+1. **netlify-development.mdc** - Netlify platform-specific guidance
+2. **jonathon-portfolio.mdc** - Project-specific patterns and conventions
+
+### Benefits
+- AI tools generate more accurate, project-aligned code
+- Consistent code patterns across different AI assistants
+- Better understanding of Netlify features and project structure
+- Reduced errors and improved suggestions
+
+### Setup Instructions
+1. Install Netlify CLI: `npm run netlify:install` (already installed)
+2. Login to Netlify: `npm run netlify:login` (already authenticated as jonathonc@gmail.com)
+3. The MCP server will automatically use npx to run @netlify/mcp when accessed by MCP clients
+4. Current project: stalwart-smakager-b57fc1 (https://jonathoncarter.com)
+
+### Available MCP Features
+- Create and manage Netlify projects
+- Deploy sites and monitor deployment status
+- Manage environment variables
+- Handle form submissions
+- Configure access controls and team settings
+- Install/uninstall Netlify extensions
+
+### Authentication Troubleshooting
+- If authentication fails, create a Personal Access Token (PAT) from Netlify dashboard
+- Add PAT to mcp.json configuration:
+```json
+{
+  "mcpServers": {
+    "netlify": {
+      "command": "npx",
+      "args": ["-y", "@netlify/mcp"],
+      "env": {
+        "NETLIFY_ACCESS_TOKEN": "your-personal-access-token"
+      }
+    }
+  }
+}
+```
+
 ### Common Safe Commands (for Prompt Fatigue Mitigation)
 ```bash
 # Build and test commands

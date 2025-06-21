@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 import arcjet, { shield, detectBot } from "@arcjet/next";
+import { hashIP } from '@/lib/privacy';
 
 // Create Arcjet instance for middleware
 const aj = arcjet({
@@ -40,11 +41,13 @@ export async function middleware(request: NextRequest) {
     const decision = await aj.protect(request);
 
     if (decision.isDenied()) {
-      // Log denied requests for monitoring
+      // Log denied requests for monitoring with hashed IP for privacy
+      const hashedIp = await hashIP(request.ip);
       console.log('Arcjet denied request:', {
         path: request.nextUrl.pathname,
         reason: decision.reason,
-        ip: request.ip,
+        hashedIp,
+        timestamp: new Date().toISOString(),
       });
 
       // Return appropriate error based on reason

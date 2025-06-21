@@ -11,7 +11,9 @@
     "test": "playwright test",
     "test:ui": "playwright test --ui",
     "test:debug": "playwright test --debug",
-    "test:report": "playwright show-report"
+    "test:report": "playwright show-report",
+    "netlify:install": "npm install -g netlify-cli",
+    "netlify:login": "netlify login"
   },
   "dependencies": {
     "@arcjet/next": "1.0.0-beta.8",
@@ -24,12 +26,14 @@
     "dompurify": "^3.2.6",
     "framer-motion": "^11.0.0",
     "gray-matter": "^4.0.3",
+    "isomorphic-dompurify": "^2.25.0",
     "lucide-react": "^0.511.0",
     "marked": "^15.0.12",
     "next": "^14.2.0",
     "next-cloudinary": "^6.16.0",
     "react": "^18.3.0",
     "react-dom": "^18.3.0",
+    "recharts": "^2.15.4",
     "tailwind-merge": "^2.3.0"
   },
   "devDependencies": {

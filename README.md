@@ -18,8 +18,8 @@ A beautiful, modern portfolio website showcasing AI-powered marketing solutions 
 - **Styling**: Tailwind CSS
 - **Animations**: Framer Motion
 - **CMS**: TinaCMS (coming soon)
-- **Images**: Cloudinary (coming soon)
-- **Deployment**: Vercel
+- **Images**: Cloudinary
+- **Deployment**: Netlify
 
 ## 📦 Installation
 

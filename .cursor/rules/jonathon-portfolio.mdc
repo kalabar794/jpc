@@ -1,0 +1,193 @@
+# Jonathon's Portfolio - AI Development Context
+
+## Project Overview
+This is Jonathon Carter's professional portfolio website showcasing AI and marketing expertise. The site emphasizes modern design, performance, and user experience.
+
+## Technology Stack
+- **Framework**: Next.js 14 (App Router)
+- **Language**: TypeScript (strict mode)
+- **Styling**: Tailwind CSS with custom design system
+- **Animations**: Framer Motion
+- **Images**: Cloudinary integration
+- **Testing**: Playwright
+- **Deployment**: Netlify (NOT Vercel)
+- **Package Manager**: npm/pnpm
+
+## Project Structure
+```
+src/
+├── app/              # Next.js app router pages
+├── components/       # React components
+│   ├── ui/          # Reusable UI components
+│   ├── admin/       # Admin-specific components
+│   └── sections/    # Page sections
+├── lib/             # Utility functions and configurations
+├── styles/          # Global styles
+├── types/           # TypeScript type definitions
+└── hooks/           # Custom React hooks
+```
+
+## Coding Conventions
+
+### Component Guidelines
+- Use functional components with TypeScript
+- Props interfaces should be defined above components
+- Export components as named exports
+- Example:
+```typescript
+interface ComponentNameProps {
+  title: string
+  description?: string
+}
+
+export function ComponentName({ title, description }: ComponentNameProps) {
+  return (
+    <div className="...">
+      {/* Component content */}
+    </div>
+  )
+}
+```
+
+### Styling Patterns
+- Use Tailwind CSS classes exclusively
+- Custom animations via Framer Motion
+- Consistent spacing: use Tailwind's spacing scale
+- Dark mode: use dark: prefix for dark mode styles
+- Responsive: mobile-first approach (sm:, md:, lg:, xl:)
+
+### Security Requirements
+- Content Security Policy configured in netlify.toml
+- Sanitize all user inputs with DOMPurify
+- Use isomorphic-dompurify for SSR compatibility
+- No inline scripts without proper CSP headers
+- All external resources must be whitelisted
+
+### Image Handling
+- Use Cloudinary for all images
+- Implement lazy loading
+- Provide appropriate alt text
+- Use Next.js Image component with Cloudinary loader
+- Example:
+```typescript
+import { CldImage } from 'next-cloudinary'
+
+<CldImage
+  src="portfolio/image-name"
+  width={800}
+  height={600}
+  alt="Descriptive alt text"
+  loading="lazy"
+/>
+```
+
+### API Routes
+- Place in `app/api/` directory
+- Use TypeScript for type safety
+- Implement proper error handling
+- Add CSRF protection where needed
+- Return consistent JSON responses
+
+### Testing Requirements
+- Write Playwright tests for new features
+- Test files in `tests/` directory
+- Run tests before claiming features work
+- Commands:
+  - `npm test` - Run all tests
+  - `npm run test:ui` - Run tests with UI
+  - `npm run test:debug` - Debug tests
+
+### Performance Guidelines
+- Lazy load components and images
+- Use dynamic imports for heavy components
+- Optimize bundle size
+- Leverage Netlify's CDN
+- Monitor Core Web Vitals
+
+### Git Workflow
+- Commit messages should be descriptive
+- Test locally before pushing
+- Use feature branches
+- Ensure all tests pass
+
+### Environment Variables
+- Store in Netlify dashboard
+- Never commit .env files
+- Use NEXT_PUBLIC_ prefix for client-side vars
+- Document all required variables
+
+## Common Patterns
+
+### Error Handling
+```typescript
+try {
+  // Operation
+} catch (error) {
+  console.error('Descriptive error message:', error)
+  // User-friendly error response
+}
+```
+
+### Loading States
+```typescript
+const [isLoading, setIsLoading] = useState(false)
+
+if (isLoading) {
+  return <LoadingSpinner />
+}
+```
+
+### Form Handling
+- Use controlled components
+- Validate on client and server
+- Show loading states
+- Handle errors gracefully
+
+## Netlify-Specific Features
+- Forms: Use data-netlify="true" attribute
+- Functions: Place in netlify/functions/
+- Redirects: Configure in netlify.toml
+- Headers: Security headers in netlify.toml
+
+## Experimental Features
+
+### About Page Experimental (`/about-experimental`)
+- Alternative version of the about page for A/B testing
+- Uses `AboutPageExperimental` component
+- Includes enhanced structured data for SEO
+- Server-side content loading with error handling
+
+### Technology Chart (`/tech-chart`)
+- Interactive visualization of the technology stack
+- Uses `TechnologyChart` component with recharts library
+- Displays proficiency levels and experience with different technologies
+- Responsive design with dark mode support
+
+### Contact API (`/api/contact`)
+- Secure contact form submission endpoint
+- CSRF protection with token validation
+- Rate limiting via Arcjet
+- Bot protection
+- Validates all required fields
+- Ready for email service integration (SendGrid/Resend)
+
+### CSRF Token API (`/api/csrf`)
+- Generates secure CSRF tokens for form protection
+- Used by contact forms and other sensitive operations
+- Simple GET endpoint returning token
+
+### Security Enhancements
+- **IP Privacy**: All IPs are hashed for GDPR compliance
+- **CSRF Protection**: Token-based protection for forms
+- **Rate Limiting**: Arcjet integration for API protection
+- **Content Sanitization**: Universal sanitization with isomorphic-dompurify
+- **Upload Security**: Cloudinary uploads with server-side validation
+
+## Important Notes
+1. This is deployed on Netlify, not Vercel
+2. Always test with `netlify dev` for local development
+3. Use Playwright for testing new features
+4. Follow existing patterns in the codebase
+5. Maintain high code quality and type safety
+6. The upload endpoint is currently disabled (needs auth implementation)
+7. Contact form is ready but needs email service configuration

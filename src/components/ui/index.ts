@@ -11,6 +11,8 @@ export { JonathonLogo, JonathonAILogo } from './JonathonLogo'
 export { Input } from './Input'
 export { Label } from './Label'
 export { Textarea } from './Textarea'
+export { default as Badge, BadgeGroup, DotBadge, CountBadge } from './Badge'
+export { default as Separator, SeparatorWithContent, DecorativeSeparator, SectionSeparator } from './Separator'
 
 // Animation Components
 export { default as AnimatedWrapper, StaggeredWrapper, StaggeredItem } from '../animations/AnimatedWrapper'

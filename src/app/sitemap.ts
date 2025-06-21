@@ -2,7 +2,7 @@ import { MetadataRoute } from 'next'
 import { getAllPosts, getAllProjects } from '@/lib/content'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://jpc-kappa.vercel.app'
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://jonathoncarter.com'
   
   // Get all blog posts and projects
   const posts = await getAllPosts()

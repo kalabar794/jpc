@@ -1,0 +1,112 @@
+# Netlify Development Context
+
+## Overview
+This project is deployed on Netlify, a modern web development platform. When generating code, consider Netlify's features and best practices.
+
+## Key Netlify Features Used
+
+### Build Configuration
+- Configuration via `netlify.toml`
+- Build command: `npm run build`
+- Publish directory: `.next`
+- Next.js plugin: `@netlify/plugin-nextjs`
+
+### Security Headers
+- Comprehensive security headers configured in `netlify.toml`
+- CSP, X-Frame-Options, and other security measures implemented
+
+### Environment Variables
+- Managed through Netlify UI and CLI
+- Access via `process.env` in code
+- Scoped to different deploy contexts
+
+## Netlify-Specific Best Practices
+
+### Serverless Functions
+- Place functions in `netlify/functions/` directory
+- Use TypeScript or JavaScript
+- Export handler function
+- Example:
+```typescript
+import { Handler } from '@netlify/functions'
+
+export const handler: Handler = async (event, context) => {
+  return {
+    statusCode: 200,
+    body: JSON.stringify({ message: 'Hello from Netlify Functions!' })
+  }
+}
+```
+
+### Edge Functions
+- Use for dynamic content at the edge
+- Place in `netlify/edge-functions/` directory
+- Use Deno runtime
+- 50ms CPU execution time limit
+
+### Forms
+- Built-in form handling with `netlify` attribute
+- Spam protection included
+- Example:
+```html
+<form name="contact" method="POST" data-netlify="true">
+  <input type="text" name="name" />
+  <input type="email" name="email" />
+  <button type="submit">Send</button>
+</form>
+```
+
+### Image Optimization
+- Use Netlify Image CDN for transformations
+- Query parameters: ?w=, ?h=, ?fit=, ?q=
+- Automatic format selection
+
+### Deployment
+- Automatic deployments from Git
+- Deploy previews for pull requests
+- Rollback capabilities
+- CLI deployment: `netlify deploy --prod`
+
+## Project-Specific Configuration
+
+### Current Setup
+- Next.js 14 with App Router
+- TypeScript for type safety
+- Tailwind CSS for styling
+- Cloudinary for image management
+- Playwright for testing
+
+### Authentication
+- Project ID: d28380d1-78b6-4175-9575-9272b86f27b3
+- Site: stalwart-smakager-b57fc1
+- URL: https://jonathoncarter.com
+
+### MCP Integration
+- Netlify MCP server configured in `mcp.json`
+- Enables AI tools to interact with Netlify API
+
+## Common Commands
+```bash
+# Deploy to production
+netlify deploy --prod
+
+# Check deployment status
+netlify status
+
+# Manage environment variables
+netlify env:list
+netlify env:set KEY value
+
+# View logs
+netlify logs:function
+
+# Local development
+netlify dev
+```
+
+## Important Considerations
+1. Always test builds locally before deploying
+2. Use environment variables for sensitive data
+3. Leverage Netlify's CDN for static assets
+4. Consider Edge Functions for performance-critical dynamic content
+5. Use deploy previews to test changes before merging
