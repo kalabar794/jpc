@@ -596,10 +596,7 @@ const AboutPage = () => {
             viewport={{ once: true }}
             className="text-center space-y-8"
           >
-            <h2 className="text-4xl md:text-5xl font-bold text-foreground">Let&apos;s Work Together</h2>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              Ready to transform your marketing with AI? Let&apos;s discuss how I can help drive your business growth.
-            </p>
+            <h2 className="text-4xl md:text-5xl font-bold text-foreground">Let&apos;s Connect</h2>
             
             <div className="flex justify-center gap-4 pt-8">
               <Button 
