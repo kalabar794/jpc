@@ -396,7 +396,7 @@ const AboutPage = () => {
               {/* Headshot image */}
               <div className="relative w-full h-full rounded-full overflow-hidden shadow-2xl border-4 border-white/20">
                 <Image
-                  src="/jonathon-headshot.jpg" 
+                  src="/experimental-about-page.png" 
                   alt="Jonathon Carter - AI Marketing Professional"
                   width={160}
                   height={160}
